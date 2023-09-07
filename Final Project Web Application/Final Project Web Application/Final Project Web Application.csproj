@@ -7,4 +7,8 @@
     <RootNamespace>Final_Project_Web_Application</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\" />
+  </ItemGroup>
+
 </Project>
