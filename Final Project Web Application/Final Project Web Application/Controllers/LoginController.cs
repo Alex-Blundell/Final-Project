@@ -8,5 +8,15 @@ namespace Final_Project_Web_Application.Controllers
         {
             return View();
         }
+
+        public IActionResult SignUp()
+        {
+            return View();
+        }
+
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
     }
 }
