@@ -9,5 +9,6 @@
         public int LastUserID { get; set; }
         public string LastThreadTitle { get; set; }
         public string LastThreadUpdate { get; set; }
+        public List<Thread> ForumThreads { get; set; }
     }
 }
