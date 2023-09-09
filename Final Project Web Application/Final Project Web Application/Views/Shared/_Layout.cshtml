@@ -22,7 +22,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Browse</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Forum" asp-action="ForumsOverview">Forums (Possibly)</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Forum" asp-action="Index">Forums (Possibly)</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Support" asp-action="Index">Support</a>
@@ -38,7 +38,7 @@
                                     <option value="author">Author</option>
                                     <option value="author">Description</option>
                                 </select>
-                                <input type="text" class="form-control" placeholder="Search book..." name="title" aria-label="Fiction search">
+                                <input type="text" class="form-control" placeholder="Search..." name="title" aria-label="Fiction search">
                             </div>
                         </li>
                         <li class="nav-item">
@@ -57,6 +57,19 @@
             @RenderBody()
         </main>
     </div>
+
+    <!-- Footer -->
+    <div class="page-footer footer">
+        <div class="container">
+            <div class="pull-left">
+                &copy; Our Library Web Application 2023
+            </div>
+        </div>
+    </div>
+    <div class="scroll-to-top" style="display: block;">
+        <i></i>
+    </div>
+    <div class="scroll-to-top-tooltip" style="display: none"> Tap again to scroll to the top! </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

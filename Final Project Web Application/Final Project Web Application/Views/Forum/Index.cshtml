@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Final_Project_Web_Application.Models.Forum>
+
+@{
+    ViewData["Title"] = "Forums";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>    
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model)
+{
+        <tr>
+            <td>
+                <a class="nav-link" asp-area="" asp-controller="Forum" asp-action="Forum">
+                    @Html.DisplayFor(modelItem => item.Name)
+                    <p>@Html.DisplayFor(modelItem => item.Description)</p>
+                </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

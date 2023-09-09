@@ -1,17 +1,29 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Final_Project_Web_Application.Data;
+using Final_Project_Web_Application.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Final_Project_Web_Application.Controllers
 {
     public class ForumController : Controller
     {
-        public IActionResult ForumsOverview()
+        private readonly ApplicationDBContext Context;
+
+        public ForumController(ApplicationDBContext DBContext)
         {
-            return View();
+            Context = DBContext;
+        }
+
+        public IActionResult Index()
+        {
+            IEnumerable<Forum> ForumObjList = Context.Forums;
+            return View(ForumObjList);
         }
 
         public IActionResult Forum()
         {
-            return View();
+            // Change to Threads.
+            IEnumerable<Forum> ForumObjList = Context.Forums;
+            return View(ForumObjList);
         }
 
         public IActionResult Thread()
