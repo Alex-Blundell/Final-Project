@@ -10,6 +10,10 @@ namespace Final_Project_Web_Application.Data
 
         }
 
+        // Forum Information.
         public DbSet<Forum> Forums { get; set; }
+        public DbSet<Models.Thread> Threads { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

@@ -21,9 +21,9 @@ namespace Final_Project_Web_Application.Controllers
 
         public IActionResult Forum()
         {
-            // Change to Threads.
-            IEnumerable<Forum> ForumObjList = Context.Forums;
-            return View(ForumObjList);
+            IEnumerable<Models.Thread> ThreadObjList = Context.Threads;
+            return View(ThreadObjList);
+
         }
 
         public IActionResult Thread()

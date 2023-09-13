@@ -13,31 +13,32 @@
     <button class="btn btn-lg btn-primary">with Microsoft</button>
     <p></p>
     <button class="btn btn-lg btn-primary">with Apple</button>
-    
     <p></p>
     <p>Or</p>   
-
-    <div class="form-group">
-        <label for="Username">Username:</label>
-        <input class="form-control" type="text" name="Username" placeholder="Username">
-        <p></p>
-    </div>
-
-    <div class="form-group">
-        <label for="Password">Password:</label>
-        <input class="form-control" type="password" name="Password" placeholder="Password">
-        <p></p>
-    </div>
-
-    <div class="form-group">
-        <label>
-            <input type="checkbox" name="Remember_Me"> Remember Me
-        </label>
-    </div>
-    
     <p></p>
-    <button class="btn btn-lg btn-primary" type="submit">Log In</button>
-    <p></p>
+
+    <form asp-action="Index" asp-controller="Login" method="post">
+        <div class="form-group">
+            <label for="Username">Username:</label>
+            <input class="form-control" type="text" name="Username" placeholder="Username">
+            <p></p>
+        </div>
+
+        <div class="form-group">
+            <label for="Password">Password:</label>
+            <input class="form-control" type="password" name="Password" placeholder="Password">
+            <p></p>
+        </div>
+
+        <div class="form-group">
+            <label>
+                <input type="checkbox" name="Remember_Me"> Remember Me
+            </label>
+        </div>
+
+        <button class="btn btn-lg btn-primary" type="submit">Log In</button>
+        <p></p>
+    </form>
 
     <a class="nav-link" asp-area="" asp-controller="Login" asp-action="ForgotPassword">Forgot Your Password?</a>
     <a class="nav-link" asp-area="" asp-controller="Login" asp-action="SignUp">Create A New Account</a>

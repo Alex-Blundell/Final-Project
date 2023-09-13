@@ -5,24 +5,30 @@
 }
 
 <table class="table">
-    <thead>
-        <tr>
-            <th>    
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-        </tr>
-    </thead>
     <tbody>
-@foreach (var item in Model)
-{
+    @foreach (var item in Model)
+    {
         <tr>
             <td>
-                <a class="nav-link" asp-area="" asp-controller="Forum" asp-action="Forum">
+                <a class="nav-link" asp-area="" asp-route-id="@item.Name" asp-controller="Forum" asp-action="Forum">
                     @Html.DisplayFor(modelItem => item.Name)
                     <p>@Html.DisplayFor(modelItem => item.Description)</p>
                 </a>
             </td>
+            <td>
+                <a class="nav-link" asp-area="" asp-route-id="@item.Name" asp-controller="Forum" asp-action="Forum">
+                    <p>Number Of Threads</p>
+                    <p>Number Of Posts</p>
+                </a>
+            </td>
+            <td>
+                <a class="nav-link" asp-area="" asp-route-id="@item.Name" asp-controller="Forum" asp-action="Index">
+                    <p>Latest Thread / Latest Thread Reply</p>
+                    <p>by Username</p>
+                    <p>DateTime</p>
+                </a>
+            </td>
         </tr>
-}
+    }
     </tbody>
 </table>
