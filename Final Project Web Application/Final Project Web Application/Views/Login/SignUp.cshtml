@@ -4,20 +4,22 @@
 
 <div class="row">
     <h1>Register</h1>
-    <div class="form-group">
-        <label for="Username">Username:</label>
-        <input class="form-control" type="text" name="Username" placeholder="Username">
+
+    <form asp-action="SignUp" asp-controller="Login" method="post">
+        <div class="form-group">
+            <label for="Username">Username:</label>
+            <input class="form-control" type="text" name="Username" placeholder="Username">
+            <p></p>
+        </div>
+
+        <div class="form-group">
+            <label for="Password">Password:</label>
+            <input class="form-control" type="password" name="Password" placeholder="Password">
+            <p></p>
+        </div>
+
         <p></p>
-    </div>
-
-    <div class="form-group">
-        <label for="Password">Password:</label>
-        <input class="form-control" type="password" name="Password" placeholder="Password">
+        <button class="btn btn-lg btn-primary" type="submit">Register</button>
         <p></p>
-    </div>
-
-    <p></p>
-    <button class="btn btn-lg btn-primary" type="submit">Register</button>
-    <p></p>
-
+    </form>
 </div>

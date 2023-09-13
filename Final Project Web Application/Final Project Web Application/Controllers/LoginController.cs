@@ -25,21 +25,21 @@ namespace Final_Project_Web_Application.Controllers
         {
             bool FoundUser = false;
 
-            foreach(Models.User CurrentUser in Context.Users)
+            foreach (Models.User CurrentUser in Context.Users)
             {
-                if(CurrentUser.Username == Username)
+                if (CurrentUser.Username == Username)
                 {
-                    string DecryptedPassword = "";
+                    string DecryptedPassword = Models.User.DecryptString(CurrentUser.Password);
 
                     // Check Password against the Decrypted Password.
-                    if(CurrentUser.Password == Password)
+                    if (DecryptedPassword == Password)
                     {
                         FoundUser = true;
                     }
                 }
             }
 
-            if(FoundUser)
+            if (FoundUser)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -54,15 +54,36 @@ namespace Final_Project_Web_Application.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult SignUp(string Username, string Password)
+        {
+            bool SignedUp = true;
+
+            foreach(Models.User CurrentUser in Context.Users)
+            {
+                // An Account already exists with that Username.
+                if (CurrentUser.Username == Username)
+                    SignedUp = false;
+            }
+
+            if(SignedUp)
+            {
+                string EncryptedPassword = Models.User.EncryptString(Password);
+
+                Context.Users.Add(new Models.User(Username, EncryptedPassword, Models.User.SecurityLevel.User));
+                Context.SaveChanges();
+
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                return View();
+            }
+        }
+
         public IActionResult ForgotPassword()
         {
             return View();
         }
-
-        public void TestOne()
-        {
-
-        }
-        
     }
 }

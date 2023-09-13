@@ -18,6 +18,13 @@ namespace Final_Project_Web_Application.Models
         [Required] public string Password { get; set; }
         [Required] public SecurityLevel SecLevel { get; set; }
 
+        public User(string username, string password, SecurityLevel secLevel)
+        {
+            Username = username;
+            Password = password;
+            SecLevel = secLevel;
+        }
+
         // Encrypt a String So that it cannot be read as Plain Text.
         public static string EncryptString(string CleanString)
         {
