@@ -2,22 +2,29 @@
     ViewBag.Title = "Login";
 }
 
-<div class="row">
-    <h1>Login</h1>
+<div class="row" >
+    <form asp-action="GoogleLogin" asp-controller="Login">
+        <button class="btn btn-lg btn-primary">with Google</button>
+    </form>
     <p></p>
-
-    <button class="btn btn-lg btn-primary">with Google</button>
+    <form asp-action="FacebookLogin" asp-controller="Login">
+        <button class="btn btn-lg btn-primary">with Facebook</button>
+    </form>
     <p></p>
-    <button class="btn btn-lg btn-primary">with Facebook</button>
+    <form asp-action="MicrosoftLogin" asp-controller="Login">
+        <button class="btn btn-lg btn-primary">with Microsoft</button>
+    </form>
     <p></p>
-    <button class="btn btn-lg btn-primary">with Microsoft</button>
-    <p></p>
-    <button class="btn btn-lg btn-primary">with Apple</button>
-    <p></p>
-    <p>Or</p>   
-    <p></p>
+    <form asp-action="AppleLogin" asp-controller="Login">
+        <button class="btn btn-lg btn-primary">with Apple</button>
+    </form>
 
     <form asp-action="Index" asp-controller="Login" method="post">
+        <div class="or_group">
+            <p></p>
+            <p>Or</p>
+        </div>
+
         <div class="form-group">
             <label for="Username">Username:</label>
             <input class="form-control" type="text" name="Username" placeholder="Username">
@@ -31,15 +38,40 @@
         </div>
 
         <div class="form-group">
-            <label>
-                <input type="checkbox" name="Remember_Me"> Remember Me
-            </label>
+            @Html.CheckBox("RememberMe", false)
+            <label for="RememberMe">Remember Me:</label>
         </div>
 
-        <button class="btn btn-lg btn-primary" type="submit">Log In</button>
+        <p></p>
+        <button class="btn_submit btn-lg btn-primary" type="submit">Log In</button>
         <p></p>
     </form>
 
     <a class="nav-link" asp-area="" asp-controller="Login" asp-action="ForgotPassword">Forgot Your Password?</a>
     <a class="nav-link" asp-area="" asp-controller="Login" asp-action="SignUp">Create A New Account</a>
 </div>
+
+
+<style>
+    .btn
+    {
+        width: 800px;
+        transform: translateX(30%);
+    }
+
+    .btn_submit
+    {
+        width: 400px;
+        transform: translateX(100%);
+    }
+
+    .form-group {
+        width: 700px;
+        transform: translateX(40%);
+    }
+
+    .or_group
+    {
+        transform: translateX(47.5%);
+    }
+</style>

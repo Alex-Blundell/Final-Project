@@ -1,5 +1,6 @@
 ﻿using Final_Project_Web_Application.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Final_Project_Web_Application.Controllers
 {
@@ -21,26 +22,39 @@ namespace Final_Project_Web_Application.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(string Username, string Password)
+        public IActionResult Index(string Username, string Password, bool RememberMe)
         {
             bool FoundUser = false;
 
-            foreach (Models.User CurrentUser in Context.Users)
+            if(Username.IsNullOrEmpty())
+                FoundUser = false;
+            else if (Password.IsNullOrEmpty())
+                FoundUser = false;
+            else
             {
-                if (CurrentUser.Username == Username)
+                foreach (Models.User CurrentUser in Context.Users)
                 {
-                    string DecryptedPassword = Models.User.DecryptString(CurrentUser.Password);
-
-                    // Check Password against the Decrypted Password.
-                    if (DecryptedPassword == Password)
+                    if (CurrentUser.Username == Username)
                     {
-                        FoundUser = true;
+                        string DecryptedPassword = Models.User.DecryptString(CurrentUser.Password);
+
+                        // Check Password against the Decrypted Password.
+                        if (DecryptedPassword == Password)
+                        {
+                            FoundUser = true;
+                        }
                     }
                 }
             }
 
             if (FoundUser)
             {
+                // Check Out Session Keys and Cookies as a way to make the Website remember me next Time.
+                if(RememberMe)
+                {
+
+                }
+
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -57,6 +71,8 @@ namespace Final_Project_Web_Application.Controllers
         [HttpPost]
         public IActionResult SignUp(string Username, string Password)
         {
+            // Possibly Switch Username up for Email.
+
             bool SignedUp = true;
 
             foreach(Models.User CurrentUser in Context.Users)
@@ -64,9 +80,13 @@ namespace Final_Project_Web_Application.Controllers
                 // An Account already exists with that Username.
                 if (CurrentUser.Username == Username)
                     SignedUp = false;
+                else if (CurrentUser.Username.ToLower() == Username.ToLower())
+                    SignedUp = false;
             }
 
-            if(SignedUp)
+            // Check to See if Password is Less than Least Ammount of Characters.
+
+            if (SignedUp)
             {
                 string EncryptedPassword = Models.User.EncryptString(Password);
 
@@ -84,6 +104,32 @@ namespace Final_Project_Web_Application.Controllers
         public IActionResult ForgotPassword()
         {
             return View();
+        }
+
+        public IActionResult SignOut()
+        {
+            // Code for Signing Out.
+            return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult GoogleLogin()
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult FacebookLogin()
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult MicrosoftLogin()
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult AppleLogin()
+        {
+            return RedirectToAction("Index", "Home");
         }
     }
 }
