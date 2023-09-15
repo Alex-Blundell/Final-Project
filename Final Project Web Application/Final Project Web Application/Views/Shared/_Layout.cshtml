@@ -17,8 +17,8 @@
     <style>
 
     </style>
-    <header>
-        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">
+    <header class="header">
+        <a class="nav-link header-image" asp-area="" asp-controller="Home" asp-action="Index">
             @if((string)ViewData["IsDarkMode"] == "Yes")
             {
                 <img src="\css\logo\logo_dark.png" alt="Girl in a jacket" width="450" height="65" asp-controller="Home" asp-action="Index">
@@ -29,7 +29,7 @@
             }
         </a>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
-            <div class="container-fluid">
+            <div class="container-fluid header-text">
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
@@ -70,7 +70,7 @@
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <div class="input-group">
-                                <select aria-label="Search by">
+                                <select class="select-button" aria-label="Search by">
                                     <option value="all">All</option>
                                     <option value="title">Title</option>
                                     <option value="author">Author</option>
@@ -206,9 +206,28 @@
             .input-group
             {
                 background-color: #292929;
-            color: #d3d3d3;
+                color: #d3d3d3;
+            }
+            .header
+            {
+                background-color: #1e1e1e;
             }
 
+            .select-button
+            {
+                background-color: #292929;
+                color: #d3d3d3;
+            }
+        }
+
+        .header-image
+        {
+            margin-left: 25px;
+        }
+        .header-text
+        {
+            margin-right: 100px;
+            margin-left: 100px;
         }
     </style>
 
