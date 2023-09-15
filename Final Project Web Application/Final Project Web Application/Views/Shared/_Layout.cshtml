@@ -10,7 +10,16 @@
 </head>
 <body>
     <header>
-        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Our Library Web Application (Better Name Later) / REPLACE WITH MORE STYLIZED TITLE</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">
+            @if((string)ViewData["IsDarkMode"] == "Yes")
+            {
+                <img src="\css\logo\logo_dark.png" alt="Girl in a jacket" width="450" height="67" asp-controller="Home" asp-action="Index">
+            }
+            else
+            {  
+                <img src="\css\logo\logo_light.png" alt="Girl in a jacket" width="450" height="67" asp-controller="Home" asp-action="Index">
+            }
+        </a>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
@@ -27,6 +36,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Support" asp-action="Index">Support</a>
                         </li>
+                        @if ((string)ViewData["HasLoggedIn"] == "Yes")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Support" asp-action="Index">Admin Panel</a>
+                            </li>
+                        }
                     </ul>
                     <ul class="navbar-nav">
                         <li class="nav-item">
@@ -42,8 +57,16 @@
                         </li>
                         <li class="nav-item">
                             <label class="switch">
-                                <input type="checkbox">
+                                <input type="checkbox" name="IsDarkMode" onclick="myFunction()">
                                 <span class="slider round"></span>
+
+                                <script>
+                                    function myFunction()
+                                    {
+                                        var element = document.body;
+                                        element.classList.toggle("dark-mode");
+                                    }
+                                </script>
                             </label>
                             <style>
                                 .switch {
@@ -111,15 +134,22 @@
                                 }
                             </style>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" asp-area="" asp-controller="Login" asp-action="Index">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" asp-area="" asp-controller="Login" asp-action="SignUp">Register</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" asp-area="" asp-controller="Login" asp-action="SignOut">Logout</a>
-                        </li>
+                        @if((string)ViewData["HasLoggedIn"] != "Yes")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link active" asp-area="" asp-controller="Login" asp-action="Index">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" asp-area="" asp-controller="Login" asp-action="SignUp">Register</a>
+                            </li>
+                        }
+                        else
+                        {
+                            // Profile Image and Dropdown, which will include the Logout Button.
+                            <li class="nav-item">
+                                <a class="nav-link active" asp-area="" asp-controller="Login" asp-action="SignOut">Logout</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
@@ -130,6 +160,13 @@
             @RenderBody()
         </main>
     </div>
+
+    <style>
+        .dark-mode {
+            background-color: #292929;
+            color: white;
+        }
+    </style>
 
     <!-- Footer -->
     <div class="page-footer footer">

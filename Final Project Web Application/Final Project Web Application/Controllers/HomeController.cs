@@ -1,5 +1,6 @@
 ﻿using Final_Project_Web_Application.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using System.Diagnostics;
 
 namespace Final_Project_Web_Application.Controllers
@@ -7,6 +8,7 @@ namespace Final_Project_Web_Application.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private bool DarkMode = false;
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -15,6 +17,27 @@ namespace Final_Project_Web_Application.Controllers
 
         public IActionResult Index()
         {
+            string IsDarkModeCookie = Request.Cookies["IsDarkMode"];
+            string HasLoggedIn = Request.Cookies["HasLoggedIn"];
+
+            // Probably the First time the Website has been Run, Add Cookie for Dark Mode and Set it to the Defualt Value.
+            if(IsDarkModeCookie == null)
+            {
+                CookieOptions Options = new CookieOptions();
+                Options.Expires = DateTime.Now.AddYears(100);
+
+                IsDarkModeCookie = "No";
+                Response.Cookies.Append("IsDarkMode", IsDarkModeCookie, Options);
+            }
+
+            if (HasLoggedIn == "Yes")
+            {
+                TempData["HasLoggedIn"] = HasLoggedIn;
+                ViewData["HasLoggedIn"] = HasLoggedIn;
+            }
+
+            TempData["IsDarkMode"] = IsDarkModeCookie;
+
             return View();
         }
 

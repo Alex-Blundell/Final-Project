@@ -18,12 +18,28 @@ namespace Final_Project_Web_Application.Controllers
 
         public IActionResult Index()
         {
+            string LoginCookie = Request.Cookies["HasLoggedIn"];
+
+            if(LoginCookie != null)
+            {
+                TempData["HasLoggedIn"] = LoginCookie;
+
+                if(LoginCookie == "Yes")
+                {
+                    string UserIDCookie = Request.Cookies["UserID"];
+                    TempData["UserID"] = UserIDCookie;
+
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+
             return View();
         }
 
         [HttpPost]
         public IActionResult Index(string Username, string Password, bool RememberMe)
         {
+            Models.User SelectedUser = new Models.User();
             bool FoundUser = false;
 
             if(Username.IsNullOrEmpty())
@@ -42,6 +58,7 @@ namespace Final_Project_Web_Application.Controllers
                         if (DecryptedPassword == Password)
                         {
                             FoundUser = true;
+                            SelectedUser = CurrentUser;
                         }
                     }
                 }
@@ -49,10 +66,13 @@ namespace Final_Project_Web_Application.Controllers
 
             if (FoundUser)
             {
-                // Check Out Session Keys and Cookies as a way to make the Website remember me next Time.
                 if(RememberMe)
                 {
+                    CookieOptions Options = new CookieOptions();
+                    Options.Expires = DateTime.Now.AddYears(100);
 
+                    Response.Cookies.Append("HasLoggedIn", "Yes", Options);
+                    Response.Cookies.Append("UserID", SelectedUser.ID.ToString(), Options);
                 }
 
                 return RedirectToAction("Index", "Home");
@@ -109,7 +129,25 @@ namespace Final_Project_Web_Application.Controllers
         public IActionResult SignOut()
         {
             // Code for Signing Out.
-            return RedirectToAction("Index", "Home");
+            string cookieValue = Request.Cookies["HasLoggedIn"];
+
+            if (cookieValue != null)
+            {
+                if (cookieValue == "Yes")
+                {
+                    Response.Cookies.Delete("HasLoggedIn");
+                    Response.Cookies.Delete("UserID");
+                    return RedirectToAction("Index", "Login");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home"); // Not Needed once I figure out how to remove button on Runtime.
+                }
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home"); // Not Needed once I figure out how to remove button on Runtime.
+            }
         }
 
         public IActionResult GoogleLogin()

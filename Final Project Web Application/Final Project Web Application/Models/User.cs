@@ -18,6 +18,11 @@ namespace Final_Project_Web_Application.Models
         [Required] public string Password { get; set; }
         [Required] public SecurityLevel SecLevel { get; set; }
 
+        public User()
+        {
+
+        }
+
         public User(string username, string password, SecurityLevel secLevel)
         {
             Username = username;
