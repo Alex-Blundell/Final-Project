@@ -134,7 +134,8 @@
                                     transition: .4s;
                                 }
 
-                                input:checked + .slider {
+                                input:checked + .slider
+                                {
                                     background-color: #404040;
                                 }
 
@@ -191,21 +192,20 @@
             background-color: #292929;
             color: #d3d3d3;
 
-
             .form-control
             {
-                background-color: #757575;
+                background-color: #404040;
                 color: white;
             }
 
             .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .show > .nav-link
             {
-            color: #d3d3d3;
+                color: #d3d3d3;
             }
 
             .input-group
             {
-                background-color: #292929;
+                background-color: #404040;
                 color: #d3d3d3;
             }
             .header
@@ -215,9 +215,19 @@
 
             .select-button
             {
-                background-color: #292929;
+                background-color: #404040;
                 color: #d3d3d3;
             }
+
+            .nav-link.active
+            {
+                background-color: #404040;
+            }
+        }
+
+        .header
+        {
+            background-color: #eff3f8;
         }
 
         .header-image
@@ -228,6 +238,15 @@
         {
             margin-right: 100px;
             margin-left: 100px;
+        }
+
+        .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .show > .nav-link {
+            padding-left: 20px;
+            padding-right: 20px;
+            height: 50px;
+            background-color: #2196F3;
+            border-color: #2196F3;
+            border-style: outset;
         }
     </style>
 
@@ -243,6 +262,21 @@
         <i></i>
     </div>
     <div class="scroll-to-top-tooltip" style="display: none"> Tap again to scroll to the top! </div>
+
+    <ul class="social-icons">
+        <li>
+            <a href="https://facebook.com/royalroadl" target="_blank" rel="noopener noreferrer" data-original-title="facebook" class="facebook" aria-label="Our Facebook Page"></a>
+        </li>
+        <li>
+            <a href="https://twitter.com/royalroadl" target="_blank" rel="noopener noreferrer" data-original-title="twitter" class="twitter" aria-label="Our Twitter Page"></a>
+        </li>
+        <li>
+            <a href="https://www.pinterest.co.uk/royalroadofficial/" target="_blank" rel="noopener noreferrer" data-original-title="pinterest" class="pintrest" aria-label="Our Pinterest Page"></a>
+        </li>
+        <li>
+            <a href="https://www.instagram.com/royalroad.official" target="_blank" rel="noopener noreferrer" data-original-title="instagram" class="instagram" aria-label="Our Instagram Page"></a>
+        </li>
+    </ul>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
