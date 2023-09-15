@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@inject Final_Project_Web_Application.Data.ApplicationDBContext DBContext
+@{
+    bool IsDarkMode = false;
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -9,38 +14,57 @@
     <link rel="stylesheet" href="~/Final_Project_Web_Application.styles.css" asp-append-version="true" />
 </head>
 <body>
+    <style>
+
+    </style>
     <header>
         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">
             @if((string)ViewData["IsDarkMode"] == "Yes")
             {
-                <img src="\css\logo\logo_dark.png" alt="Girl in a jacket" width="450" height="67" asp-controller="Home" asp-action="Index">
+                <img src="\css\logo\logo_dark.png" alt="Girl in a jacket" width="450" height="65" asp-controller="Home" asp-action="Index">
             }
             else
             {  
-                <img src="\css\logo\logo_light.png" alt="Girl in a jacket" width="450" height="67" asp-controller="Home" asp-action="Index">
+                <img src="\css\logo\logo_light.png" alt="Girl in a jacket" width="450" height="65" asp-controller="Home" asp-action="Index">
             }
         </a>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Browse</a>
+                            <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Index">Browse</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Forum" asp-action="Index">Forums</a>
+                            <a class="nav-link active" asp-area="" asp-controller="Forum" asp-action="Index">Forums</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Support" asp-action="Index">Support</a>
+                            <a class="nav-link active" asp-area="" asp-controller="Support" asp-action="Index">Support</a>
                         </li>
                         @if ((string)ViewData["HasLoggedIn"] == "Yes")
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Support" asp-action="Index">Admin Panel</a>
-                            </li>
+                            string UserID = (string)ViewData["UserID"];
+                            int IntegerUserID = int.Parse(UserID);
+
+                            User SelectedUser = new User();
+
+                            foreach(User CurrentUser in DBContext.Users)
+                            {
+                                if(CurrentUser.ID == IntegerUserID)
+                                {
+                                    SelectedUser = CurrentUser;
+                                }
+                            }
+
+                            if(SelectedUser.SecLevel >= Final_Project_Web_Application.Models.User.SecurityLevel.Admin)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link active" asp-area="" asp-controller="Support" asp-action="Index">Admin Panel</a>
+                                </li>
+                            }
                         }
                     </ul>
                     <ul class="navbar-nav">
@@ -162,9 +186,29 @@
     </div>
 
     <style>
-        .dark-mode {
+        .dark-mode
+        {
             background-color: #292929;
-            color: white;
+            color: #d3d3d3;
+
+
+            .form-control
+            {
+                background-color: #757575;
+                color: white;
+            }
+
+            .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .show > .nav-link
+            {
+            color: #d3d3d3;
+            }
+
+            .input-group
+            {
+                background-color: #292929;
+            color: #d3d3d3;
+            }
+
         }
     </style>
 
