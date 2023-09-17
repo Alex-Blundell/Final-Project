@@ -1,7 +1,8 @@
-﻿@inject Final_Project_Web_Application.Data.ApplicationDBContext DBContext
-@{
-    bool IsDarkMode = false;
-}
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@inject IJsonHelper Json;
+
+@inject Final_Project_Web_Application.Data.ApplicationDBContext DBContext
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,10 +14,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Final_Project_Web_Application.styles.css" asp-append-version="true" />
 </head>
-<body>
-    <style>
-
-    </style>
+<body style="background-image: url('../../wwwroot/css/background.jpg');" onload="LoadDarkMode()">
     <header class="header">
         <a class="nav-link header-image" asp-area="" asp-controller="Home" asp-action="Index">
             @if((string)ViewData["IsDarkMode"] == "Yes")
@@ -44,9 +42,9 @@
                         <li class="nav-item">
                             <a class="nav-link active" asp-area="" asp-controller="Support" asp-action="Index">Support</a>
                         </li>
-                        @if ((string)ViewData["HasLoggedIn"] == "Yes")
+                        @if ((string)TempData["HasLoggedIn"] == "Yes")
                         {
-                            string UserID = (string)ViewData["UserID"];
+                            string UserID = (string)TempData["UserID"];
                             int IntegerUserID = int.Parse(UserID);
 
                             User SelectedUser = new User();
@@ -62,7 +60,7 @@
                             if(SelectedUser.SecLevel >= Final_Project_Web_Application.Models.User.SecurityLevel.Admin)
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link active" asp-area="" asp-controller="Support" asp-action="Index">Admin Panel</a>
+                                    <a class="nav-link active" asp-area="" asp-controller="AdminPanel" asp-action="Index">Admin Panel</a>
                                 </li>
                             }
                         }
@@ -81,14 +79,41 @@
                         </li>
                         <li class="nav-item">
                             <label class="switch">
-                                <input type="checkbox" name="IsDarkMode" onclick="myFunction()">
+                                <input type="checkbox" name="IsDarkMode" onclick="SwitchDarkMode()">
                                 <span class="slider round"></span>
-
                                 <script>
-                                    function myFunction()
+                                    function SwitchDarkMode()
                                     {
                                         var element = document.body;
                                         element.classList.toggle("dark-mode");
+
+                                        if (element.classList.contains("dark-mode"))
+                                        {
+                                            $.ajax({
+                                                type: "POST",
+                                                url: '/Home/WriteCookie',
+                                                data: { Value: "Yes" },
+                                            });
+                                        }
+                                        else
+                                        {
+                                            $.ajax({
+                                                type: "POST",
+                                                url: '/Home/WriteCookie',
+                                                data: { Value: "No" },
+                                            });
+                                        }
+                                    }
+
+                                    function LoadDarkMode()
+                                    {
+                                        var IsDarkMode = '@ViewData["IsDarkMode"]';
+
+                                        if (IsDarkMode == "Yes")
+                                        { 
+                                            var element = document.body;
+                                            element.classList.toggle("dark-mode");
+                                        }
                                     }
                                 </script>
                             </label>
@@ -189,13 +214,13 @@
     <style>
         .dark-mode
         {
-            background-color: #292929;
             color: #d3d3d3;
 
             .form-control
             {
                 background-color: #404040;
                 color: white;
+                border-color: hsla(0,0%,100%,.1)
             }
 
             .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .show > .nav-link
@@ -224,7 +249,7 @@
 
         .header
         {
-            background-color: #d7e8fd;
+            background-color: #b2d3fb;
         }
 
         .header-image
@@ -243,14 +268,19 @@
             padding-right: 30px;
             padding-top: 0.75rem;
             height: 50px;
-            background-color: #2196F3;
+            background-color: #2e5575;
+            color: #ffd575;
             border: 1px solid;
-            border-color: #0f426b;
+            border-color: #294459;
         }
 
         .border-bottom
         {
-            border-bottom: 1px solid #818181!important
+            border-bottom: 1px solid #818181!important;
+        }
+
+        .navbar {
+            padding-bottom: 0px;
         }
     </style>
 

@@ -15,6 +15,20 @@ namespace Final_Project_Web_Application.Controllers
             _logger = logger;
         }
 
+        [HttpPost]
+        public IActionResult WriteCookie(string Value)
+        {
+            HttpContext.Session.SetString("Photo", "p1");
+            CookieOptions options = new CookieOptions();
+            options.Expires = DateTime.Now.AddYears(100);
+
+            Response.Cookies.Append("IsDarkMode", Value, options);
+            ViewData["IsDarkMode"] = Value;
+
+            return RedirectToAction("Index", "Home");
+        }
+
+
         public IActionResult Index()
         {
             string IsDarkModeCookie = Request.Cookies["IsDarkMode"];
@@ -36,9 +50,11 @@ namespace Final_Project_Web_Application.Controllers
                 TempData["HasLoggedIn"] = HasLoggedIn;
                 ViewData["HasLoggedIn"] = HasLoggedIn;
                 ViewData["UserID"] = UserID;
+                TempData["UserID"] = UserID;
             }
 
             TempData["IsDarkMode"] = IsDarkModeCookie;
+            ViewData["IsDarkMode"] = IsDarkModeCookie;
 
             return View();
         }
