@@ -1,3 +1,5 @@
-﻿@{
+﻿@inject ApplicationDBContext DBContext;
+@{
     Layout = "_Layout";
+    ViewBag.Context = DBContext;
 }

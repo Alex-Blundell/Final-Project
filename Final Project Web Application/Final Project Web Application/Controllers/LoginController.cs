@@ -19,8 +19,22 @@ namespace Final_Project_Web_Application.Controllers
         public IActionResult Index()
         {
             string LoginCookie = Request.Cookies["HasLoggedIn"];
+            string IsDarkModeCookie = Request.Cookies["IsDarkMode"];
 
-            if(LoginCookie != null)
+            // Probably the First time the Website has been Run, Add Cookie for Dark Mode and Set it to the Default Value.
+            if (IsDarkModeCookie == null)
+            {
+                CookieOptions Options = new CookieOptions();
+                Options.Expires = DateTime.Now.AddYears(100);
+
+                IsDarkModeCookie = "No";
+                Response.Cookies.Append("IsDarkMode", IsDarkModeCookie, Options);
+            }
+
+            TempData["IsDarkMode"] = IsDarkModeCookie;
+            ViewData["IsDarkMode"] = IsDarkModeCookie;
+
+            if (LoginCookie != null)
             {
                 TempData["HasLoggedIn"] = LoginCookie;
 
@@ -39,6 +53,21 @@ namespace Final_Project_Web_Application.Controllers
         [HttpPost]
         public IActionResult Index(string Username, string Password, bool RememberMe)
         {
+            string IsDarkModeCookie = Request.Cookies["IsDarkMode"];
+
+            // Probably the First time the Website has been Run, Add Cookie for Dark Mode and Set it to the Default Value.
+            if (IsDarkModeCookie == null)
+            {
+                CookieOptions Options = new CookieOptions();
+                Options.Expires = DateTime.Now.AddYears(100);
+
+                IsDarkModeCookie = "No";
+                Response.Cookies.Append("IsDarkMode", IsDarkModeCookie, Options);
+            }
+
+            TempData["IsDarkMode"] = IsDarkModeCookie;
+            ViewData["IsDarkMode"] = IsDarkModeCookie;
+
             Models.User SelectedUser = new Models.User();
             bool FoundUser = false;
 
@@ -85,12 +114,42 @@ namespace Final_Project_Web_Application.Controllers
 
         public IActionResult SignUp()
         {
+            string IsDarkModeCookie = Request.Cookies["IsDarkMode"];
+
+            // Probably the First time the Website has been Run, Add Cookie for Dark Mode and Set it to the Default Value.
+            if (IsDarkModeCookie == null)
+            {
+                CookieOptions Options = new CookieOptions();
+                Options.Expires = DateTime.Now.AddYears(100);
+
+                IsDarkModeCookie = "No";
+                Response.Cookies.Append("IsDarkMode", IsDarkModeCookie, Options);
+            }
+
+            TempData["IsDarkMode"] = IsDarkModeCookie;
+            ViewData["IsDarkMode"] = IsDarkModeCookie;
+
             return View();
         }
 
         [HttpPost]
         public IActionResult SignUp(string Username, string Password)
         {
+            string IsDarkModeCookie = Request.Cookies["IsDarkMode"];
+
+            // Probably the First time the Website has been Run, Add Cookie for Dark Mode and Set it to the Default Value.
+            if (IsDarkModeCookie == null)
+            {
+                CookieOptions Options = new CookieOptions();
+                Options.Expires = DateTime.Now.AddYears(100);
+
+                IsDarkModeCookie = "No";
+                Response.Cookies.Append("IsDarkMode", IsDarkModeCookie, Options);
+            }
+
+            TempData["IsDarkMode"] = IsDarkModeCookie;
+            ViewData["IsDarkMode"] = IsDarkModeCookie;
+
             // Possibly Switch Username up for Email.
 
             bool SignedUp = true;
@@ -123,11 +182,41 @@ namespace Final_Project_Web_Application.Controllers
 
         public IActionResult ForgotPassword()
         {
+            string IsDarkModeCookie = Request.Cookies["IsDarkMode"];
+
+            // Probably the First time the Website has been Run, Add Cookie for Dark Mode and Set it to the Default Value.
+            if (IsDarkModeCookie == null)
+            {
+                CookieOptions Options = new CookieOptions();
+                Options.Expires = DateTime.Now.AddYears(100);
+
+                IsDarkModeCookie = "No";
+                Response.Cookies.Append("IsDarkMode", IsDarkModeCookie, Options);
+            }
+
+            TempData["IsDarkMode"] = IsDarkModeCookie;
+            ViewData["IsDarkMode"] = IsDarkModeCookie;
+
             return View();
         }
 
         public IActionResult SignOut()
         {
+            string IsDarkModeCookie = Request.Cookies["IsDarkMode"];
+
+            // Probably the First time the Website has been Run, Add Cookie for Dark Mode and Set it to the Default Value.
+            if (IsDarkModeCookie == null)
+            {
+                CookieOptions Options = new CookieOptions();
+                Options.Expires = DateTime.Now.AddYears(100);
+
+                IsDarkModeCookie = "No";
+                Response.Cookies.Append("IsDarkMode", IsDarkModeCookie, Options);
+            }
+
+            TempData["IsDarkMode"] = IsDarkModeCookie;
+            ViewData["IsDarkMode"] = IsDarkModeCookie;
+
             // Code for Signing Out.
             string cookieValue = Request.Cookies["HasLoggedIn"];
 

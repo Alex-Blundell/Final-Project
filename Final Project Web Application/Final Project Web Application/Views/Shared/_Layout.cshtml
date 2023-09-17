@@ -2,7 +2,10 @@
 @inject IHttpContextAccessor HttpContextAccessor
 @inject IJsonHelper Json;
 
-@inject Final_Project_Web_Application.Data.ApplicationDBContext DBContext
+@using Final_Project_Web_Application.Data;
+@{
+    var DBContext = ViewBag.Context as ApplicationDBContext;
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -106,12 +109,11 @@
 
                                     function LoadDarkMode()
                                     {
-                                        document.getElementById("DarkModeSwitch").checked = true;
-
                                         var IsDarkMode = '@ViewData["IsDarkMode"]';
 
                                         if (IsDarkMode == "Yes")
                                         {
+                                            document.getElementById("DarkModeSwitch").checked = true;
                                             var element = document.body;
                                             element.classList.toggle("dark-mode");
 

@@ -29,6 +29,8 @@ namespace Final_Project_Web_Application.Controllers
             }
 
             TempData["IsDarkMode"] = IsDarkModeCookie;
+            ViewData["IsDarkMode"] = IsDarkModeCookie;
+
 
             return View();
         }

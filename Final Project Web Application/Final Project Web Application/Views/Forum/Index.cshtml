@@ -1,7 +1,8 @@
-﻿@model IEnumerable<Final_Project_Web_Application.Models.Forum>
-
+﻿@using Final_Project_Web_Application.Data;
+@model IEnumerable<Final_Project_Web_Application.Models.Forum>
 @{
     ViewData["Title"] = "Forums";
+    var DBContext = ViewBag.Context as ApplicationDBContext;
 }
 
 <table class="table">
@@ -17,8 +18,26 @@
             </td>
             <td>
                 <a class="nav-link" asp-area="" asp-route-id="@item.Name" asp-controller="Forum" asp-action="Forum">
-                    <p>Number Of Threads</p>
-                    <p>Number Of Posts</p>
+                    @{
+                        int ThreadNum = 0;
+                        int PostsNum = 0;
+
+                        foreach(Thread SelectedThread in DBContext.Threads)
+                        {
+                            if(SelectedThread.ForumID == item.ID)
+                            {
+                                ThreadNum++;
+
+                                foreach(Post SelectedPost in DBContext.Posts)
+                                {
+                                    // Check to see if the Posts ThreadID is Equal to the SelectedThread ID.
+                                }
+                            }
+                        }
+
+                        <p>@ThreadNum Threads</p>
+                        <p>@PostsNum Threads</p>
+                    }
                 </a>
             </td>
             <td>
