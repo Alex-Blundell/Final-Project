@@ -79,7 +79,7 @@
                         </li>
                         <li class="nav-item">
                             <label class="switch">
-                                <input type="checkbox" name="IsDarkMode" onclick="SwitchDarkMode()">
+                                <input type="checkbox" id="DarkModeSwitch" name="IsDarkMode" onclick="SwitchDarkMode()">
                                 <span class="slider round"></span>
                                 <script>
                                     function SwitchDarkMode()
@@ -107,13 +107,14 @@
 
                                     function LoadDarkMode()
                                     {
+                                        document.getElementById("DarkModeSwitch").checked = true;
+
                                         var IsDarkMode = '@ViewData["IsDarkMode"]';
 
-                                        if (IsDarkMode == "Yes")
-                                        { 
+                                        if (IsDarkMode == "Yes") {
                                             var element = document.body;
                                             element.classList.toggle("dark-mode");
-                                        }
+                                        } 
                                     }
                                 </script>
                             </label>
