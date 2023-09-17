@@ -17,14 +17,7 @@
 <body style="background-image: url('../../wwwroot/css/background.jpg');" onload="LoadDarkMode()">
     <header class="header">
         <a class="nav-link header-image" asp-area="" asp-controller="Home" asp-action="Index">
-            @if((string)ViewData["IsDarkMode"] == "Yes")
-            {
-                <img src="\css\logo\logo_dark.png" alt="Girl in a jacket" width="450" height="65" asp-controller="Home" asp-action="Index">
-            }
-            else
-            {  
-                <img src="\css\logo\logo_light.png" alt="Girl in a jacket" width="450" height="65" asp-controller="Home" asp-action="Index">
-            }
+            <img src="\css\logo\logo_light.png" id="logo" width="450" height="65" asp-controller="Home" asp-action="Index">
         </a>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
             <div class="container-fluid header-text">
@@ -94,6 +87,9 @@
                                                 url: '/Home/WriteCookie',
                                                 data: { Value: "Yes" },
                                             });
+
+                                            var pic = document.getElementById("logo");
+                                            pic.src = "\\css\\logo\\logo_dark.png";
                                         }
                                         else
                                         {
@@ -102,6 +98,9 @@
                                                 url: '/Home/WriteCookie',
                                                 data: { Value: "No" },
                                             });
+
+                                            var pic = document.getElementById("logo");
+                                            pic.src = "\\css\\logo\\logo_light.png";
                                         }
                                     }
 
@@ -111,9 +110,13 @@
 
                                         var IsDarkMode = '@ViewData["IsDarkMode"]';
 
-                                        if (IsDarkMode == "Yes") {
+                                        if (IsDarkMode == "Yes")
+                                        {
                                             var element = document.body;
                                             element.classList.toggle("dark-mode");
+
+                                            var pic = document.getElementById("logo");
+                                            pic.src = "\\css\\logo\\logo_dark.png";
                                         } 
                                     }
                                 </script>
