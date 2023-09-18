@@ -8,7 +8,6 @@ namespace Final_Project_Web_Application.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private bool DarkMode = false;
 
         public HomeController(ILogger<HomeController> logger)
         {

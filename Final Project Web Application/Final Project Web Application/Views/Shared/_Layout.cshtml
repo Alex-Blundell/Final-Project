@@ -17,8 +17,8 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Final_Project_Web_Application.styles.css" asp-append-version="true" />
 </head>
-<body style="background-image: url('../../wwwroot/css/background.jpg');" onload="LoadDarkMode()">
-    <header class="header">
+<body onload="LoadDarkMode()">
+    <header>
         <a class="nav-link header-image" asp-area="" asp-controller="Home" asp-action="Index">
             <img src="\css\logo\logo_light.png" id="logo" width="450" height="65" asp-controller="Home" asp-action="Index">
         </a>
@@ -114,6 +114,7 @@
                                         if (IsDarkMode == "Yes")
                                         {
                                             document.getElementById("DarkModeSwitch").checked = true;
+
                                             var element = document.body;
                                             element.classList.toggle("dark-mode");
 
@@ -220,40 +221,42 @@
     <style>
         .dark-mode
         {
+            background-color: #404040;
             color: #d3d3d3;
-
-            .form-control
-            {
-                background-color: #404040;
-                color: white;
-                border-color: hsla(0,0%,100%,.1)
-            }
-
-            .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .show > .nav-link
-            {
-                background-color: #404040;
-                border-color: hsla(0,0%,100%,.1);
-                color: #d3d3d3;
-            }
-
-            .input-group
-            {
-                background-color: #404040;
-                color: #d3d3d3;
-            }
-            .header
-            {
-                background-color: #1e1e1e;
-            }
-
-            .select-button
-            {
-                background-color: #404040;
-                color: #d3d3d3;
-            }
         }
 
-        .header
+        .dark-mode header
+        {
+            background-color: #1e1e1e;
+        }
+
+        .dark-mode .input-group
+        {
+            background-color: #404040;
+            color: #d3d3d3;
+        }
+
+        .dark-mode .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .show > .nav-link
+        {
+            background-color: #2f2f2f;
+                border-color: hsl(0deg, 0%, 47.39%, 0.1);
+                color: #b06ceb;
+        }
+
+        .dark-mode .select-button
+        {
+            background-color: #404040;
+            color: #d3d3d3;
+        }
+
+        .dark-mode .form-control
+        {
+            background-color: #404040;
+            color: white;
+            border-color: hsla(0,0%,100%,.1);
+        }
+
+        header
         {
             background-color: #b2d3fb;
         }
