@@ -31,16 +31,39 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Index"><center>Home</center></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Index">Browse</a>
+                            <div class="dropdown">
+                                <a class="nav-link active dropbtn">
+                                    <center>Read
+                                        <i class="arrow down"></i>
+                                    </center>
+                                    
+                                </a>
+                                <div class="dropdown-content">
+                                    <a asp-controller="" asp-action="">Action & Adventure</a>
+                                    <a asp-controller="" asp-action="">Classic</a>
+                                    <a asp-controller="" asp-action="">Crime</a>
+                                    <a asp-controller="" asp-action="">Drama</a>
+                                    <a asp-controller="" asp-action="">Fantasy</a>
+                                    <a asp-controller="" asp-action="">Horror</a>
+                                    <a asp-controller="" asp-action="">Mystery</a>
+                                    <a asp-controller="" asp-action="">Non-Fiction</a>
+                                    <a asp-controller="" asp-action="">Romance</a>
+                                    <a asp-controller="" asp-action="">Satire</a>
+                                    <a asp-controller="" asp-action="">Sci-Fi</a>
+                                    <a asp-controller="" asp-action="">Thriller</a>
+                                    <a asp-controller="" asp-action="">Western</a>
+                                    <a asp-controller="" asp-action="">Young Adult</a>
+                                </div>
+                            </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" asp-area="" asp-controller="Forum" asp-action="Index">Forums</a>
+                            <a class="nav-link active" asp-area="" asp-controller="Forum" asp-action="Index"><center>Forums</center></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" asp-area="" asp-controller="Support" asp-action="Index">Support</a>
+                            <a class="nav-link active" asp-area="" asp-controller="Support" asp-action="Index"><center>Support</center> </a>
                         </li>
                         @if ((string)TempData["HasLoggedIn"] == "Yes")
                         {
@@ -60,7 +83,7 @@
                             if(SelectedUser.SecLevel >= Final_Project_Web_Application.Models.User.SecurityLevel.Admin)
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link active" asp-area="" asp-controller="AdminPanel" asp-action="Index">Admin Panel</a>
+                                    <a class="nav-link active" asp-area="" asp-controller="AdminPanel" asp-action="Index"><center>Admin Panel</center></a>
                                 </li>
                             }
                         }
@@ -198,10 +221,10 @@
                         @if((string)ViewData["HasLoggedIn"] != "Yes")
                         {
                             <li class="nav-item">
-                                <a class="nav-link active" asp-area="" asp-controller="Login" asp-action="Index">Login</a>
+                                <a class="nav-link active" asp-area="" asp-controller="Login" asp-action="Index"><center>Login</center></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" asp-area="" asp-controller="Login" asp-action="SignUp">Register</a>
+                                <a class="nav-link active" asp-area="" asp-controller="Login" asp-action="SignUp"><center>Register</center></a>
                             </li>
                         }
                         else
@@ -209,9 +232,11 @@
                             <li class="nav-item">
                                 <div class="dropdown">
                                     <a class="nav-link active dropbtn">
-                                        <span class="avatar"><img src="data/avatars/s/61/61448.jpg?1671429630" alt=""></span>
-                                        <strong>@SelectedUser.Username</strong>
-                                        <i class="arrow down"></i>
+                                        <center>
+                                            <span class="avatar"><img src="data/avatars/s/61/61448.jpg?1671429630" alt=""></span>
+                                            <strong>@SelectedUser.Username</strong>
+                                            <i class="arrow down"></i>
+                                        </center>
                                     </a>
                                     <div class="dropdown-content">
                                         <a asp-controller="" asp-action="">My Profile</a>
@@ -238,20 +263,22 @@
 
         .arrow {
             border: solid #2d2d2d;
-            border-width: 0 2px 2px 0;
+            border-width: 0 3px 3px 0;
             display: inline-block;
-            padding: 4px;
-            margin-left: 4px;
-            margin-bottom: 1.5px;
+            padding: 3px;
+            margin-left: 18px;
+            margin-bottom: 2.5px;
+            margin-right: -15px;
         }
 
         .dark-mode .arrow {
             border: solid #898989;
-            border-width: 0 2px 2px 0;
+            border-width: 0 3px 3px 0;
             display: inline-block;
-            padding: 4px;
-            margin-left: 4px;
-            margin-bottom: 1.5px;
+            padding: 3px;
+            margin-left: 18px;
+            margin-bottom: 2.5px;
+            margin-right: -15px;
         }
 
         .down {
@@ -368,10 +395,9 @@
 
         .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .show > .nav-link
         {
-            padding-left: 30px;
-            padding-right: 30px;
             padding-top: 0.75rem;
             height: 50px;
+            width: 165px;
             background-color: #2e5575;
             color: #ffd575;
             border: 1px solid;
