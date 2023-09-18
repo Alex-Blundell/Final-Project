@@ -7,6 +7,10 @@
     var DBContext = ViewBag.Context as ApplicationDBContext;
 }
 
+@{
+    User SelectedUser = null;
+}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,7 +47,7 @@
                             string UserID = (string)TempData["UserID"];
                             int IntegerUserID = int.Parse(UserID);
 
-                            User SelectedUser = new User();
+                            SelectedUser = new User();
 
                             foreach(User CurrentUser in DBContext.Users)
                             {
@@ -202,9 +206,21 @@
                         }
                         else
                         {
-                            // Profile Image and Dropdown, which will include the Logout Button.
                             <li class="nav-item">
-                                <a class="nav-link active" asp-area="" asp-controller="Login" asp-action="SignOut">Logout</a>
+                                <div class="dropdown">
+                                    <a class="nav-link active dropbtn">
+                                        <span class="avatar"><img src="data/avatars/s/61/61448.jpg?1671429630" alt=""></span>
+                                        <strong>@SelectedUser.Username</strong>
+                                        <i class="arrow down"></i>
+                                    </a>
+                                    <div class="dropdown-content">
+                                        <a asp-controller="" asp-action="">My Profile</a>
+                                        <a asp-controller="" asp-action="">Read List</a>
+                                        <a asp-controller="" asp-action="">Borrowed Items</a>
+                                        <a asp-controller="" asp-action="">Settings</a>
+                                        <a asp-controller="Login" asp-action="SignOut">Logout</a>
+                                    </div>
+                                </div>
                             </li>
                         }
                     </ul>
@@ -219,6 +235,85 @@
     </div>
 
     <style>
+
+        .arrow {
+            border: solid #2d2d2d;
+            border-width: 0 2px 2px 0;
+            display: inline-block;
+            padding: 4px;
+            margin-left: 4px;
+            margin-bottom: 1.5px;
+        }
+
+        .dark-mode .arrow {
+            border: solid #898989;
+            border-width: 0 2px 2px 0;
+            display: inline-block;
+            padding: 4px;
+            margin-left: 4px;
+            margin-bottom: 1.5px;
+        }
+
+        .down {
+            transform: rotate(45deg);
+            -webkit-transform: rotate(45deg);
+        }
+
+        .dropbtn {
+            color: white;
+            padding: 13px;
+            font-size: 16px;
+            border: none;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            box-shadow: 0px 8px 13px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dark-mode .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #1F1F1F;
+            box-shadow: 0px 8px 13px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 10px 10px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dark-mode .dropdown-content a {
+            color: #b06ceb;
+            padding: 10px 10px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dark-mode .dropdown-content a:hover {
+            background-color: #333;
+        }
+
+        /* Show the dropdown menu on hover */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
         .dark-mode
         {
             background-color: #404040;
