@@ -233,8 +233,8 @@
                                 <div class="dropdown">
                                     <a class="nav-link active dropbtn">
                                         <center>
-                                            <span class="avatar"><img src="data/avatars/s/61/61448.jpg?1671429630" alt=""></span>
-                                            <strong>@SelectedUser.Username</strong>
+                                            <span class="avatar"><img src="\css\avatars\default.jpg" alt=""></span>
+                                            <strong class="username">@SelectedUser.Username</strong>
                                             <i class="arrow down"></i>
                                         </center>
                                     </a>
@@ -266,9 +266,10 @@
             border-width: 0 3px 3px 0;
             display: inline-block;
             padding: 3px;
-            margin-left: 18px;
             margin-bottom: 2.5px;
-            margin-right: -15px;
+            position: relative;
+            left: 30px;
+            bottom: 2.5px;
         }
 
         .dark-mode .arrow {
@@ -276,14 +277,28 @@
             border-width: 0 3px 3px 0;
             display: inline-block;
             padding: 3px;
-            margin-left: 18px;
             margin-bottom: 2.5px;
-            margin-right: -15px;
         }
 
         .down {
             transform: rotate(45deg);
             -webkit-transform: rotate(45deg);
+        }
+
+        .avatar img
+        {
+            width: 40px;
+            height: 40px;
+            margin-left: -43px;
+            margin-top: -8px;
+            border-radius: 50%;
+        }
+
+        strong.username
+        {
+            position: relative;
+            left: 25px;
+            bottom: 2.5px;
         }
 
         .dropbtn {
@@ -304,14 +319,12 @@
             background-color: #f1f1f1;
             box-shadow: 0px 8px 13px 0px rgba(0,0,0,0.2);
             z-index: 1;
+            width: -webkit-fill-available;
         }
 
         .dark-mode .dropdown-content {
-            display: none;
-            position: absolute;
             background-color: #1F1F1F;
             box-shadow: 0px 8px 13px 0px rgba(0,0,0,0.2);
-            z-index: 1;
         }
 
         .dropdown-content a {
