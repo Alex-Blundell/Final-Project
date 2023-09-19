@@ -32,17 +32,14 @@ namespace Final_Project_Web_Application.Controllers
             if (HasLoggedIn == "Yes")
             {
                 TempData["HasLoggedIn"] = HasLoggedIn;
-                ViewData["HasLoggedIn"] = HasLoggedIn;
-                ViewData["UserID"] = UserID;
                 TempData["UserID"] = UserID;
             }
 
             TempData["IsDarkMode"] = IsDarkModeCookie;
-            ViewData["IsDarkMode"] = IsDarkModeCookie;
 
             if(Name != null)
             {
-                ViewData["IsThreads"] = "Yes";
+                TempData["IsThreads"] = "Yes";
                 IEnumerable<Models.Thread> ThreadObjList = Context.Threads;
 
                 int SelectedID = 0;
@@ -81,7 +78,7 @@ namespace Final_Project_Web_Application.Controllers
                 }
                 else
                 {
-                    ViewData["IsThreads"] = "No";
+                    TempData["IsThreads"] = "No";
                     IEnumerable<Forum> ForumObjList = Context.Forums;
                     return View(ForumObjList);
                 }
@@ -93,7 +90,7 @@ namespace Final_Project_Web_Application.Controllers
             }
             else
             {
-                ViewData["IsThreads"] = "No";
+                TempData["IsThreads"] = "No";
                 IEnumerable<Forum> ForumObjList = Context.Forums;
 
                 return View(ForumObjList);
@@ -115,7 +112,6 @@ namespace Final_Project_Web_Application.Controllers
             }
 
             TempData["IsDarkMode"] = IsDarkModeCookie;
-            ViewData["IsDarkMode"] = IsDarkModeCookie;
 
             return View();
         }
@@ -135,7 +131,6 @@ namespace Final_Project_Web_Application.Controllers
             }
 
             TempData["IsDarkMode"] = IsDarkModeCookie;
-            ViewData["IsDarkMode"] = IsDarkModeCookie;
 
             return View();
         }
@@ -155,7 +150,6 @@ namespace Final_Project_Web_Application.Controllers
             }
 
             TempData["IsDarkMode"] = IsDarkModeCookie;
-            ViewData["IsDarkMode"] = IsDarkModeCookie;
 
             return View();
         }

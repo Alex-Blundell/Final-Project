@@ -33,8 +33,6 @@ namespace Final_Project_Web_Application.Controllers
             if (HasLoggedIn == "Yes")
             {
                 TempData["HasLoggedIn"] = HasLoggedIn;
-                ViewData["HasLoggedIn"] = HasLoggedIn;
-                ViewData["UserID"] = UserID;
                 TempData["UserID"] = UserID;
 
                 Models.User SelectedUser = null;

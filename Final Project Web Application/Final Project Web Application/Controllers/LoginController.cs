@@ -32,7 +32,6 @@ namespace Final_Project_Web_Application.Controllers
             }
 
             TempData["IsDarkMode"] = IsDarkModeCookie;
-            ViewData["IsDarkMode"] = IsDarkModeCookie;
 
             if (LoginCookie != null)
             {
@@ -66,7 +65,6 @@ namespace Final_Project_Web_Application.Controllers
             }
 
             TempData["IsDarkMode"] = IsDarkModeCookie;
-            ViewData["IsDarkMode"] = IsDarkModeCookie;
 
             Models.User SelectedUser = new Models.User();
             bool FoundUser = false;
@@ -132,7 +130,6 @@ namespace Final_Project_Web_Application.Controllers
             }
 
             TempData["IsDarkMode"] = IsDarkModeCookie;
-            ViewData["IsDarkMode"] = IsDarkModeCookie;
 
             return View();
         }
@@ -153,7 +150,6 @@ namespace Final_Project_Web_Application.Controllers
             }
 
             TempData["IsDarkMode"] = IsDarkModeCookie;
-            ViewData["IsDarkMode"] = IsDarkModeCookie;
 
             // Possibly Switch Username up for Email.
 
@@ -200,7 +196,6 @@ namespace Final_Project_Web_Application.Controllers
             }
 
             TempData["IsDarkMode"] = IsDarkModeCookie;
-            ViewData["IsDarkMode"] = IsDarkModeCookie;
 
             return View();
         }
@@ -220,7 +215,6 @@ namespace Final_Project_Web_Application.Controllers
             }
 
             TempData["IsDarkMode"] = IsDarkModeCookie;
-            ViewData["IsDarkMode"] = IsDarkModeCookie;
 
             // Code for Signing Out.
             string cookieValue = Request.Cookies["HasLoggedIn"];

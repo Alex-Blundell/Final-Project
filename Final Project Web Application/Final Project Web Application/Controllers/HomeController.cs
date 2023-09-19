@@ -18,11 +18,12 @@ namespace Final_Project_Web_Application.Controllers
         public IActionResult WriteCookie(string Value)
         {
             HttpContext.Session.SetString("Photo", "p1");
+
             CookieOptions options = new CookieOptions();
             options.Expires = DateTime.Now.AddYears(100);
 
             Response.Cookies.Append("IsDarkMode", Value, options);
-            ViewData["IsDarkMode"] = Value;
+            TempData["IsDarkMode"] = Value;
 
             return RedirectToAction("Index", "Home");
         }
@@ -47,8 +48,6 @@ namespace Final_Project_Web_Application.Controllers
             if (HasLoggedIn == "Yes")
             {
                 TempData["HasLoggedIn"] = HasLoggedIn;
-                ViewData["HasLoggedIn"] = HasLoggedIn;
-                ViewData["UserID"] = UserID;
                 TempData["UserID"] = UserID;
             }
 
@@ -57,13 +56,10 @@ namespace Final_Project_Web_Application.Controllers
             if (TempLoginCheck == "Yes")
             {
                 TempData["HasLoggedIn"] = TempData["TempLogin"];
-                ViewData["HasLoggedIn"] = TempData["TempLogin"];
-                ViewData["UserID"] = TempData["TempUserID"];
                 TempData["UserID"] = TempData["TempUserID"];
             }
 
             TempData["IsDarkMode"] = IsDarkModeCookie;
-            ViewData["IsDarkMode"] = IsDarkModeCookie;
 
             return View();
         }
