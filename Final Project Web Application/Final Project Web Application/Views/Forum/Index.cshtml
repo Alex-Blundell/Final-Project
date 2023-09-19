@@ -5,49 +5,102 @@
     var DBContext = ViewBag.Context as ApplicationDBContext;
 }
 
-<table class="table">
-    <tbody>
-    @foreach (var item in Model)
+@{
+    if(ViewData["IsThreads"] == "No")
     {
-        <tr>
-            <td>
-                <a class="nav-link" asp-area="" asp-route-id="@item.Name" asp-controller="Forum" asp-action="Forum">
-                    @Html.DisplayFor(modelItem => item.Name)
-                    <p>@Html.DisplayFor(modelItem => item.Description)</p>
-                </a>
-            </td>
-            <td>
-                <a class="nav-link" asp-area="" asp-route-id="@item.Name" asp-controller="Forum" asp-action="Forum">
-                    @{
-                        int ThreadNum = 0;
-                        int PostsNum = 0;
+        <table class="table">
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a class="nav-link" asp-area="" asp-route-Name="@item.Name" asp-controller="Forum" asp-action="Index">
+                                @Html.DisplayFor(modelItem => item.Name)
+                                <p>@Html.DisplayFor(modelItem => item.Description)</p>
+                            </a>
+                        </td>
+                        <td>
+                            <a class="nav-link" asp-area="" asp-route-Name="@item.Name" asp-controller="Forum" asp-action="Index">
+                                @{
+                                    int ThreadNum = 0;
+                                    int PostsNum = 0;
 
-                        foreach(Thread SelectedThread in DBContext.Threads)
-                        {
-                            if(SelectedThread.ForumID == item.ID)
-                            {
-                                ThreadNum++;
+                                    foreach (Thread SelectedThread in DBContext.Threads)
+                                    {
+                                        if (SelectedThread.ForumID == item.ID)
+                                        {
+                                            ThreadNum++;
 
-                                foreach(Post SelectedPost in DBContext.Posts)
-                                {
-                                    // Check to see if the Posts ThreadID is Equal to the SelectedThread ID.
+                                            foreach (Post SelectedPost in DBContext.Posts)
+                                            {
+                                                // Check to see if the Posts ThreadID is Equal to the SelectedThread ID.
+                                            }
+                                        }
+                                    }
+
+                                    <p>@ThreadNum Threads</p>
+                                    <p>@PostsNum Threads</p>
                                 }
-                            }
-                        }
-
-                        <p>@ThreadNum Threads</p>
-                        <p>@PostsNum Threads</p>
-                    }
-                </a>
-            </td>
-            <td>
-                <a class="nav-link" asp-area="" asp-route-id="@item.Name" asp-controller="Forum" asp-action="Index">
-                    <p>Latest Thread / Latest Thread Reply</p>
-                    <p>by Username</p>
-                    <p>DateTime</p>
-                </a>
-            </td>
-        </tr>
+                            </a>
+                        </td>
+                        <td>
+                            <a class="nav-link" asp-area="" asp-route-Name="@item.Name" asp-controller="Forum" asp-action="Index">
+                                Latest Thread / Latest Thread Reply <br />
+                                by Username<br />
+                                DateTime
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     }
-    </tbody>
-</table>
+    else
+    {
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+        <table class="table">
+            <tbody>
+                @foreach (var item in ViewBag.Model)
+                {
+                    <td>
+                        <a class="nav-link" asp-area="" asp-route-ID="@item.ID" asp-controller="Forum" asp-action="Thread">
+                            @item.Name
+                        </a>
+                    </td>
+                    <td>
+                        <a class="nav-link" asp-area="" asp-route-ID="@item.ID" asp-controller="Forum" asp-action="Thread">
+                             @item.CreationDate
+                        </a>
+                    </td>
+                }
+            </tbody>
+        </table>
+    }
+}
+
+<style>
+    td
+    {
+        max-width: 750px;
+        
+    }
+
+    .nav-link
+    {
+        color: #b06ceb;
+    }
+
+    .table > tbody
+    {
+        vertical-align: middle;
+    }
+
+    tr
+    {
+        background-color: #2f2f2f;
+        border-color: hsl(0deg, 0%, 100%, 0.25);
+    }
+
+</style>

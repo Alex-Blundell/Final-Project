@@ -15,5 +15,6 @@ namespace Final_Project_Web_Application.Data
         public DbSet<Models.Thread> Threads { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Book> Book { get; set; }
     }
 }

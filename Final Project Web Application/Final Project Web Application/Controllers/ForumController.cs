@@ -13,7 +13,7 @@ namespace Final_Project_Web_Application.Controllers
             Context = DBContext;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string Name)
         {
             string IsDarkModeCookie = Request.Cookies["IsDarkMode"];
             string UserID = Request.Cookies["UserID"];
@@ -40,33 +40,67 @@ namespace Final_Project_Web_Application.Controllers
             TempData["IsDarkMode"] = IsDarkModeCookie;
             ViewData["IsDarkMode"] = IsDarkModeCookie;
 
-            IEnumerable<Forum> ForumObjList = Context.Forums;
-            return View(ForumObjList);
-        }
-
-        public IActionResult Forum()
-        {
-            string IsDarkModeCookie = Request.Cookies["IsDarkMode"];
-
-            // Probably the First time the Website has been Run, Add Cookie for Dark Mode and Set it to the Default Value.
-            if (IsDarkModeCookie == null)
+            if(Name != null)
             {
-                CookieOptions Options = new CookieOptions();
-                Options.Expires = DateTime.Now.AddYears(100);
+                ViewData["IsThreads"] = "Yes";
+                IEnumerable<Models.Thread> ThreadObjList = Context.Threads;
 
-                IsDarkModeCookie = "No";
-                Response.Cookies.Append("IsDarkMode", IsDarkModeCookie, Options);
+                int SelectedID = 0;
+
+                if (Name == "Introductions")
+                {
+                    SelectedID = 1;
+                }
+                else if (Name == "Help")
+                {
+                    SelectedID = 10;
+                }
+                else if (Name == "General")
+                {
+                    SelectedID = 11;
+                }
+                else if (Name == "Off_Topic")
+                {
+                    SelectedID = 12;
+                }
+                else if (Name == "Suggestions")
+                {
+                    SelectedID = 13;
+                }
+                else if (Name == "Recomendations")
+                {
+                    SelectedID = 14;
+                }
+                else if (Name == "Forgot_Title")
+                {
+                    SelectedID = 15;
+                }
+                else if (Name == "Reviews")
+                {
+                    SelectedID = 16;
+                }
+                else
+                {
+                    ViewData["IsThreads"] = "No";
+                    IEnumerable<Forum> ForumObjList = Context.Forums;
+                    return View(ForumObjList);
+                }
+
+                List<Models.Thread> ThreadList = ThreadObjList.Where(x => x.ID == SelectedID).ToList();
+
+                ViewBag.Model = ThreadList;
+                return View();
             }
+            else
+            {
+                ViewData["IsThreads"] = "No";
+                IEnumerable<Forum> ForumObjList = Context.Forums;
 
-            TempData["IsDarkMode"] = IsDarkModeCookie;
-            ViewData["IsDarkMode"] = IsDarkModeCookie;
-
-            IEnumerable<Models.Thread> ThreadObjList = Context.Threads;
-            return View(ThreadObjList);
-
+                return View(ForumObjList);
+            }
         }
 
-        public IActionResult Thread()
+        public IActionResult Thread(int ID)
         {
             string IsDarkModeCookie = Request.Cookies["IsDarkMode"];
 
