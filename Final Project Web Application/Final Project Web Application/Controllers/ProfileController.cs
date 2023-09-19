@@ -23,5 +23,20 @@ namespace Final_Project_Web_Application.Controllers
 
             return View();
         }
+
+        public IActionResult ReadList()
+        {
+            return View();
+        }
+
+        public IActionResult BorrowedItems()
+        {
+            return View();
+        }
+
+        public IActionResult Settings()
+        {
+            return View();
+        }
     }
 }
