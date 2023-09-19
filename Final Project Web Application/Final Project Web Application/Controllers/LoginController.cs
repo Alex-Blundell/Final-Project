@@ -103,6 +103,11 @@ namespace Final_Project_Web_Application.Controllers
                     Response.Cookies.Append("HasLoggedIn", "Yes", Options);
                     Response.Cookies.Append("UserID", SelectedUser.ID.ToString(), Options);
                 }
+                else
+                {
+                    TempData["TempLogin"] = "Yes";
+                    TempData["TempUserID"] = SelectedUser.ID.ToString();
+                }
 
                 return RedirectToAction("Index", "Home");
             }

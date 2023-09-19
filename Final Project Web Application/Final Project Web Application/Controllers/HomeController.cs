@@ -52,6 +52,16 @@ namespace Final_Project_Web_Application.Controllers
                 TempData["UserID"] = UserID;
             }
 
+            string TempLoginCheck = (string)TempData["TempLogin"];
+
+            if (TempLoginCheck == "Yes")
+            {
+                TempData["HasLoggedIn"] = TempData["TempLogin"];
+                ViewData["HasLoggedIn"] = TempData["TempLogin"];
+                ViewData["UserID"] = TempData["TempUserID"];
+                TempData["UserID"] = TempData["TempUserID"];
+            }
+
             TempData["IsDarkMode"] = IsDarkModeCookie;
             ViewData["IsDarkMode"] = IsDarkModeCookie;
 
