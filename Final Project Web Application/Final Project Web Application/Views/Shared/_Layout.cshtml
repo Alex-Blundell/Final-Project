@@ -39,7 +39,6 @@
                                     <center>Read
                                         <i class="arrow down"></i>
                                     </center>
-                                    
                                 </a>
                                 <div class="dropdown-content">
                                     <a asp-route-Genre="ActionAdventure" asp-controller="Read" asp-action="Index">Action & Adventure</a>
@@ -136,7 +135,7 @@
 
                                     function LoadDarkMode()
                                     {
-                                        var IsDarkMode = '@ViewData["IsDarkMode"]';
+                                        var IsDarkMode = '@TempData["IsDarkMode"]';
 
                                         if (IsDarkMode == "Yes")
                                         {
@@ -218,13 +217,13 @@
                                 }
                             </style>
                         </li>
-                        @if((string)ViewData["HasLoggedIn"] != "Yes")
+                        @if((string)TempData["HasLoggedIn"] != "Yes")
                         {
                             <li class="nav-item">
-                                <a class="nav-link active" asp-area="" asp-controller="Login" asp-action="Index"><center>Login</center></a>
+                                <a class="nav-link active login-btn" asp-area="" asp-controller="Login" asp-action="Index"><center>Login</center></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" asp-area="" asp-controller="Login" asp-action="SignUp"><center>Register</center></a>
+                                <a class="nav-link active login-btn" asp-area="" asp-controller="Login" asp-action="SignUp"><center>Register</center></a>
                             </li>
                         }
                         else
@@ -374,8 +373,8 @@
         .dark-mode .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .show > .nav-link
         {
             background-color: #2f2f2f;
-                border-color: hsl(0deg, 0%, 47.39%, 0.1);
-                color: #b06ceb;
+            border-color: hsl(0deg, 0%, 47.39%, 0.1);
+            color: #b06ceb;
         }
 
         .dark-mode .select-button
@@ -415,6 +414,10 @@
             color: #ffd575;
             border: 1px solid;
             border-color: #294459;
+        }
+
+        .login-btn{
+            width: 109px!important;
         }
 
         .border-bottom
