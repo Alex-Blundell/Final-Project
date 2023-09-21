@@ -65,7 +65,8 @@ namespace Final_Project_Web_Application.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SecLevel = table.Column<int>(type: "int", nullable: false)
+                    SecLevel = table.Column<int>(type: "int", nullable: false),
+                    AvatarURL = table.Column<string>(type: "nvarchar(max)", nullable: false, defaultValue: "\\css\\avatars\\default.jpg")
                 },
                 constraints: table =>
                 {

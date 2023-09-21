@@ -17,6 +17,7 @@ namespace Final_Project_Web_Application.Models
         [Required] public string Username { get; set; }
         [Required] public string Password { get; set; }
         [Required] public SecurityLevel SecLevel { get; set; }
+        [Required] public string AvatarURL { get; set; }
 
         public User()
         {

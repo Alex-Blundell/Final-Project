@@ -1,5 +1,47 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    var DBContext = ViewBag.Context as ApplicationDBContext;
+
+    int ID = int.Parse((string)TempData["UserID"]);
+    User SelectedUser = null;
+
+    foreach(User CurrentUser in DBContext.Users)
+    {
+        if(CurrentUser.ID == ID)
+        {
+            SelectedUser = CurrentUser;
+        }
+    }
 }
+
+<center>
+    <form action="upload.php" method="POST" enctype="multipart/form-data">
+        <img class="avatar" src="/css/avatars/default.jpg">
+    </form>
+</center>
+
+<div class="form-group">
+    <label for="Username">Username:</label>
+    <input class="form-control" type="text" name="Username" value="@SelectedUser.Username">
+    <p></p>
+</div>
+
+<div class="form-group">
+    <label for="Password">Password:</label>
+    <input class="form-control" type="password" name="Password" value="@SelectedUser.Password">
+    <p></p>
+</div>
+
+<style>
+    .avatar{
+        width: 250px;
+        height: 250px;
+        border: 1.5px solid #000;
+    }
+</style>
+
+<script>
+    function ThisFunction()
+    {
+
+    }
+</script>

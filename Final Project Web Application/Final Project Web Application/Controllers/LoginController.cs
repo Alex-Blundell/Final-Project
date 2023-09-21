@@ -13,9 +13,6 @@ namespace Final_Project_Web_Application.Controllers
             Context = DBContext;
         }
 
-        public string Username { get; set; }
-        public string Password { get; set; }
-
         public IActionResult Index()
         {
             string LoginCookie = Request.Cookies["HasLoggedIn"];

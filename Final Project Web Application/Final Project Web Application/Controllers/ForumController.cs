@@ -46,35 +46,35 @@ namespace Final_Project_Web_Application.Controllers
 
                 if (Name == "Introductions")
                 {
-                    SelectedID = 1;
+                    SelectedID = Context.Forums.ToList()[0].ID;
                 }
                 else if (Name == "Help")
                 {
-                    SelectedID = 10;
+                    SelectedID = Context.Forums.ToList()[1].ID;
                 }
                 else if (Name == "General")
                 {
-                    SelectedID = 11;
+                    SelectedID = Context.Forums.ToList()[2].ID;
                 }
-                else if (Name == "Off_Topic")
+                else if (Name == "Off Topic")
                 {
-                    SelectedID = 12;
+                    SelectedID = Context.Forums.ToList()[3].ID;
                 }
                 else if (Name == "Suggestions")
                 {
-                    SelectedID = 13;
+                    SelectedID = Context.Forums.ToList()[4].ID;
                 }
                 else if (Name == "Recomendations")
                 {
-                    SelectedID = 14;
+                    SelectedID = Context.Forums.ToList()[5].ID;
                 }
-                else if (Name == "Forgot_Title")
+                else if (Name == "I Forgot the Title...")
                 {
-                    SelectedID = 15;
+                    SelectedID = Context.Forums.ToList()[6].ID;
                 }
                 else if (Name == "Reviews")
                 {
-                    SelectedID = 16;
+                    SelectedID = Context.Forums.ToList()[7].ID;
                 }
                 else
                 {

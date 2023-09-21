@@ -26,7 +26,7 @@
         <a class="nav-link header-image" asp-area="" asp-controller="Home" asp-action="Index">
             <img src="\css\logo\logo_light.png" id="logo" width="450" height="65" asp-controller="Home" asp-action="Index">
         </a>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow mb-3">
             <div class="container-fluid header-text">
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
@@ -87,7 +87,7 @@
                             }
                         }
                     </ul>
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav rightnav">
                         <li class="nav-item">
                             <div class="input-group">
                                 <select class="select-button" aria-label="Search by">
@@ -158,6 +158,7 @@
                                     height: 34px;
                                     margin-left: 15px;
                                     margin-right: 15px;
+                                    margin-top: 8px;
                                 }
 
                                 /* Hide default HTML checkbox */
@@ -232,16 +233,16 @@
                                 <div class="dropdown">
                                     <a class="nav-link active dropbtn">
                                         <center>
-                                            <span class="avatar"><img src="\css\avatars\default.jpg" alt=""></span>
+                                            <span class="avatar"><img src="@SelectedUser.AvatarURL" alt=""></span>
                                             <strong class="username">@SelectedUser.Username</strong>
                                             <i class="arrow down"></i>
                                         </center>
                                     </a>
                                     <div class="dropdown-content">
-                                        <a asp-controller="Profile" asp-action="Index">My Profile</a>
-                                        <a asp-controller="Profile" asp-action="ReadList">Read List</a>
-                                        <a asp-controller="Profile" asp-action="BorrowedItems">Borrowed Items</a>
-                                        <a asp-controller="Profile" asp-action="Settings">Settings</a>
+                                        <a asp-route-Username="@SelectedUser.Username" asp-controller="Profile" asp-action="Index">My Profile</a>
+                                        <a asp-route-Username="@SelectedUser.Username" asp-controller="Profile" asp-action="ReadList">Read List</a>
+                                        <a asp-route-Username="@SelectedUser.Username" asp-controller="Profile" asp-action="BorrowedItems">Borrowed Items</a>
+                                        <a asp-route-Username="@SelectedUser.Username" asp-controller="Profile" asp-action="Settings">Settings</a>
                                         <a asp-controller="Login" asp-action="SignOut">Logout</a>
                                     </div>
                                 </div>
@@ -252,13 +253,48 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container main-body">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
     <style>
+        body
+        {
+            background-image: url("https://localhost:44395/css/background.jpg");
+            margin-bottom: 0px;
+        }
+
+        body::before
+        {
+            background-color: hsl(0deg, 0%, 47.39%, 0.1);
+        }
+
+        .dark-mode .container
+        {
+            background-color: #2f2f2f;
+        }
+
+        .container{
+            background-color: #c4d0ff;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .main-body{
+            min-height: 1080px;
+            max-width: 1450px;
+        }
+
+        .footer {
+            background-color: #c4d0ff;
+        }
+
+        .dark-mode .footer{
+            background-color: #404040
+        }
+
         .social-link img
         {
             width: 30px;
@@ -323,6 +359,10 @@
             display: inline-block;
         }
 
+        .input-group{
+            margin-top: 6px;
+        }
+
         .dropdown-content {
             display: none;
             position: absolute;
@@ -366,7 +406,6 @@
 
         .dark-mode
         {
-            background-color: #404040;
             color: #d3d3d3;
         }
 
@@ -384,7 +423,14 @@
         .dark-mode .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .show > .nav-link
         {
             background-color: #2f2f2f;
-            border-color: hsl(0deg, 0%, 47.39%, 0.1);
+            border-color: hsl(0deg, 0%, 0%, 0);
+            color: #b06ceb;
+        }
+
+        .dark-mode .navbar-light:hover .navbar-nav:hover .nav-link.active:hover, .navbar-light:hover .navbar-nav:hover .show > .nav-link:hover
+        {
+            background-color: #404040;
+            border-color: hsl(0deg, 0%, 0%, 0);
             color: #b06ceb;
         }
 
@@ -392,18 +438,19 @@
         {
             background-color: #404040;
             color: #d3d3d3;
+                border-color: hsl(0deg, 0%, 0%, 0.1)
         }
-
+       
         .dark-mode .form-control
         {
             background-color: #404040;
             color: white;
-            border-color: hsla(0,0%,100%,.1);
+            border-color: hsl(0deg, 0%, 0%, 0)
         }
 
         header
         {
-            background-color: #b2d3fb;
+            background-color: #8197b1;
         }
 
         .header-image
@@ -417,6 +464,14 @@
         }
 
         .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .show > .nav-link
+        {
+            padding-top: 0.75rem;
+            height: 50px;
+            width: 165px;
+            color: #ffd575;
+        }
+
+        .navbar-light:hover .navbar-nav:hover .nav-link.active:hover, .navbar-light:hover .navbar-nav:hover .show > .nav-link:hover
         {
             padding-top: 0.75rem;
             height: 50px;
@@ -438,6 +493,21 @@
 
         .navbar {
             padding-bottom: 0px;
+            margin-bottom: 0rem !important;
+            padding-top: 0rem !important;
+            background-color: #5d7ca1;
+        }
+
+        .flex-grow-1 {
+            margin-left: 30px;
+        }
+
+        .rightnav{
+            margin-right: 100px;
+        }
+
+        .dark-mode .navbar {
+            background-color: #2f2f2f;
         }
     </style>
 
@@ -449,29 +519,7 @@
             </div>
         </div>
     </div>
-    <ul class="social-linklist">
-        <li>
-            <a class="social-link" href="https://facebook.com/">
-                <img src="/css/logo/facebook-icon.png"/>
-            </a>
-        </li>
-        <li>
-            <a class="social-link" href="https://twitter.com/">
-                <img src="/css/logo/facebook-icon.png" />
-            </a>
-        </li>
-        <li>
-            <a class="social-link" href="https://twitter.com/">
-                <img src="/css/logo/facebook-icon.png" />
-            </a>
-        </li>
-        <li>
-            <a class="social-link" href="https://twitter.com/">
-                <img src="/css/logo/facebook-icon.png" />
-            </a>
-        </li>
-    </ul>
-
+   
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

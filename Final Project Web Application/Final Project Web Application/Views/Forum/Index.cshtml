@@ -84,12 +84,15 @@
     td
     {
         max-width: 750px;
-        
     }
 
-    .nav-link
+    .dark-mode .nav-link
     {
         color: #b06ceb;
+    }
+
+    .nav-link {
+        color: #f2d575;
     }
 
     .table > tbody
@@ -97,9 +100,13 @@
         vertical-align: middle;
     }
 
-    tr
-    {
+    .dark-mode tr {
         background-color: #2f2f2f;
+        border-color: hsl(0deg, 0%, 100%, 0.25);
+    }
+
+    tr {
+        background-color: #6c7c89;
         border-color: hsl(0deg, 0%, 100%, 0.25);
     }
 
