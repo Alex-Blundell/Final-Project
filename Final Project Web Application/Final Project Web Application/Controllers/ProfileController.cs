@@ -68,7 +68,7 @@ namespace Final_Project_Web_Application.Controllers
 
             TempData["IsDarkMode"] = IsDarkModeCookie;
 
-            return View();
+            return View(new List<Book>());
         }
 
         public IActionResult BorrowedItems(int ID)
@@ -97,7 +97,7 @@ namespace Final_Project_Web_Application.Controllers
 
             TempData["IsDarkMode"] = IsDarkModeCookie;
 
-            return View();
+            return View(new List<Book>());
         }
 
         public IActionResult Settings(int ID)

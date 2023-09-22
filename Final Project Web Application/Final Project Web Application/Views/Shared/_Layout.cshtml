@@ -24,7 +24,7 @@
 <body onload="LoadDarkMode()">
     <header>
         <a class="nav-link header-image" asp-area="" asp-controller="Home" asp-action="Index">
-            <img src="\css\logo\logo_light.png" id="logo" width="450" height="65" asp-controller="Home" asp-action="Index">
+            <img class="logo" src="\css\logo\logo_light.png" id="logo" width="450" height="65" asp-controller="Home" asp-action="Index">
         </a>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow mb-3">
             <div class="container-fluid header-text">
@@ -292,7 +292,7 @@
         }
 
         .dark-mode .footer{
-            background-color: #404040
+            background-color: #2f2f2f
         }
 
         .social-link img
@@ -368,7 +368,7 @@
             position: absolute;
             background-color: #f1f1f1;
             box-shadow: 0px 8px 13px 0px rgba(0,0,0,0.2);
-            z-index: 1;
+            z-index: 2;
             width: -webkit-fill-available;
         }
 
@@ -508,6 +508,15 @@
 
         .dark-mode .navbar {
             background-color: #2f2f2f;
+        }
+
+        .logo{
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .login-buttons{
+
         }
     </style>
 
