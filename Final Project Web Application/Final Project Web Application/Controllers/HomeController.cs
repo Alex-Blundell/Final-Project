@@ -35,6 +35,8 @@ namespace Final_Project_Web_Application.Controllers
             string UserID = Request.Cookies["UserID"];
             string HasLoggedIn = Request.Cookies["HasLoggedIn"];
 
+            
+
             // Probably the First time the Website has been Run, Add Cookie for Dark Mode and Set it to the Defualt Value.
             if(IsDarkModeCookie == null)
             {
@@ -61,7 +63,7 @@ namespace Final_Project_Web_Application.Controllers
 
             TempData["IsDarkMode"] = IsDarkModeCookie;
 
-            return View();
+            return View(new List<Book>());
         }
 
         public IActionResult News()
