@@ -9,7 +9,5 @@ namespace Final_Project_Web_Application.Models
         [ForeignKey("ID")] public int ForumID { get; set; }
         [Required] public string Name { get; set; }
         [Required] public string CreationDate { get; set; }
-
-        //public List<Post> ThreadPosts { get; set; }
     }
 }

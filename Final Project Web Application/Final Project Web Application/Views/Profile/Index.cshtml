@@ -1,4 +1,5 @@
-﻿@{
+﻿@using Final_Project_Web_Application.Models;
+@{
     var DBContext = ViewBag.Context as ApplicationDBContext;
 
     int ID = int.Parse((string)TempData["UserID"]);
@@ -22,6 +23,8 @@
     <center><input type="submit" name="submit" value="Submit"></center>
 </form>
 
+<form asp-action="Index" asp-controller="Profile" method="post">
+
 <div class="form-group">
     <label for="Username">Username:</label>
     <input class="form-control" type="text" name="Username" value="@SelectedUser.Username">
@@ -29,10 +32,17 @@
 </div>
 
 <div class="form-group">
+    @{
+        string Password = Final_Project_Web_Application.Models.User.DecryptString(SelectedUser.Password);
+    }
     <label for="Password">Password:</label>
-    <input class="form-control" type="password" name="Password" value="@SelectedUser.Password">
+    <input class="form-control" type="password" name="Password" value="@Password">
     <p></p>
 </div>
+
+<center><input type="submit" name="submit" value="Save Changes"></center>
+
+</form>
 
 <style>
     .avatar

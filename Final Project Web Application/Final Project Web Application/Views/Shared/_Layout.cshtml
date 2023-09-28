@@ -101,15 +101,17 @@
                     <ul class="navbar-nav rightnav">
                         <!-- Search Type Select -->
                         <li class="nav-item">
-                            <div class="input-group">
-                                <select class="select-button" aria-label="Search by">
-                                    <option value="all">All</option>
-                                    <option value="title">Title</option>
-                                    <option value="author">Author</option>
-                                    <option value="author">Description</option>
-                                </select>
-                                <input type="text" class="form-control" placeholder="Search..." name="title" aria-label="Fiction search">
-                            </div>
+                            <form asp-action="Search" asp-controller="Home" method="post">
+                                <div class="input-group">
+                                    <select class="select-button" name="SearchType" aria-label="Search by">
+                                        <option value="All">All</option>
+                                        <option value="Title">Title</option>
+                                        <option value="Author">Author</option>
+                                        <option value="Description">Description</option>
+                                    </select>
+                                    <input type="text" class="form-control" placeholder="Search..." name="Query" aria-label="Fiction search">
+                                </div>
+                            </form>
                         </li>
                         <!-- Dark / Light Mode Switch -->
                         <li class="nav-item">
@@ -297,6 +299,15 @@
     </div>
 
     <style>
+        .dark-mode .table {
+            color: #b06ceb;
+        }
+
+        .dark-mode .table td, .table th {
+            border-top: 1px solid hsla(0, 0%, 100%, 0.1);
+            border-bottom-width: 0px;
+        }
+
         body
         {
             background-image: url("https://localhost:44395/css/background.jpg");

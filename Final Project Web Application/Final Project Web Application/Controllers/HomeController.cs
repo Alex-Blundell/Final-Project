@@ -1,4 +1,5 @@
-﻿using Final_Project_Web_Application.Models;
+﻿using Final_Project_Web_Application.Data;
+using Final_Project_Web_Application.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System.Diagnostics;
@@ -8,10 +9,12 @@ namespace Final_Project_Web_Application.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDBContext Context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ApplicationDBContext DBContext)
         {
             _logger = logger;
+            Context = DBContext;
         }
 
         [HttpPost]
@@ -34,8 +37,6 @@ namespace Final_Project_Web_Application.Controllers
             string IsDarkModeCookie = Request.Cookies["IsDarkMode"];
             string UserID = Request.Cookies["UserID"];
             string HasLoggedIn = Request.Cookies["HasLoggedIn"];
-
-            
 
             // Probably the First time the Website has been Run, Add Cookie for Dark Mode and Set it to the Defualt Value.
             if(IsDarkModeCookie == null)
@@ -99,7 +100,8 @@ namespace Final_Project_Web_Application.Controllers
             return View();
         }
 
-        public IActionResult Search(string Query)
+        [HttpPost]
+        public IActionResult Search(string SearchType, string Query)
         {
             string IsDarkModeCookie = Request.Cookies["IsDarkMode"];
             string UserID = Request.Cookies["UserID"];
@@ -129,7 +131,45 @@ namespace Final_Project_Web_Application.Controllers
                 TempData["UserID"] = TempData["TempUserID"];
             }
 
-            return View();
+            TempData["SearchQuery"] = Query;
+            TempData["IsDarkMode"] = IsDarkModeCookie;
+
+            //List<Book> AllBooks = Context.Books.ToList();
+            List<Book> AllBooks = new List<Book>();
+            List<Book> SearchBooks = new List<Book>();
+
+            foreach(Book CurrentBook in AllBooks)
+            {
+                if(SearchType == "All")
+                {
+                    if(CurrentBook.Title.Contains(Query))
+                        SearchBooks.Add(CurrentBook);
+                    else if(CurrentBook.Description.Contains(Query))
+                        SearchBooks.Add(CurrentBook);
+                    else if(CurrentBook.Author.Contains(Query))
+                        SearchBooks.Add(CurrentBook);
+                }
+                else
+                {
+                    if(SearchType == "Title")
+                    {
+                        if(CurrentBook.Title.Contains(Query))
+                            SearchBooks.Add(CurrentBook);
+                    }
+                    else if(SearchType == "Author")
+                    {
+                        if(CurrentBook.Author.Contains(Query))
+                            SearchBooks.Add(CurrentBook);
+                    }
+                    else if(SearchType == "Description")
+                    {
+                        if(CurrentBook.Description.Contains(Query))
+                            SearchBooks.Add(CurrentBook);
+                    }
+                }
+            }
+
+            return View(SearchBooks);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
