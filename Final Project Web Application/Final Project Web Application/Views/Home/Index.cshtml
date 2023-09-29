@@ -1,7 +1,9 @@
 ﻿@model IEnumerable<Final_Project_Web_Application.Models.Book>
 
+@using Final_Project_Web_Application.Data;
 @{
     ViewData["Title"] = "Home Page";
+    var DBContext = ViewBag.Context as ApplicationDBContext;
 }
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -12,33 +14,54 @@
 <!-- News Carousel -->
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        @{
+            int i = 1;
+            foreach(NewsItem CurrentItem in DBContext.NewsCycle)
+            {
+                if(i == 1)
+                {
+                    <li data-target="#carouselExampleIndicators" data-slide-to="@i" class="active"></li>
+                }
+                else
+                {
+                    <li data-target="#carouselExampleIndicators" data-slide-to="@i"></li>
+                }
+
+                i++;
+            }
+        }
     </ol>
     <div class="carousel-inner">
         <!-- News Carousel Items -->
-        <div class="carousel-item active">
-            <img class="d-block w-100" src="/css/Background One.jpg" alt="First slide">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>Closed for Easter Holidays</h5>
-                <p>Due to the Easter Holidays being a public holiday, We will be closed, we reopen on Monday, have a Happy Easter.</p>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img class="d-block w-100" src="/css/Background Two.jpg" alt="Second slide">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>Book signing with John Green</h5>
-                <p>Come and get your book signed with John Green.</p>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img class="d-block w-100" src="/css/Background Three.jpg" alt="Third slide">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>2023 Short Story Competition</h5>
-                <p>The 2023 Short Story Competition has finished, check out the winners stories!</p>
-            </div>
-        </div>
+        @{
+            int Index = 1;
+
+            foreach (NewsItem CurrentItem in DBContext.NewsCycle)
+            {
+                if (Index == 1)
+                {
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src="@CurrentItem.BackgroundURL" alt="First slide">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>@CurrentItem.Title</h5>
+                            <p>@CurrentItem.Description</p>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="@CurrentItem.BackgroundURL" alt="Second slide">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>@CurrentItem.Title</h5>
+                            <p>@CurrentItem.Description</p>
+                        </div>
+                    </div>
+                }
+
+                Index++;
+            }
+        }
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide-to="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -58,76 +81,22 @@
                 <center>Top 10</center>
             </td>
         </tr>
-        <!-- #1 -->
-        <tr>
-            <td>
-                <img src="/css/avatars/default.jpg" class="book-cover">
-                <a class="book-details">Book Title by Book Author</a>
-            </td>
-        </tr>
-        <!-- #2 -->
-        <tr>
-            <td>
-                <img src="/css/avatars/default.jpg" class="book-cover">
-                <a class="book-details">Book Title by Book Author</a>
-            </td>
-        </tr>
-        <!-- #3 -->
-        <tr>
-            <td>
-                <img src="/css/avatars/default.jpg" class="book-cover">
-                <a class="book-details">Book Title by Book Author</a>
-            </td>
-        </tr>
-        <!-- #4 -->
-        <tr>
-            <td>
-                <img src="/css/avatars/default.jpg" class="book-cover">
-                <a class="book-details">Book Title by Book Author</a>
-            </td>
-        </tr>
-        <!-- #5 -->
-        <tr>
-            <td>
-                <img src="/css/avatars/default.jpg" class="book-cover">
-                <a class="book-details">Book Title by Book Author</a>
-            </td>
-        </tr>
-        <!-- #6 -->
-        <tr>
-            <td>
-                <img src="/css/avatars/default.jpg" class="book-cover">
-                <a class="book-details">Book Title by Book Author</a>
-            </td>
-        </tr>
-        <!-- #7 -->
-        <tr>
-            <td>
-                <img src="/css/avatars/default.jpg" class="book-cover">
-                <a class="book-details">Book Title by Book Author</a>
-            </td>
-        </tr>
-        <!-- #8 -->
-        <tr>
-            <td>
-                <img src="/css/avatars/default.jpg" class="book-cover">
-                <a class="book-details">Book Title by Book Author</a>
-            </td>
-        </tr>
-        <!-- #9 -->
-        <tr>
-            <td>
-                <img src="/css/avatars/default.jpg" class="book-cover">
-                <a class="book-details">Book Title by Book Author</a>
-            </td>
-        </tr>
-        <!-- #10 -->
-        <tr>
-            <td>
-                <img src="/css/avatars/default.jpg" class="book-cover">
-                <a class="book-details">Book Title by Book Author</a>
-            </td>
-        </tr>
+        @{
+            int TopIndex = 1;
+            foreach(TopBooks TopBook in DBContext.TopTen)
+            {
+                <!-- #@TopIndex -->
+
+                <tr>
+                    <td>
+                        <img src="/css/DefaultCover.jpg" class="book-cover">
+                        <a class="book-details">Book Title by Book Author</a>
+                    </td>
+                </tr>
+
+                TopIndex++;
+            }
+        }
     </tbody>
 </table>
 
@@ -139,76 +108,22 @@
                 <center>Staff Picks</center>
             </td>
         </tr>
-        <!-- #1 -->
-        <tr>
-            <td>
-                <img src="/css/avatars/default.jpg" class="book-cover">
-                <a class="book-details">Book Title by Book Author</a>
-            </td>
-        </tr>
-        <!-- #2 -->
-        <tr>
-            <td>
-                <img src="/css/avatars/default.jpg" class="book-cover">
-                <a class="book-details">Book Title by Book Author</a>
-            </td>
-        </tr>
-        <!-- #3 -->
-        <tr>
-            <td>
-                <img src="/css/avatars/default.jpg" class="book-cover">
-                <a class="book-details">Book Title by Book Author</a>
-            </td>
-        </tr>
-        <!-- #4 -->
-        <tr>
-            <td>
-                <img src="/css/avatars/default.jpg" class="book-cover">
-                <a class="book-details">Book Title by Book Author</a>
-            </td>
-        </tr>
-        <!-- #5 -->
-        <tr>
-            <td>
-                <img src="/css/avatars/default.jpg" class="book-cover">
-                <a class="book-details">Book Title by Book Author</a>
-            </td>
-        </tr>
-        <!-- #6 -->
-        <tr>
-            <td>
-                <img src="/css/avatars/default.jpg" class="book-cover">
-                <a class="book-details">Book Title by Book Author</a>
-            </td>
-        </tr>
-        <!-- #7 -->
-        <tr>
-            <td>
-                <img src="/css/avatars/default.jpg" class="book-cover">
-                <a class="book-details">Book Title by Book Author</a>
-            </td>
-        </tr>
-        <!-- #8 -->
-        <tr>
-            <td>
-                <img src="/css/avatars/default.jpg" class="book-cover">
-                <a class="book-details">Book Title by Book Author</a>
-            </td>
-        </tr>
-        <!-- #9 -->
-        <tr>
-            <td>
-                <img src="/css/avatars/default.jpg" class="book-cover">
-                <a class="book-details">Book Title by Book Author</a>
-            </td>
-        </tr>
-        <!-- #10 -->
-        <tr>
-            <td>
-                <img src="/css/avatars/default.jpg" class="book-cover">
-                <a class="book-details">Book Title by Book Author</a>
-            </td>
-        </tr>
+        @{
+            int StaffIndex = 1;
+            foreach (StaffPicks CurrentPick in DBContext.StaffPicks)
+            {
+                <!-- #@StaffIndex -->
+
+                <tr>
+                    <td>
+                        <img src="/css/DefaultCover.jpg" class="book-cover">
+                        <a class="book-details">Book Title by Book Author</a>
+                    </td>
+                </tr>
+
+                StaffIndex++;
+            }
+        }
     </tbody>
 </table>
 
@@ -267,7 +182,7 @@
 
     .book-cover
     {
-        width: 120px;
+        width: 100px;
         height: 150px;
     }
 
