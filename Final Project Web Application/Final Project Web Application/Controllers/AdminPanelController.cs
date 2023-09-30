@@ -1,4 +1,5 @@
 ﻿using Final_Project_Web_Application.Data;
+using Final_Project_Web_Application.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Final_Project_Web_Application.Controllers
@@ -50,7 +51,10 @@ namespace Final_Project_Web_Application.Controllers
                 if(FoundUserID)
                 {
                     if (SelectedUser.SecLevel >= Models.User.SecurityLevel.Admin)
-                        return View();
+                    {
+                        IEnumerable<Book> BookList = Context.Books;
+                        return View(BookList);
+                    }
                     else
                         return RedirectToAction("Index", "Home"); // Saved UserID does not have a security level high enough to view the Administration Panel.
                 }
@@ -65,6 +69,40 @@ namespace Final_Project_Web_Application.Controllers
                 // Currently Not Logged in, as such they should not be able to access the Admin Panel.
                 return RedirectToAction("Index", "Home");
             }
+        }
+
+        public IActionResult AddBook()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddBook(Book NewBook)
+        {
+            Context.Books.Add(NewBook);
+            Context.SaveChanges();
+            return RedirectToAction("Index", "AdminPanel");
+        }
+
+        public IActionResult Delete(int ID)
+        {
+            Book SelectedBook = null;
+
+            foreach(Book CurrentBook in Context.Books)
+            {
+                if(CurrentBook.ID == ID)
+                {
+                    SelectedBook = CurrentBook;
+                }
+            }
+
+            if(SelectedBook != null)
+            {
+                Context.Books.Remove(SelectedBook);
+                Context.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }

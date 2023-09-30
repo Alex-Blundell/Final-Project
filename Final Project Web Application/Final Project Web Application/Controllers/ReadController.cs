@@ -46,21 +46,74 @@ namespace Final_Project_Web_Application.Controllers
             TempData["IsDarkMode"] = IsDarkModeCookie;
 
             // Show Basic List of Book Objects.
-            IEnumerable<Models.Book> RAWBookList = null; // Get Book Data from the DB Context.
-            IEnumerable<Models.Book> BookList = null; // Edited Book List.
+            List<Book> RAWBookList = Context.Books.ToList(); // Get Book Data from the DB Context.
+            List<Book> BookList = new List<Book>(); // Edited Book List.
 
             if(Genre != null)
             {
-                /*foreach(Models.Book ThisBook in RAWBookList)
+                foreach(Book ThisBook in RAWBookList)
                 {
-                    // Check Selected Genre against the Genre for the Book.
-                    // Add to the BookList.
-                }*/
+                    if(ThisBook.Genre == Book.Category.ActionAdventure && Genre == "ActionAdventure")
+                    {
+                        BookList.Add(ThisBook);
+                    }
+                    else if(ThisBook.Genre == Book.Category.Classic && Genre == "Classic")
+                    {
+                        BookList.Add(ThisBook);
+                    }
+                    else if (ThisBook.Genre == Book.Category.Crime && Genre == "Crime")
+                    {
+                        BookList.Add(ThisBook);
+                    }
+                    else if (ThisBook.Genre == Book.Category.Drama && Genre == "Drama")
+                    {
+                        BookList.Add(ThisBook);
+                    }
+                    else if (ThisBook.Genre == Book.Category.Fantasy && Genre == "Fantasy")
+                    {
+                        BookList.Add(ThisBook);
+                    }
+                    else if (ThisBook.Genre == Book.Category.Horror && Genre == "Horror")
+                    {
+                        BookList.Add(ThisBook);
+                    }
+                    else if (ThisBook.Genre == Book.Category.Mystery && Genre == "Mystery")
+                    {
+                        BookList.Add(ThisBook);
+                    }
+                    else if (ThisBook.Genre == Book.Category.Non_Fiction && Genre == "Non-Fiction")
+                    {
+                        BookList.Add(ThisBook);
+                    }
+                    else if (ThisBook.Genre == Book.Category.Romance && Genre == "Romance")
+                    {
+                        BookList.Add(ThisBook);
+                    }
+                    else if (ThisBook.Genre == Book.Category.Satire && Genre == "Satire")
+                    {
+                        BookList.Add(ThisBook);
+                    }
+                    else if (ThisBook.Genre == Book.Category.Sci_Fi && Genre == "Sci-Fi")
+                    {
+                        BookList.Add(ThisBook);
+                    }
+                    else if (ThisBook.Genre == Book.Category.Thriller && Genre == "Thriller")
+                    {
+                        BookList.Add(ThisBook);
+                    }
+                    else if (ThisBook.Genre == Book.Category.Western && Genre == "Western")
+                    {
+                        BookList.Add(ThisBook);
+                    }
+                    else if (ThisBook.Genre == Book.Category.Young_Adult && Genre == "YoungAdult")
+                    {
+                        BookList.Add(ThisBook);
+                    }
+                }
             }
 
             // Send BookList to the View.
-            //return View(BookList);
-            return View(new List<Book>());
+            return View(BookList);
         }
     }
 }
