@@ -4,60 +4,95 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Books</h1>
+
 
 <p>
     <a asp-action="AddBook">Create New</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                <center>@Html.DisplayNameFor(model => model.Title)</center>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                <center>@Html.DisplayNameFor(model => model.Description)</center>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Author)
+                <center>@Html.DisplayNameFor(model => model.Author)</center>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CoverURL)
+                <center>@Html.DisplayNameFor(model => model.CoverURL)</center>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Genre)
+                <center>@Html.DisplayNameFor(model => model.Genre)</center>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Status)
+                <center>@Html.DisplayNameFor(model => model.Status)</center>
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CoverURL)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Genre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CoverURL)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Genre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+<div class="list-group">
+    <a href="/AdminPanel/#" class="list-group-item active">
+        Books
+    </a>
+    <a href="/AdminPanel/#" class="list-group-item">
+        Users
+    </a>
+    <a href="/AdminPanel/#" class="list-group-item">
+        Borrowed Books
+    </a>
+</div>
+
+<style>
+    .table th {
+        border: 1px solid hsla(0, 0%, 100%, 0.1);
+    }
+    .table td{
+        border: 1px solid hsla(0, 0%, 100%, 0.1);
+    }
+
+    .table{
+        width: 70%;
+        border: 1px solid hsla(0, 0%, 100%, 0.1);
+        float: right;
+        right: 65px;
+        position: relative;
+    }
+
+    .list-group{
+        width: 20%;
+    }
+</style>

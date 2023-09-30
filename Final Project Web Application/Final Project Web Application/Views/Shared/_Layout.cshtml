@@ -17,9 +17,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Final Project Web Application</title>
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Final_Project_Web_Application.styles.css" asp-append-version="true" />
+
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 </head>
 <body onload="LoadDarkMode()">
     <header>
@@ -487,7 +490,7 @@
         {
             background-color: #404040;
             color: #d3d3d3;
-                border-color: hsl(0deg, 0%, 0%, 0.1)
+            border-color: hsl(0deg, 0%, 0%, 0.1)
         }
        
         .dark-mode .form-control
@@ -566,6 +569,37 @@
 
         .login-buttons{
 
+        }
+
+        .list-group-item
+        {
+            background-color: #5d7ca1;
+            color: #ffd575;
+        }
+
+        .dark-mode .list-group-item
+        {
+            background-color: #3a3a3a;
+            color: #b06ceb;
+        }
+
+        .list-group-item.active
+        {
+            background-color: #2e5575!important;
+            z-index: 1 !important;
+            border: 0px;
+        }
+
+        .dark-mode .list-group-item.active
+        {
+            background-color: #1e1e1e!important;
+            z-index: 1!important;
+            border: 0px;
+        }
+
+        .dark-mode .list-group
+        {
+            border: 1px solid hsla(0, 0%, 100%, 0.1);
         }
     </style>
 

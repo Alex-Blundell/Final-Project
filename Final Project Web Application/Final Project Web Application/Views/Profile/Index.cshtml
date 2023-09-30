@@ -44,6 +44,24 @@
 
 </form>
 
+<div class="list-group">
+    <a asp-action="Index" asp-controller="Profile" class="list-group-item active">
+        My Profile
+    </a>
+    <a asp-action="ReadList" asp-controller="Profile" class="list-group-item">
+        Read List
+    </a>
+    <a asp-action="BorrowedBooks" asp-controller="Profile" class="list-group-item">
+        Borrowed Books
+    </a>
+    <a asp-action="Settings" asp-controller="Profile" class="list-group-item">
+        Settings
+    </a>
+    <a asp-action="SignOut" asp-controller="Login" class="list-group-item">
+        Logout
+    </a>
+</div>
+
 <style>
     .avatar
     {
@@ -55,5 +73,11 @@
     .form-group {
         width: 700px;
         transform: translateX(40%);
+    }
+
+    .list-group{
+        width: 20%;
+        position: relative;
+        bottom: 475px;
     }
 </style>

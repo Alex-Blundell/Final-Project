@@ -173,15 +173,21 @@ namespace Final_Project_Web_Application.Controllers
             int UID = int.Parse(UserID);
 
             // Get All Borrowed Books.
-            //List<BorrowedBook> BorrowedBook = Context.BorrowedBooks.ToList();
-            List<BorrowedBook> BorrowedBook = new List<BorrowedBook>();
-            List<BorrowedBook> MyBooks = new List<BorrowedBook>();
+            List<BorrowedBook> BorrowedBook = Context.BorrowedBooks.ToList();
+            List<Book> MyBooks = new List<Book>();
 
             foreach(BorrowedBook CurrentBook in BorrowedBook)
             {
                 if(CurrentBook.BorrowerID == UID)
                 {
-                    MyBooks.Add(CurrentBook);
+                    foreach(Book ThisBook in Context.Books)
+                    {
+                        if(ThisBook.ID == CurrentBook.BookID)
+                        {
+                            MyBooks.Add(ThisBook);
+                            break;
+                        }
+                    }
                 }
             }
 
