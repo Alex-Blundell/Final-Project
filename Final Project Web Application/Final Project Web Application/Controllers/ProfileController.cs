@@ -83,21 +83,34 @@ namespace Final_Project_Web_Application.Controllers
             // Changes have been Made to the Username, Update it in DB.
             if (SelectedUser.Username != Username)
             {
-                // Check to see if the Updated Username already Exists in DB.
-                // If Not, Update.
-                // If it does, send Error.
+                foreach(Models.User CurrentUser in Context.Users)
+                {
+                    if(CurrentUser.Username == Username)
+                    {
+                        FoundError = true;
+                    }
+                }
+
+                if(FoundError)
+                {
+                    // Show Error on WebPage
+                }
+                else
+                {
+                    SelectedUser.Username = Username;
+                    Context.Update(SelectedUser);
+                    Context.SaveChanges();
+                }
             }
 
             if(!FoundError)
             {
-                // Changes have bee made to the Password, Update it in the DB.
-                string DecryptedPassword = Models.User.DecryptString(SelectedUser.Password);
-                if (DecryptedPassword != Password)
-                {
-                    // Update Password.
-                }
+                // Changes have been made to the Password, Update it in the DB.
+                SelectedUser.Password = Models.User.EncryptString(Password);
+                Context.Update(SelectedUser);
+                Context.SaveChanges();
             }
-            
+
             TempData["IsDarkMode"] = IsDarkModeCookie;
             return View();
         }
