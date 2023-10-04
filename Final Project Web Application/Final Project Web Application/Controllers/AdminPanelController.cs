@@ -10,7 +10,7 @@ namespace Final_Project_Web_Application.Controllers
 
         public AdminPanelController(ApplicationDBContext DBContext)
         {
-            Context = DBContext;bbnjbn
+            Context = DBContext;
         }
 
         public IActionResult Index()
