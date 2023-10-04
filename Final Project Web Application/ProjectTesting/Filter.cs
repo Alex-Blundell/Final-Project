@@ -28,9 +28,51 @@ namespace ProjectTesting
             return results;
         }
 
-        public Filter()
+        public List<Book> SearchBooksByTitle(List<Book> SearchBooks, string Query)
         {
-            
+            List<Book> results = new List<Book>();
+
+            foreach (Book ThisBook in SearchBooks)
+            {
+                if (ThisBook.Title.ToString().ToLower().Contains(Query.ToLower()))
+                {
+                    results.Add(ThisBook);
+                }
+
+            }
+
+            return results;
         }
+        public List<Book> SearchBooksByAuthor(List<Book> SearchBooks, string Query)
+        {
+            List<Book> results = new List<Book>();
+
+            foreach (Book ThisBook in SearchBooks)
+            {
+                if (ThisBook.Author.ToString().ToLower().Contains(Query.ToLower()))
+                {
+                    results.Add(ThisBook);
+                }
+
+            }
+
+            return results;
+        }
+        public List<Book> SearchBooksByDescription(List<Book> SearchBooks, string Query)
+        {
+            List<Book> results = new List<Book>();
+
+            foreach (Book ThisBook in SearchBooks)
+            {
+                if (ThisBook.Description.ToString().ToLower().Contains(Query.ToLower()))
+                {
+                    results.Add(ThisBook);
+                }
+
+            }
+
+            return results;
+        }
+
     }
 }

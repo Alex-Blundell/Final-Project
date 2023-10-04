@@ -1,4 +1,5 @@
 using Final_Project_Web_Application.Models;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ProjectTesting
 {
@@ -12,7 +13,7 @@ namespace ProjectTesting
             User u = new User();
             u.Username = "ABC";
             Assert.AreEqual("ABC", u.Username);
-    
+
         }
         // Test method for testing the Password property
         [TestMethod]
@@ -21,7 +22,7 @@ namespace ProjectTesting
             User u = new User();
             u.Password = "ABC123";
             Assert.AreEqual("ABC123", u.Password);
-    
+
         }
 
 
@@ -95,57 +96,49 @@ namespace ProjectTesting
     }
 
     [TestClass]
-    public class HomePageUnitTest
+    public class BooksUnitTest
     {
         [TestMethod]
-        public void HomePageTestMethod1()
+        public void Books_AuthorTest1()
         {
+            Book b = new Book();
+            b.Author = "TESTING";
+            Assert.AreEqual("TESTING", b.Author);
         }
-
         [TestMethod]
-        public void ClickHomeButton_ShouldShowHomePage()
+        public void Books_TitleTest3()
         {
-            // Arrange
-            MainLayout mainLayout = new MainLayout();
-
-            // Act
-            mainLayout.ClickHomeButton();
-
-            // Assert
-            // Assuming there's some property or method to check if the home page is visible
-            Assert.IsTrue(mainLayout.IsHomePageVisible(), "Home page should be visible after clicking the home button");
+            Book b = new Book();
+            b.Title = "TESTING";
+            Assert.AreEqual("TESTING", b.Title);
         }
-
-        private class MainLayout
+        [TestMethod]
+        public void Books_DescriptionTest4()
         {
-            public MainLayout()
-            {
-            }
-
-            internal void ClickHomeButton()
-            {
-                throw new NotImplementedException();
-            }
-
-            internal bool IsHomePageVisible()
-            {
-                throw new NotImplementedException();
-            }
+            Book b = new Book();
+            b.Description = "TESTING";
+            Assert.AreEqual("TESTING", b.Description);
+        }
+        [TestMethod]
+        public void Books_CoverUrlTest5()
+        {
+            Book b = new Book();
+            b.CoverURL = "http://testing.com";
+            Assert.AreEqual("http://testing.com", b.CoverURL);
+        }
+        [TestMethod]
+        public void Books_GenreTest6()
+        {
+            Book b = new Book();
+            b.Genre = Book.Category.Classic;
+            Assert.AreEqual(Book.Category.Classic, b.Genre);
         }
     }
 
-    [TestClass]
-    public class BookCatalogueUnitTest
-    {
-        [TestMethod]
-        public void BookCatalogueTestMethod1()
-        {
-        }
-    }
 
     [TestClass]
     public class SearchUnitTest
-    { 
+    {
         [TestMethod]
         public void TestSearch_All()
         {
@@ -191,11 +184,10 @@ namespace ProjectTesting
 
         }
 
-        /*
-    
         [TestMethod]
-        public void TestSearch_BookTitle()
-        {    
+        public void TestSearch_Title()
+        {
+
             // Create some sample book objects
             Book testBook1 = new Book();
             Book testBook2 = new Book();
@@ -206,34 +198,35 @@ namespace ProjectTesting
             testBook1.Description = "The first novel in the Harry Potter series and Rowling's debut novel," +
                 " it follows Harry Potter, a young wizard who discovers his magical heritage on his eleventh ";
 
-            testBook1.Title = "The Great Gatsby";
-            testBook1.Author = "F. Scott Fitzgerald";
-            testBook1.Description = "The Great Gatsby is a 1925 novel by American writer F. Scott Fitzgerald.";
+            testBook2.Title = "The Great Gatsby";
+            testBook2.Author = "F. Scott Fitzgerald";
+            testBook2.Description = "The Great Gatsby is a 1925 novel by American writer F. Scott Fitzgerald.";
 
-            testBook1.Title = "The Catcher in the Rye";
-            testBook1.Author = "J.D. Salinger";
-            testBook1.Description = "The Catcher in the Rye is an American novel by J. D. Salinger " +
+            testBook3.Title = "The Catcher in the Rye";
+            testBook3.Author = "J.D. Salinger";
+            testBook3.Description = "The Catcher in the Rye is an American novel by J. D. Salinger " +
                 "that was partially published in serial form 1945–46 before being novelized in 1951.";
+
 
             // Create a list of books
             List<Book> bookList = new List<Book>
-            {
-                testBook1,
-                testBook2,
-                testBook3,
-            };
+                {
+                    testBook1,
+                    testBook2,
+                    testBook3,
+                };
 
             // Create a filter object
-            var filter = new Filter();
+            Filter filter = new Filter();
 
             // Perform the search for books with names containing "Harry"
-            List<Book> searchResults = filter.SearchBooksByBookTitle(bookList, "Harry");
+            List<Book> searchResults = filter.SearchBooksByTitle(bookList, "Harry");
 
             // Assert the expected results
-            CollectionAssert.Contains(searchResults, testBook1); // Harry Potter book should be found
+            CollectionAssert.Contains(searchResults, testBook1); // Harry Potter book should be found 
             CollectionAssert.DoesNotContain(searchResults, testBook2); // The Great Gatsby should not be found
             CollectionAssert.DoesNotContain(searchResults, testBook3); // To Kill a Mockingbird should not be found
-              
+
         }
         [TestMethod]
         public void TestSearch_Author()
@@ -249,35 +242,37 @@ namespace ProjectTesting
             testBook1.Description = "The first novel in the Harry Potter series and Rowling's debut novel," +
                 " it follows Harry Potter, a young wizard who discovers his magical heritage on his eleventh ";
 
-            testBook1.Title = "The Great Gatsby";
-            testBook1.Author = "F. Scott Fitzgerald";
-            testBook1.Description = "The Great Gatsby is a 1925 novel by American writer F. Scott Fitzgerald.";
+            testBook2.Title = "The Great Gatsby";
+            testBook2.Author = "F. Scott Fitzgerald";
+            testBook2.Description = "The Great Gatsby is a 1925 novel by American writer F. Scott Fitzgerald.";
 
-            testBook1.Title = "The Catcher in the Rye";
-            testBook1.Author = "J.D. Salinger";
-            testBook1.Description = "The Catcher in the Rye is an American novel by J. D. Salinger " +
+            testBook3.Title = "The Catcher in the Rye";
+            testBook3.Author = "J.D. Salinger";
+            testBook3.Description = "The Catcher in the Rye is an American novel by J. D. Salinger " +
                 "that was partially published in serial form 1945–46 before being novelized in 1951.";
+
 
             // Create a list of books
             List<Book> bookList = new List<Book>
-            {
-                testBook1,
-                testBook2,
-                testBook3,
-            };
+                {
+                    testBook1,
+                    testBook2,
+                    testBook3,
+                };
 
             // Create a filter object
-            var filter = new Filter();
+            Filter filter = new Filter();
 
             // Perform the search for books with names containing "Harry"
-            List<Book> searchResults = filter.SearchBooksByAuthorName(bookList, "J");
+            List<Book> searchResults = filter.SearchBooksByAuthor(bookList, "F");
 
             // Assert the expected results
-            CollectionAssert.Contains(searchResults, testBook1); // Harry Potter book should be found 
-            CollectionAssert.DoesNotContain(searchResults, testBook2); // The Great Gatsby should not be found
+            CollectionAssert.DoesNotContain(searchResults, testBook1); // Harry Potter book should not be found 
+            CollectionAssert.Contains(searchResults, testBook2); // The Great Gatsby should be found
             CollectionAssert.DoesNotContain(searchResults, testBook3); // To Kill a Mockingbird should not be found
-            
+
         }
+
         [TestMethod]
         public void TestSearch_Descreiption()
         {
@@ -292,13 +287,13 @@ namespace ProjectTesting
             testBook1.Description = "The first novel in the Harry Potter series and Rowling's debut novel," +
                 " it follows Harry Potter, a young wizard who discovers his magical heritage on his eleventh ";
 
-            testBook1.Title = "The Great Gatsby";
-            testBook1.Author = "F. Scott Fitzgerald";
-            testBook1.Description = "The Great Gatsby is a 1925 novel by American writer F. Scott Fitzgerald.";
+            testBook2.Title = "The Great Gatsby";
+            testBook2.Author = "F. Scott Fitzgerald";
+            testBook2.Description = "The Great Gatsby is a 1925 novel by American writer F. Scott Fitzgerald.";
 
-            testBook1.Title = "The Catcher in the Rye";
-            testBook1.Author = "J.D. Salinger";
-            testBook1.Description = "The Catcher in the Rye is an American novel by J. D. Salinger " +
+            testBook3.Title = "The Catcher in the Rye";
+            testBook3.Author = "J.D. Salinger";
+            testBook3.Description = "The Catcher in the Rye is an American novel by J. D. Salinger " +
                 "that was partially published in serial form 1945–46 before being novelized in 1951.";
 
 
@@ -320,44 +315,82 @@ namespace ProjectTesting
             CollectionAssert.Contains(searchResults, testBook1); // Harry Potter book should be found 
             CollectionAssert.DoesNotContain(searchResults, testBook2); // The Great Gatsby should not be found
             CollectionAssert.DoesNotContain(searchResults, testBook3); // To Kill a Mockingbird should not be found
-            
+
         }
     }
 
     [TestClass]
-    public class ReadListUnitTest
+    public class ForumUnitTest
     {
-        // Test method for testing the behavior of the "Read" button
+        // Test method for testing the forum function
         [TestMethod]
-        public void TestReadButton_Click_DisplaysMenuWithOptions()
+        public void TestForumNameTest()
         {
-            // Arrange
-            var menuSystemMock = new Mock<IMenuSystem>();
-            var menuHandler = new MenuHandler(menuSystemMock.Object);
+            Forum f = new Forum();
+            f.Name = "Test1";
+            Assert.AreEqual("Test1", f.Name);
 
-            // Mock the behavior of the menu system when the "Read" button is clicked
-            menuSystemMock.Setup(ms => ms.DisplayMenu(It.IsAny<string[]>()))
-                .Returns(new string[] { "Action & Adventure", "Classic","Crime",
-            "Drama", "Fantasy", "Honor", "Myster", "Non-Fiction", "Romance",
-            "Satire", "Sci-Fi", "Thriller", "Western", "Young Adult" });
-
-            // Act
-            menuHandler.ClickReadButton();
-
-            // Assert
-            // Retrieve the actual menu options from the menu system or UI
-            string[] actualOptions = menuHandler.GetDisplayedMenuOptions();
-
-            // Define the expected options
-            string[] expectedOptions = { "Action & Adventure", "Classic","Crime",
-            "Drama", "Fantasy", "Honor", "Myster", "Non-Fiction", "Romance",
-            "Satire", "Sci-Fi", "Thriller", "Western", "Young Adult" };
-
-            // Use CollectionAssert to check if the actual options match the expected options
-            CollectionAssert.AreEquivalent(expectedOptions, actualOptions);
         }
-        */
-       
+        [TestMethod]
+        public void ForumDescriptionTest()
+        {
+            Forum f = new Forum();
+            f.Description = "Testing Case";
+            Assert.AreEqual("Testing Case", f.Description);
+
+        }
+    }
+
+    [TestClass]
+    public class PostUnitTest
+    {
+        // Test method for testing the post function
+        [TestMethod]
+        public void Post_NameTest()
+        {
+            Post p = new Post();
+            p.Title = "Sharing";
+            Assert.AreEqual("Sharing", p.Title);
+
+        }
+        [TestMethod]
+        public void Post_MessageTest()
+        {
+            Post p = new Post();
+            p.Message = "Sharing";
+            Assert.AreEqual("Sharing", p.Message);
+        }
+
+        [TestMethod]
+        public void Post_DateTest()
+        {
+            Post p = new Post();
+            p.PostDateTime = "20/09/2020";
+            Assert.AreEqual("20/09/2020", p.PostDateTime);
+        }
+    }
+
+
+    [TestClass]
+    public class ForumThreadTest
+    {
+        [TestMethod]
+        public void Thread_NameTest()
+        {
+            Final_Project_Web_Application.Models.Thread t = new Final_Project_Web_Application.Models.Thread();
+
+            t.Name = "Thread";
+            Assert.AreEqual("Thread", t.Name);
+        }
+        [TestMethod]
+        public void Thread_CreationDateTest()
+        {
+            Final_Project_Web_Application.Models.Thread t = new Final_Project_Web_Application.Models.Thread();
+            t.CreationDate = "02/10/2023";
+            Assert.AreEqual("02/10/2023", t.CreationDate);
+
+        }
+        
     }
 
 }
