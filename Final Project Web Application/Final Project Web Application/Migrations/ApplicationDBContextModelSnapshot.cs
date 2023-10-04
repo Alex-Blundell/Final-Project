@@ -16,10 +16,68 @@ namespace Final_Project_Web_Application.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.10")
+                .HasAnnotation("ProductVersion", "7.0.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Final_Project_Web_Application.Models.Book", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CoverURL")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Genre")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Books");
+                });
+
+            modelBuilder.Entity("Final_Project_Web_Application.Models.BorrowedBook", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<int>("BookID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BorrowerID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TimeLeft")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("BorrowedBooks");
+                });
 
             modelBuilder.Entity("Final_Project_Web_Application.Models.Forum", b =>
                 {
@@ -42,16 +100,38 @@ namespace Final_Project_Web_Application.Migrations
                     b.ToTable("Forums");
                 });
 
-            modelBuilder.Entity("Final_Project_Web_Application.Models.Post", b =>
+            modelBuilder.Entity("Final_Project_Web_Application.Models.NewsItem", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<bool>("IsOP")
-                        .HasColumnType("bit");
+                    b.Property<string>("BackgroundURL")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("NewsCycle");
+                });
+
+            modelBuilder.Entity("Final_Project_Web_Application.Models.Post", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Message")
                         .IsRequired()
@@ -60,6 +140,12 @@ namespace Final_Project_Web_Application.Migrations
                     b.Property<string>("PostDateTime")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PostNum")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ThreadID")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -71,9 +157,29 @@ namespace Final_Project_Web_Application.Migrations
                     b.Property<bool>("WasEdited")
                         .HasColumnType("bit");
 
-                    b.HasKey("Id");
+                    b.HasKey("ID");
 
                     b.ToTable("Posts");
+                });
+
+            modelBuilder.Entity("Final_Project_Web_Application.Models.StaffPicks", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<int>("BookID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StaffName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("StaffPicks");
                 });
 
             modelBuilder.Entity("Final_Project_Web_Application.Models.Thread", b =>
@@ -100,6 +206,25 @@ namespace Final_Project_Web_Application.Migrations
                     b.ToTable("Threads");
                 });
 
+            modelBuilder.Entity("Final_Project_Web_Application.Models.TopBooks", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<int>("BookID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Ranking")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("TopTen");
+                });
+
             modelBuilder.Entity("Final_Project_Web_Application.Models.User", b =>
                 {
                     b.Property<int>("ID")
@@ -107,6 +232,10 @@ namespace Final_Project_Web_Application.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("AvatarURL")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
                         .IsRequired()

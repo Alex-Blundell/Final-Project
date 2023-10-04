@@ -17,22 +17,30 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Final Project Web Application</title>
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Final_Project_Web_Application.styles.css" asp-append-version="true" />
+
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 </head>
 <body onload="LoadDarkMode()">
     <header>
+        <!-- Header Logo -->
         <a class="nav-link header-image" asp-area="" asp-controller="Home" asp-action="Index">
             <img class="logo" src="\css\logo\logo_light.png" id="logo" width="450" height="65" asp-controller="Home" asp-action="Index">
         </a>
+        <!-- Navbar Main -->
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow mb-3">
             <div class="container-fluid header-text">
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <!-- Navbar Left -->
                     <ul class="navbar-nav flex-grow-1">
+                        <!-- Home Button -->
                         <li class="nav-item">
                             <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Index"><center>Home</center></a>
                         </li>
+                        <!-- Read Button Dropdown -->
                         <li class="nav-item">
                             <div class="dropdown">
                                 <a class="nav-link active dropbtn">
@@ -58,12 +66,15 @@
                                 </div>
                             </div>
                         </li>
+                        <!-- Forums Button -->
                         <li class="nav-item">
                             <a class="nav-link active" asp-area="" asp-controller="Forum" asp-action="Index"><center>Forums</center></a>
                         </li>
+                        <!-- Support Button -->
                         <li class="nav-item">
                             <a class="nav-link active" asp-area="" asp-controller="Support" asp-action="Index"><center>Support</center> </a>
                         </li>
+                        <!-- Checks to See if the User has Logged In. -->
                         @if ((string)TempData["HasLoggedIn"] == "Yes")
                         {
                             string UserID = (string)TempData["UserID"];
@@ -79,26 +90,33 @@
                                 }
                             }
 
+                            // Check to See if the User's Security Level is High Enough to see the Admin Panel Button.
                             if(SelectedUser.SecLevel >= Final_Project_Web_Application.Models.User.SecurityLevel.Admin)
                             {
+                                // Admin Panel Button.
                                 <li class="nav-item">
                                     <a class="nav-link active" asp-area="" asp-controller="AdminPanel" asp-action="Index"><center>Admin Panel</center></a>
                                 </li>
                             }
                         }
                     </ul>
+                    <!-- Navbar Right -->
                     <ul class="navbar-nav rightnav">
+                        <!-- Search Type Select -->
                         <li class="nav-item">
-                            <div class="input-group">
-                                <select class="select-button" aria-label="Search by">
-                                    <option value="all">All</option>
-                                    <option value="title">Title</option>
-                                    <option value="author">Author</option>
-                                    <option value="author">Description</option>
-                                </select>
-                                <input type="text" class="form-control" placeholder="Search..." name="title" aria-label="Fiction search">
-                            </div>
+                            <form asp-action="Search" asp-controller="Home" method="post">
+                                <div class="input-group">
+                                    <select class="select-button" name="SearchType" aria-label="Search by">
+                                        <option value="All">All</option>
+                                        <option value="Title">Title</option>
+                                        <option value="Author">Author</option>
+                                        <option value="Description">Description</option>
+                                    </select>
+                                    <input type="text" class="form-control" placeholder="Search..." name="Query" aria-label="Fiction search">
+                                </div>
+                            </form>
                         </li>
+                        <!-- Dark / Light Mode Switch -->
                         <li class="nav-item">
                             <label class="switch">
                                 <input type="checkbox" id="DarkModeSwitch" name="IsDarkMode" onclick="SwitchDarkMode()">
@@ -106,28 +124,36 @@
                                 <script>
                                     function SwitchDarkMode()
                                     {
+                                        // Gets the HTML Body and Toggles a Class called dark-mode On or Off.
                                         var element = document.body;
                                         element.classList.toggle("dark-mode");
 
+                                        // Checks to See if the ClassList Contains the Class called dark-mode
                                         if (element.classList.contains("dark-mode"))
                                         {
+                                            // Sends Information to the Home Page in Order to Write the Cookie,
+                                            // so Browser will remember if dark-mode is on or not.
                                             $.ajax({
                                                 type: "POST",
                                                 url: '/Home/WriteCookie',
                                                 data: { Value: "Yes" },
                                             });
 
+                                            // Replace the Logo Source to the Dark Mode version.
                                             var pic = document.getElementById("logo");
                                             pic.src = "\\css\\logo\\logo_dark.png";
                                         }
                                         else
                                         {
+                                            // Sends Information to the Home Page in Order to Write the Cookie,
+                                            // so Browser will remember if dark-mode is on or not.
                                             $.ajax({
                                                 type: "POST",
                                                 url: '/Home/WriteCookie',
                                                 data: { Value: "No" },
                                             });
 
+                                            // Replace the Logo Source to the Light Mode version.
                                             var pic = document.getElementById("logo");
                                             pic.src = "\\css\\logo\\logo_light.png";
                                         }
@@ -135,15 +161,20 @@
 
                                     function LoadDarkMode()
                                     {
+                                        // Checks the Temporary Data for the DarkMode Cookie.
                                         var IsDarkMode = '@TempData["IsDarkMode"]';
 
                                         if (IsDarkMode == "Yes")
                                         {
+                                            // Set Switch to Dark Mode.
                                             document.getElementById("DarkModeSwitch").checked = true;
 
+                                            // Set Body to toggle Dark-Mode, should always work due to dark-mode not being,
+                                            // a part of the Body Classlist ordinarily.
                                             var element = document.body;
                                             element.classList.toggle("dark-mode");
 
+                                            // Swap the Logo Source to the Dark Mode Version.
                                             var pic = document.getElementById("logo");
                                             pic.src = "\\css\\logo\\logo_dark.png";
                                         } 
@@ -218,26 +249,37 @@
                                 }
                             </style>
                         </li>
+                        <!-- Checks to See if the User has not Logged In. -->
                         @if((string)TempData["HasLoggedIn"] != "Yes")
                         {
+                            // Has not Logged In.
+
+                            <!-- Login Button, Should Only see if the User is Not Logged in. -->
                             <li class="nav-item">
                                 <a class="nav-link active login-btn" asp-area="" asp-controller="Login" asp-action="Index"><center>Login</center></a>
                             </li>
+                            <!-- Register, Should Only see if the User is Not Logged in. -->
                             <li class="nav-item">
                                 <a class="nav-link active login-btn" asp-area="" asp-controller="Login" asp-action="SignUp"><center>Register</center></a>
                             </li>
                         }
                         else
                         {
+                            // Has Logged In.
+
+                            <!-- Profile Display -->
                             <li class="nav-item">
                                 <div class="dropdown">
                                     <a class="nav-link active dropbtn">
                                         <center>
+                                            <!-- Avatar Image -->
                                             <span class="avatar"><img src="@SelectedUser.AvatarURL" alt=""></span>
+                                            <!-- Username -->
                                             <strong class="username">@SelectedUser.Username</strong>
                                             <i class="arrow down"></i>
                                         </center>
                                     </a>
+                                    <!-- Dropdown Options. -->
                                     <div class="dropdown-content">
                                         <a asp-route-Username="@SelectedUser.Username" asp-controller="Profile" asp-action="Index">My Profile</a>
                                         <a asp-route-Username="@SelectedUser.Username" asp-controller="Profile" asp-action="ReadList">Read List</a>
@@ -260,9 +302,18 @@
     </div>
 
     <style>
+        .dark-mode .table {
+            color: #b06ceb;
+        }
+
+        .dark-mode .table td, .table th {
+            border-top: 1px solid hsla(0, 0%, 100%, 0.1);
+            border-bottom-width: 0px;
+        }
+
         body
         {
-            background-image: url("https://localhost:44395/css/background.jpg");
+            background: url("https://localhost:44395/css/background.jpg") fixed no-repeat 50%;
             margin-bottom: 0px;
         }
 
@@ -283,12 +334,13 @@
         }
 
         .main-body{
-            min-height: 1080px;
+            min-height: 735px;
             max-width: 1450px;
         }
 
         .footer {
             background-color: #c4d0ff;
+            padding-bottom: 25px;
         }
 
         .dark-mode .footer{
@@ -439,7 +491,7 @@
         {
             background-color: #404040;
             color: #d3d3d3;
-                border-color: hsl(0deg, 0%, 0%, 0.1)
+            border-color: hsl(0deg, 0%, 0%, 0.1)
         }
        
         .dark-mode .form-control
@@ -518,6 +570,37 @@
 
         .login-buttons{
 
+        }
+
+        .list-group-item
+        {
+            background-color: #5d7ca1;
+            color: #ffd575;
+        }
+
+        .dark-mode .list-group-item
+        {
+            background-color: #3a3a3a;
+            color: #b06ceb;
+        }
+
+        .list-group-item.active
+        {
+            background-color: #2e5575!important;
+            z-index: 1 !important;
+            border: 0px;
+        }
+
+        .dark-mode .list-group-item.active
+        {
+            background-color: #1e1e1e!important;
+            z-index: 1!important;
+            border: 0px;
+        }
+
+        .dark-mode .list-group
+        {
+            border: 1px solid hsla(0, 0%, 100%, 0.1);
         }
     </style>
 

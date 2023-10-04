@@ -43,4 +43,31 @@ namespace Final_Project_Web_Application.Models
 
         }
     }
+
+    public class BorrowedBook
+    {
+        [Key] public int ID { get; set; }
+        [Required] public int BookID { get; set; }
+        [Required] public int BorrowerID { get; set; }
+        [Required] public string TimeLeft { get; set; }
+
+        public BorrowedBook()
+        {
+
+        }
+    }
+
+    public class TopBooks
+    {
+        [Key] public int ID { get; set; }
+        [Required] public int BookID { get; set; }
+        [Required] public int Ranking { get; set; }
+    }
+
+    public class StaffPicks
+    {
+        [Key] public int ID { get; set; }
+        [Required] public int BookID { get; set; }
+        [Required] public string StaffName { get; set; }
+    }
 }

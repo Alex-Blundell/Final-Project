@@ -16,5 +16,9 @@ namespace Final_Project_Web_Application.Data
         public DbSet<Post> Posts { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Book> Books { get; set; }
+        public DbSet<BorrowedBook> BorrowedBooks { get; set; }
+        public DbSet<TopBooks> TopTen { get; set; }
+        public DbSet<StaffPicks> StaffPicks { get; set; }
+        public DbSet<NewsItem> NewsCycle { get; set; }
     }
 }

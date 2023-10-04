@@ -1,13 +1,17 @@
-﻿namespace Final_Project_Web_Application.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Final_Project_Web_Application.Models
 {
     public class Post
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string Message { get; set; }
-        public int UserID { get; set; }
-        public string PostDateTime { get; set; }
-        public bool WasEdited { get; set; }
-        public bool IsOP { get; set; }
+        [Key] public int ID { get; set; }
+        [Required] public int UserID { get; set; }
+        [ForeignKey("ID")] public int ThreadID { get; set; }
+        [Required] public int PostNum { get; set; }
+        [Required] public string Title { get; set; }
+        [Required] public string Message { get; set; }
+        [Required] public string PostDateTime { get; set; }
+        [Required] public bool WasEdited { get; set; }
     }
 }
