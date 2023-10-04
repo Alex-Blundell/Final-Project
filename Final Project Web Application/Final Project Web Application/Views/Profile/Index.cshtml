@@ -1,4 +1,5 @@
-﻿@{
+﻿@using Final_Project_Web_Application.Models;
+@{
     var DBContext = ViewBag.Context as ApplicationDBContext;
 
     int ID = int.Parse((string)TempData["UserID"]);
@@ -18,9 +19,11 @@
 </center>
 
 <form action="/css/upload.php" method="POST" enctype="multipart/form-data">
-    <input type="file" name="imageToUpload">
-    <input type="submit" name="submit" value="Submit">
+    <center><input type="file" name="imageToUpload"></center>
+    <center><input type="submit" name="submit" value="Submit"></center>
 </form>
+
+<form asp-action="Index" asp-controller="Profile" method="post">
 
 <div class="form-group">
     <label for="Username">Username:</label>
@@ -29,9 +32,34 @@
 </div>
 
 <div class="form-group">
+    @{
+        string Password = Final_Project_Web_Application.Models.User.DecryptString(SelectedUser.Password);
+    }
     <label for="Password">Password:</label>
-    <input class="form-control" type="password" name="Password" value="@SelectedUser.Password">
+    <input class="form-control" type="password" name="Password" value="@Password">
     <p></p>
+</div>
+
+<center><input type="submit" name="submit" value="Save Changes"></center>
+
+</form>
+
+<div class="list-group">
+    <a asp-action="Index" asp-controller="Profile" class="list-group-item active">
+        My Profile
+    </a>
+    <a asp-action="ReadList" asp-controller="Profile" class="list-group-item">
+        Read List
+    </a>
+    <a asp-action="BorrowedBooks" asp-controller="Profile" class="list-group-item">
+        Borrowed Books
+    </a>
+    <a asp-action="Settings" asp-controller="Profile" class="list-group-item">
+        Settings
+    </a>
+    <a asp-action="SignOut" asp-controller="Login" class="list-group-item">
+        Logout
+    </a>
 </div>
 
 <style>
@@ -40,5 +68,16 @@
         width: 250px;
         height: 250px;
         border: 1.5px solid #000;
+    }
+
+    .form-group {
+        width: 700px;
+        transform: translateX(40%);
+    }
+
+    .list-group{
+        width: 20%;
+        position: relative;
+        bottom: 475px;
     }
 </style>

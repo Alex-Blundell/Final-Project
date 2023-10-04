@@ -4,8 +4,6 @@
     {
         // List of Read Books.
         List<Book> ReadList { get; set; }
-        // Borrowed Books.
-        List<Book> BorrowedBooks { get; set; }
 
         // Settings.
     }

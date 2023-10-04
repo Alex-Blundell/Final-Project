@@ -30,11 +30,12 @@
                                         if (SelectedThread.ForumID == item.ID)
                                         {
                                             ThreadNum++;
-
+                                            /*
                                             foreach (Post SelectedPost in DBContext.Posts)
                                             {
                                                 // Check to see if the Posts ThreadID is Equal to the SelectedThread ID.
                                             }
+                                            */
                                         }
                                     }
 
@@ -57,26 +58,35 @@
     }
     else
     {
-        <p>
-            <a asp-action="Create">Create New</a>
-        </p>
-        <table class="table">
-            <tbody>
-                @foreach (var item in ViewBag.Model)
-                {
-                    <td>
-                        <a class="nav-link" asp-area="" asp-route-ID="@item.ID" asp-controller="Forum" asp-action="Thread">
-                            @item.Name
-                        </a>
-                    </td>
-                    <td>
-                        <a class="nav-link" asp-area="" asp-route-ID="@item.ID" asp-controller="Forum" asp-action="Thread">
-                             @item.CreationDate
-                        </a>
-                    </td>
-                }
-            </tbody>
-        </table>
+        if (ViewBag.Model.Count > 0)
+        {
+            <p>
+                <a asp-action="Create">Create New</a>
+            </p>
+            <table class="table">
+                <tbody>
+                    @foreach (var item in ViewBag.Model)
+                    {
+                        <tr>
+                            <td>
+                                <a class="nav-link" asp-area="" asp-route-ID="@item.ID" asp-controller="Forum" asp-action="Thread">
+                                    @item.Name
+                                </a>
+                            </td>
+                            <td>
+                                <a class="nav-link" asp-area="" asp-route-ID="@item.ID" asp-controller="Forum" asp-action="Thread">
+                                    @item.CreationDate
+                                </a>
+                            </td>
+                        </tr> 
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <center><h1>There are currently no threads within this forum, please check back later.</h1></center>
+        }
     }
 }
 
