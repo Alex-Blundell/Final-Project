@@ -24,11 +24,12 @@ namespace Final_Project_Web_Application.Models
 
         }
 
-        public User(string username, string password, SecurityLevel secLevel)
+        public User(string username, string password, SecurityLevel secLevel, string avatarURL)
         {
             Username = username;
             Password = password;
             SecLevel = secLevel;
+            AvatarURL = avatarURL;
         }
 
         // Encrypt a String So that it cannot be read as Plain Text.

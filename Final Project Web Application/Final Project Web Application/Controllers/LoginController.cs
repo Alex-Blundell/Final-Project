@@ -167,7 +167,7 @@ namespace Final_Project_Web_Application.Controllers
             {
                 string EncryptedPassword = Models.User.EncryptString(Password);
 
-                Context.Users.Add(new Models.User(Username, EncryptedPassword, Models.User.SecurityLevel.User));
+                Context.Users.Add(new Models.User(Username, EncryptedPassword, Models.User.SecurityLevel.User, "\\css\\avatars\\default.jpg"));
                 Context.SaveChanges();
 
                 return RedirectToAction("Index", "Login");
