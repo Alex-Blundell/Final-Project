@@ -609,12 +609,13 @@
         <div class="container">
             <div class="pull-left">
                 &copy; Our Library Web Application 2023
-                <a class="nav-link active" asp-area="" asp-controller="UserUnitTest" asp-action="Index"><center>Unit Tests</center></a>
+                <a class="nav-link active" asp-area="" asp-controller="UserUnitTest" asp-action="Index"><center>User Tests</center></a>
+                <a class="nav-link active" asp-area="" asp-controller="ForumUnitTest" asp-action="Index"><center>Forums Tests</center></a>
+                <a class="nav-link active" asp-area="" asp-controller="BooksUnitTest" asp-action="Index"><center>Books Tests</center></a>
             </div>
         </div>
     </div>
-   
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+     
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
