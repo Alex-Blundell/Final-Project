@@ -43,13 +43,13 @@
                         <!-- Read Button Dropdown -->
                         <li class="nav-item">
                             <div class="dropdown">
-                                <a class="nav-link active dropbtn">
+                                <a name="readBTN" class="nav-link active dropbtn">
                                     <center>Read
                                         <i class="arrow down"></i>
                                     </center>
                                 </a>
                                 <div class="dropdown-content">
-                                    <a asp-route-Genre="ActionAdventure" asp-controller="Read" asp-action="Index">Action & Adventure</a>
+                                    <a name="ActionBTN" asp-route-Genre="ActionAdventure" asp-controller="Read" asp-action="Index">Action & Adventure</a>
                                     <a asp-route-Genre="Classic" asp-controller="Read" asp-action="Index">Classic</a>
                                     <a asp-route-Genre="Crime" asp-controller="Read" asp-action="Index">Crime</a>
                                     <a asp-route-Genre="Drama" asp-controller="Read" asp-action="Index">Drama</a>
@@ -68,7 +68,7 @@
                         </li>
                         <!-- Forums Button -->
                         <li class="nav-item">
-                            <a class="nav-link active" asp-area="" asp-controller="Forum" asp-action="Index"><center>Forums</center></a>
+                            <a class="nav-link active" asp-area="" asp-controller="Forum" name="ForumsBTN" asp-action="Index"><center>Forums</center></a>
                         </li>
                         <!-- Support Button -->
                         <li class="nav-item">
@@ -95,7 +95,7 @@
                             {
                                 // Admin Panel Button.
                                 <li class="nav-item">
-                                    <a class="nav-link active" asp-area="" asp-controller="AdminPanel" asp-action="Index"><center>Admin Panel</center></a>
+                                    <a name="AdminPanelBTN" class="nav-link active" asp-area="" asp-controller="AdminPanel" asp-action="Index"><center>Admin Panel</center></a>
                                 </li>
                             }
                         }
@@ -270,7 +270,7 @@
                             <!-- Profile Display -->
                             <li class="nav-item">
                                 <div class="dropdown">
-                                    <a class="nav-link active dropbtn">
+                                    <a name="ProfileDropdown" class="nav-link active dropbtn">
                                         <center>
                                             <!-- Avatar Image -->
                                             <span class="avatar"><img src="@SelectedUser.AvatarURL" alt=""></span>
@@ -281,10 +281,10 @@
                                     </a>
                                     <!-- Dropdown Options. -->
                                     <div class="dropdown-content">
-                                        <a asp-route-Username="@SelectedUser.Username" asp-controller="Profile" asp-action="Index">My Profile</a>
-                                        <a asp-route-Username="@SelectedUser.Username" asp-controller="Profile" asp-action="ReadList">Read List</a>
-                                        <a asp-route-Username="@SelectedUser.Username" asp-controller="Profile" asp-action="BorrowedItems">Borrowed Items</a>
-                                        <a asp-route-Username="@SelectedUser.Username" asp-controller="Profile" asp-action="Settings">Settings</a>
+                                        <a name="ProfileBTN" asp-route-Username="@SelectedUser.Username" asp-controller="Profile" asp-action="Index">My Profile</a>
+                                        <a name="ReadlistBTN" asp-route-Username="@SelectedUser.Username" asp-controller="Profile" asp-action="ReadList">Read List</a>
+                                        <a name="BorrowedBTN" asp-route-Username="@SelectedUser.Username" asp-controller="Profile" asp-action="BorrowedItems">Borrowed Items</a>
+                                        <a name="SettingBTN" asp-route-Username="@SelectedUser.Username" asp-controller="Profile" asp-action="Settings">Settings</a>
                                         <a asp-controller="Login" asp-action="SignOut">Logout</a>
                                     </div>
                                 </div>

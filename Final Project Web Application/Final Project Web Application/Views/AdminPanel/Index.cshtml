@@ -8,7 +8,7 @@
 
 
 <p>
-    <a asp-action="AddBook">Create New</a>
+    <a name="AdminPanelCreateNewBTN" asp-action="AddBook">Create New</a>
 </p>
 
 <table class="table">
@@ -57,7 +57,7 @@
                     @Html.DisplayFor(modelItem => item.Status)
                 </td>
                 <td>
-                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                    <a name="@item.Title BTN" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
                 </td>
             </tr>
         }

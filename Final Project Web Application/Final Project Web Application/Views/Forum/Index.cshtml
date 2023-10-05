@@ -14,13 +14,13 @@
                 {
                     <tr>
                         <td>
-                            <a class="nav-link" asp-area="" asp-route-Name="@item.Name" asp-controller="Forum" asp-action="Index">
+                            <a name="@item.Name BTN" class="nav-link" asp-area="" asp-route-Name="@item.Name" asp-controller="Forum" asp-action="Index">
                                 @Html.DisplayFor(modelItem => item.Name)
                                 <p>@Html.DisplayFor(modelItem => item.Description)</p>
                             </a>
                         </td>
                         <td>
-                            <a class="nav-link" asp-area="" asp-route-Name="@item.Name" asp-controller="Forum" asp-action="Index">
+                            <a name="@item.Name BTN"  class="nav-link" asp-area="" asp-route-Name="@item.Name" asp-controller="Forum" asp-action="Index">
                                 @{
                                     int ThreadNum = 0;
                                     int PostsNum = 0;
@@ -45,7 +45,7 @@
                             </a>
                         </td>
                         <td>
-                            <a class="nav-link" asp-area="" asp-route-Name="@item.Name" asp-controller="Forum" asp-action="Index">
+                            <a name="@item.Name BTN" class="nav-link" asp-area="" asp-route-Name="@item.Name" asp-controller="Forum" asp-action="Index">
                                 Latest Thread / Latest Thread Reply <br />
                                 by Username<br />
                                 DateTime
