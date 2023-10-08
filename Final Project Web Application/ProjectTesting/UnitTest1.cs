@@ -1,4 +1,6 @@
+using Final_Project_Web_Application.Controllers;
 using Final_Project_Web_Application.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ProjectTesting
@@ -22,37 +24,7 @@ namespace ProjectTesting
             User u = new User();
             u.Password = "ABC123";
             Assert.AreEqual("ABC123", u.Password);
-
         }
-
-
-        // Test method for testing the RememberMe property
-        [TestMethod]
-        public void TestLogin_RememberMe()
-        {
-            /*
-            User u = new User();
-            u.R = true; // Simulate checking the "Remember Me" checkbox
-            Assert.IsTrue(u.RememberMe, "RememberMe should be true when the checkbox is checked.");
-            */
-        }
-
-
-
-        // Test method for testing the login functionality
-        [TestMethod]
-        public void TestLogin_LoginButton()
-        {
-            // Simulate clicking the login button
-            /*
-            User u = new User();
-            bool loginSuccessful = u.Login(); // Assuming Login() method returns a boolean indicating success
-
-            // Assert
-            Assert.IsTrue(loginSuccessful, "Login should be successful when valid credentials are used.");
-            */
-        }
-
     }
 
 
@@ -77,22 +49,7 @@ namespace ProjectTesting
             Assert.AreEqual("ABC123", u.Password);
 
         }
-
-
-        // Test method for testing the registration functionality
-        [TestMethod]
-        public void TestRegister_RegisterButton()
-        {
-            /*
-            // Simulate clicking the Register button
-            User u = new User();
-            bool registerSuccessful = u.Register(); // Assuming Register() method returns a boolean indicating success
-
-            // Assert
-            Assert.IsTrue(registerSuccessful, "Registeration should be successful when valid credentials are used.");
-            */
-        }
-
+    
     }
 
     [TestClass]
@@ -274,7 +231,7 @@ namespace ProjectTesting
         }
 
         [TestMethod]
-        public void TestSearch_Descreiption()
+        public void TestSearch_Description()
         {
 
             // Create some sample book objects
@@ -390,7 +347,37 @@ namespace ProjectTesting
             Assert.AreEqual("02/10/2023", t.CreationDate);
 
         }
-        
+
     }
 
+
+    [TestClass]
+    public class ControllerUnitTest
+    {
+        [TestMethod]
+        public void UserControllerUnitTest()
+        {
+            UserUnitTestController controller = new UserUnitTestController();
+            IActionResult result = controller.Index() as IActionResult;
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void BooksControllerUnitTest()
+        {
+            BooksUnitTestController controller = new BooksUnitTestController();
+            IActionResult result = controller.Index() as IActionResult;
+            Assert.IsNotNull(result);
+        }
+        [TestMethod]
+        public void ForumControllerUnitTest()
+        {
+            ForumUnitTestController controller = new ForumUnitTestController();
+            IActionResult result = controller.Index() as IActionResult;
+            Assert.IsNotNull(result);
+        }
+
+
+
+    }
 }

@@ -20,9 +20,21 @@ namespace ASElibraryTestProject
 
         public AutomationUI()
         {
+<<<<<<< Updated upstream
             ChromeOptions Options = new ChromeOptions();
             Options.AddArgument("--start-maximized");
             _driver = new ChromeDriver(Options);
+=======
+            _driver = new ChromeDriver();
+        }
+        [TestMethod] 
+        public void Registerpage()
+        {
+            _driver.Navigate().GoToUrl("https://localhost:44395/Login/SignUp");
+            Assert.AreEqual("Register - Final Project Web Application", _driver.Title);
+              
+            _driver.Close();
+>>>>>>> Stashed changes
         }
      
         [TestMethod]
@@ -41,13 +53,97 @@ namespace ASElibraryTestProject
             password.SendKeys("123");
             DelayForDemo();
 
-            //log in click
+            //Sign up click
             _driver.FindElement(By.Name("RegisterBTN")).Submit();
 
             _driver.Close();
 
         }
+<<<<<<< Updated upstream
    
+=======
+
+        [TestMethod]
+        public void RegisterWithBlankPassword()
+        {
+            _driver.Navigate().GoToUrl("https://localhost:44395/Login/SignUp");
+
+            // Username
+            IWebElement username = _driver.FindElement(By.Name("Username"));
+            username.SendKeys("some");
+            DelayForDemo();
+
+            // Password (leave blank)
+            IWebElement password = _driver.FindElement(By.Name("Password"));
+            password.SendKeys("");
+            DelayForDemo();
+
+            // Register button click
+            _driver.FindElement(By.Name("RegisterBTN")).Submit();
+
+            // Verify that an error message is displayed (you may need to adapt this based on your actual implementation)
+            IWebElement errorMessage = _driver.FindElement(By.ClassName("error-message"));
+            Assert.IsNotNull(errorMessage);
+            Assert.IsTrue(errorMessage.Text.Contains("The password is required"));
+
+            _driver.Close();
+        }
+
+        [TestMethod]
+        public void RegisterWithBlankUsername()
+        {
+            _driver.Navigate().GoToUrl("https://localhost:44395/Login/SignUp");
+
+            // Username
+            IWebElement username = _driver.FindElement(By.Name("Username"));
+            username.SendKeys(" ");
+            DelayForDemo();
+
+            // Password (leave blank)
+            IWebElement password = _driver.FindElement(By.Name("Password"));
+            password.SendKeys("123");
+            DelayForDemo();
+
+            // Register button click
+            _driver.FindElement(By.Name("RegisterBTN")).Submit();
+
+            // Verify that an error message is displayed (you may need to adapt this based on your actual implementation)
+            IWebElement errorMessage = _driver.FindElement(By.ClassName("error-message"));
+            Assert.IsNotNull(errorMessage);
+            Assert.IsTrue(errorMessage.Text.Contains("The Username is required"));
+
+            _driver.Close();
+        }
+        [TestMethod]
+        public void RegisterWithSpecialCharacters()
+        {
+            _driver.Navigate().GoToUrl("https://localhost:44395/Login/SignUp");
+
+            // Username with special characters
+            IWebElement username = _driver.FindElement(By.Name("Username"));
+            username.SendKeys("$%&^^^");
+            DelayForDemo();
+
+            // Password with special characters
+            IWebElement password = _driver.FindElement(By.Name("Password"));
+            password.SendKeys("$%&^^^");
+            DelayForDemo();
+
+            // Register button click
+            _driver.FindElement(By.Name("RegisterBTN")).Submit();
+
+            _driver.Close();
+        }
+
+        [TestMethod]
+        public void Loginpage()
+        {
+            _driver.Navigate().GoToUrl("https://localhost:44395/Login");
+            Assert.AreEqual("Login - Final Project Web Application", _driver.Title);
+
+            _driver.Close();
+        }
+>>>>>>> Stashed changes
         [TestMethod]
         public void Loginwithuserdetail()
         {
@@ -267,4 +363,7 @@ namespace ASElibraryTestProject
             _driver.Close();
         }
     }
-}
+   
+        
+
+     }
