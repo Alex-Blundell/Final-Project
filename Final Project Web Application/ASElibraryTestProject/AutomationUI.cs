@@ -20,11 +20,9 @@ namespace ASElibraryTestProject
 
         public AutomationUI()
         {
-<<<<<<< Updated upstream
             ChromeOptions Options = new ChromeOptions();
             Options.AddArgument("--start-maximized");
             _driver = new ChromeDriver(Options);
-=======
             _driver = new ChromeDriver();
         }
         [TestMethod] 
@@ -34,7 +32,6 @@ namespace ASElibraryTestProject
             Assert.AreEqual("Register - Final Project Web Application", _driver.Title);
               
             _driver.Close();
->>>>>>> Stashed changes
         }
      
         [TestMethod]
@@ -59,9 +56,6 @@ namespace ASElibraryTestProject
             _driver.Close();
 
         }
-<<<<<<< Updated upstream
-   
-=======
 
         [TestMethod]
         public void RegisterWithBlankPassword()
@@ -143,7 +137,7 @@ namespace ASElibraryTestProject
 
             _driver.Close();
         }
->>>>>>> Stashed changes
+
         [TestMethod]
         public void Loginwithuserdetail()
         {
@@ -363,7 +357,4 @@ namespace ASElibraryTestProject
             _driver.Close();
         }
     }
-   
-        
-
-     }
+}
