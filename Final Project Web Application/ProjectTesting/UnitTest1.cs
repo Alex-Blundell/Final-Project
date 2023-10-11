@@ -26,32 +26,6 @@ namespace ProjectTesting
         }
 
 
-        // Test method for testing the RememberMe property
-        [TestMethod]
-        public void TestLogin_RememberMe()
-        {
-            /*
-            User u = new User();
-            u.R = true; // Simulate checking the "Remember Me" checkbox
-            Assert.IsTrue(u.RememberMe, "RememberMe should be true when the checkbox is checked.");
-            */
-        }
-
-
-
-        // Test method for testing the login functionality
-        [TestMethod]
-        public void TestLogin_LoginButton()
-        {
-            // Simulate clicking the login button
-            /*
-            User u = new User();
-            bool loginSuccessful = u.Login(); // Assuming Login() method returns a boolean indicating success
-
-            // Assert
-            Assert.IsTrue(loginSuccessful, "Login should be successful when valid credentials are used.");
-            */
-        }
 
     }
 
@@ -79,19 +53,7 @@ namespace ProjectTesting
         }
 
 
-        // Test method for testing the registration functionality
-        [TestMethod]
-        public void TestRegister_RegisterButton()
-        {
-            /*
-            // Simulate clicking the Register button
-            User u = new User();
-            bool registerSuccessful = u.Register(); // Assuming Register() method returns a boolean indicating success
-
-            // Assert
-            Assert.IsTrue(registerSuccessful, "Registeration should be successful when valid credentials are used.");
-            */
-        }
+              
 
     }
 

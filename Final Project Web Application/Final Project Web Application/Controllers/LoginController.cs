@@ -49,9 +49,10 @@ namespace Final_Project_Web_Application.Controllers
         [HttpPost]
         public IActionResult Index(string Username, string Password, bool RememberMe)
         {
+            // Get the value of the IsDarkMode cookie from the request
             string IsDarkModeCookie = Request.Cookies["IsDarkMode"];
 
-            // Probably the First time the Website has been Run, Add Cookie for Dark Mode and Set it to the Default Value.
+            // Check if the IsDarkMode cookie is null (first-time website run), and set it to the default value "No"
             if (IsDarkModeCookie == null)
             {
                 CookieOptions Options = new CookieOptions();
@@ -61,58 +62,76 @@ namespace Final_Project_Web_Application.Controllers
                 Response.Cookies.Append("IsDarkMode", IsDarkModeCookie, Options);
             }
 
+            // Set the IsDarkMode value in TempData for use in the view
             TempData["IsDarkMode"] = IsDarkModeCookie;
 
-            Models.User SelectedUser = new Models.User();
-            bool FoundUser = false;
+            // Clear previous error messages from TempData
+            TempData["ErrorMessage"] = null;
 
-            if(Username.IsNullOrEmpty())
-                FoundUser = false;
-            else if (Password.IsNullOrEmpty())
-                FoundUser = false;
+            // Check if either the Username or Password is blank
+            if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
+            {
+                // Set an error message in TempData for display in the view
+                TempData["ErrorMessage"] = "Username and Password are required.";
+                return View();
+            }
             else
             {
+                // Create a new user object to store the selected user
+                Models.User SelectedUser = new Models.User();
+                // Flag to track whether a user with the provided credentials is found
+                bool FoundUser = false;
+
+                // Loop through each user in the database
                 foreach (Models.User CurrentUser in Context.Users)
                 {
+                    // Check if the current user's username matches the provided username
                     if (CurrentUser.Username == Username)
                     {
+                        // Decrypt the password for comparison
                         string DecryptedPassword = Models.User.DecryptString(CurrentUser.Password);
 
-                        // Check Password against the Decrypted Password.
+                        // Check if the decrypted password matches the provided password
                         if (DecryptedPassword == Password)
                         {
+                            // Set FoundUser to true and store the selected user
                             FoundUser = true;
                             SelectedUser = CurrentUser;
                         }
                     }
                 }
-            }
 
-            if (FoundUser)
-            {
-                if(RememberMe)
+                // Check if a user with the provided credentials is found
+                if (FoundUser)
                 {
-                    CookieOptions Options = new CookieOptions();
-                    Options.Expires = DateTime.Now.AddYears(100);
+                    // If RememberMe is true, set cookies for HasLoggedIn and UserID
+                    if (RememberMe)
+                    {
+                        CookieOptions Options = new CookieOptions();
+                        Options.Expires = DateTime.Now.AddYears(100);
 
-                    Response.Cookies.Append("HasLoggedIn", "Yes", Options);
-                    Response.Cookies.Append("UserID", SelectedUser.ID.ToString(), Options);
+                        Response.Cookies.Append("HasLoggedIn", "Yes", Options);
+                        Response.Cookies.Append("UserID", SelectedUser.ID.ToString(), Options);
+                    }
+                    else
+                    {
+                        // If RememberMe is false, store temporary login information in TempData
+                        TempData["TempLogin"] = "Yes";
+                        TempData["TempUserID"] = SelectedUser.ID.ToString();
+                    }
+
+                    // Redirect to the home page
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
-                    TempData["TempLogin"] = "Yes";
-                    TempData["TempUserID"] = SelectedUser.ID.ToString();
+                    // If no user is found, set an error message for display in the view
+                    TempData["ErrorMessage"] = "Invalid username or password.";
+                    return View();
                 }
-
-                return RedirectToAction("Index", "Home");
-            }
-            else
-            {
-                return View();
             }
         }
-
-        public IActionResult SignUp()
+            public IActionResult SignUp()
         {
             string IsDarkModeCookie = Request.Cookies["IsDarkMode"];
 
@@ -147,6 +166,14 @@ namespace Final_Project_Web_Application.Controllers
             }
 
             TempData["IsDarkMode"] = IsDarkModeCookie;
+
+            // Check if either the Username or Password is blank
+            if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
+            {
+                // Set an error message in TempData for display in the view
+                TempData["ErrorMessage"] = "Username and Password are required.";
+                return View();
+            }
 
             // Possibly Switch Username up for Email.
 

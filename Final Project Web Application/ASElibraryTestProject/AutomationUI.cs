@@ -24,6 +24,7 @@ namespace ASElibraryTestProject
             Options.AddArgument("--start-maximized");
             _driver = new ChromeDriver(Options);
         }
+
         [TestMethod] 
         public void Registerpage()
         {
@@ -57,7 +58,121 @@ namespace ASElibraryTestProject
 
         }
 
-   
+        [TestMethod]
+        public void RegisterWithBlankUsername()
+        {
+            _driver.Navigate().GoToUrl("https://localhost:44395/Login/SignUp");
+
+            // Username (leave blank)
+            IWebElement username = _driver.FindElement(By.Name("Username"));
+            username.SendKeys("");
+            DelayForDemo();
+
+            // Password
+            IWebElement password = _driver.FindElement(By.Name("Password"));
+            password.SendKeys("123");
+            DelayForDemo();
+
+            // Register button click
+            _driver.FindElement(By.Name("RegisterBTN")).Submit();
+
+            // Verify that an error message is displayed (you may need to adapt this based on your actual implementation)
+            IWebElement errorMessage = _driver.FindElement(By.ClassName("alert-danger"));
+
+            IWebElement Message = errorMessage.FindElement(By.TagName("li"));
+            Assert.IsTrue(Message.Text.Contains("The Username field is required."));
+
+            _driver.Close();
+        }
+        [TestMethod]
+        public void RegisterWithBlankorNullPassword()
+        {
+            _driver.Navigate().GoToUrl("https://localhost:44395/Login/SignUp");
+
+            // Username 
+            IWebElement username = _driver.FindElement(By.Name("Username"));
+            username.SendKeys("Testing");
+            DelayForDemo();
+
+            // Password (leave blank)
+            IWebElement password = _driver.FindElement(By.Name("Password"));
+            password.SendKeys("");
+            DelayForDemo();
+
+            // Register button click
+            _driver.FindElement(By.Name("RegisterBTN")).Submit();
+
+            // Verify that an error message is displayed (you may need to adapt this based on your actual implementation)
+            IWebElement errorMessage = _driver.FindElement(By.ClassName("alert-danger"));
+
+            IWebElement Message = errorMessage.FindElement(By.TagName("li"));
+            Assert.IsTrue(Message.Text.Contains("The Password field is required."));
+
+            _driver.Close();
+        }
+
+        [TestMethod]
+        public void LoginWithInvaliadUsername()
+        {
+
+            _driver.Navigate().GoToUrl("https://localhost:44395/Login");
+            string URL = _driver.Url;
+
+            // Invaliad Username
+            IWebElement username = _driver.FindElement(By.Name("Username"));
+            username.SendKeys("testing");
+            DelayForDemo();
+
+            // Password
+            IWebElement password = _driver.FindElement(By.Name("Password"));
+            password.SendKeys("123");
+            DelayForDemo();
+
+            // Register button click
+            _driver.FindElement(By.Name("LoginBTN")).Submit();
+
+            DelayForDemo();
+            DelayForDemo();
+            DelayForDemo();
+            DelayForDemo();
+            DelayForDemo();
+
+            Assert.AreEqual(_driver.Url, URL);
+
+            _driver.Close();
+        }
+        [TestMethod]
+        public void LoginWithWrongPassword()
+        {
+
+            _driver.Navigate().GoToUrl("https://localhost:44395/Login");
+            string URL = _driver.Url;
+
+            // Username
+            IWebElement username = _driver.FindElement(By.Name("Username"));
+            username.SendKeys("testing");
+            DelayForDemo();
+
+            // Password (leave blank)
+            IWebElement password = _driver.FindElement(By.Name("Password"));
+            password.SendKeys("Testing");
+            DelayForDemo();
+
+            // Register button click
+            _driver.FindElement(By.Name("LoginBTN")).Submit();
+
+            DelayForDemo();
+            DelayForDemo();
+            DelayForDemo();
+            DelayForDemo();
+            DelayForDemo();
+
+            Assert.AreEqual(_driver.Url, URL);
+
+            _driver.Close();
+        }
+
+
         [TestMethod]
         public void Loginwithuserdetail()
         {

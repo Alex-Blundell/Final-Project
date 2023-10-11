@@ -26,7 +26,13 @@
             <p></p>
             <p>Or</p>
         </div>
-
+        <!-- Display error message only if there are validation errors -->
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger">
+                @Html.ValidationSummary()
+            </div>
+        }
         <div class="form-group">
             <label for="Username">Username:</label>
             <input class="form-control" type="text" name="Username" placeholder="Username">

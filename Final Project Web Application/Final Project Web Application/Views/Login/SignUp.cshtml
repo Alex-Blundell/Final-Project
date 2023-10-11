@@ -4,6 +4,13 @@
 
 <div class="row">
     <h1>Register</h1>
+    <!-- Display error message only if there are validation errors -->
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            @Html.ValidationSummary()
+        </div>
+    }
 
     <form asp-action="SignUp" asp-controller="Login" method="post">
         <div class="form-group">
