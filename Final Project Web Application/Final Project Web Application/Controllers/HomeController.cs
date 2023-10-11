@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System.Diagnostics;
 
-namespace Final_Project_Web_Application.Controllers
+namespace Final_Project_Web_Application.Controllers 
 {
     public class HomeController : Controller
     {
@@ -68,6 +68,39 @@ namespace Final_Project_Web_Application.Controllers
         }
 
         public IActionResult News()
+        {
+            string IsDarkModeCookie = Request.Cookies["IsDarkMode"];
+            string UserID = Request.Cookies["UserID"];
+            string HasLoggedIn = Request.Cookies["HasLoggedIn"];
+
+            // Probably the First time the Website has been Run, Add Cookie for Dark Mode and Set it to the Defualt Value.
+            if (IsDarkModeCookie == null)
+            {
+                CookieOptions Options = new CookieOptions();
+                Options.Expires = DateTime.Now.AddYears(100);
+
+                IsDarkModeCookie = "No";
+                Response.Cookies.Append("IsDarkMode", IsDarkModeCookie, Options);
+            }
+
+            if (HasLoggedIn == "Yes")
+            {
+                TempData["HasLoggedIn"] = HasLoggedIn;
+                TempData["UserID"] = UserID;
+            }
+
+            string TempLoginCheck = (string)TempData["TempLogin"];
+
+            if (TempLoginCheck == "Yes")
+            {
+                TempData["HasLoggedIn"] = TempData["TempLogin"];
+                TempData["UserID"] = TempData["TempUserID"];
+            }
+
+            return View();
+        }
+
+        public IActionResult Search()
         {
             string IsDarkModeCookie = Request.Cookies["IsDarkMode"];
             string UserID = Request.Cookies["UserID"];

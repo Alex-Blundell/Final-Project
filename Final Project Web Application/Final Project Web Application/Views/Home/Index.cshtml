@@ -86,11 +86,26 @@
             foreach(TopBooks TopBook in DBContext.TopTen)
             {
                 <!-- #@TopIndex -->
-
                 <tr>
+                    @{
+                        Book SelectedBook = new Book();
+
+                        foreach (Book ThisBook in DBContext.Books)
+                        {
+                            if (ThisBook.ID == TopBook.BookID)
+                            {
+                                SelectedBook = ThisBook;
+                            }
+                        }
+                    }
+
                     <td>
-                        <img src="/css/DefaultCover.jpg" class="book-cover">
-                        <a class="book-details">Book Title by Book Author</a>
+                        #@TopBook.Ranking
+                        <img src="@SelectedBook.CoverURL" class="book-cover">
+                        <a class="book-details">
+                            @SelectedBook.Title
+                            <p>by @SelectedBook.Author</p>
+                        </a>
                     </td>
                 </tr>
 
@@ -116,8 +131,24 @@
 
                 <tr>
                     <td>
-                        <img src="/css/DefaultCover.jpg" class="book-cover">
-                        <a class="book-details">Book Title by Book Author</a>
+                        @{
+                            Book SelectedBook = new Book();
+
+                            foreach (Book ThisBook in DBContext.Books)
+                            {
+                                if (ThisBook.ID == CurrentPick.BookID)
+                                {
+                                    SelectedBook = ThisBook;
+                                }
+                            }
+                        }
+
+                        <img src="@SelectedBook.CoverURL" class="book-cover">
+                        <a class="book-details">
+                            @SelectedBook.Title
+                            <p>by @SelectedBook.Author</p>
+                            <p><i>Chosen by, @CurrentPick.StaffName</i></p>
+                        </a>
                     </td>
                 </tr>
 
@@ -132,8 +163,10 @@
     {
         width: 40%;
         max-width: 40%;
-        display:inline-block;
-        padding-top: 75px;
+        display:inline-table;
+        margin-top: 50px;
+        margin-left: 40px;
+        margin-right: 40px;
     }
 
     .book-table-start{
@@ -188,6 +221,7 @@
 
     .book-details{
         padding-left: 25px;
+        display: inline-grid;
     }
 
     .dark-mode .table{

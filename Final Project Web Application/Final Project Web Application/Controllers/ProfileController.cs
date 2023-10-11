@@ -214,8 +214,6 @@ namespace Final_Project_Web_Application.Controllers
             {
                 TempData["HasLoggedIn"] = HasLoggedIn;
                 TempData["UserID"] = UserID;
-
-                // If the User that has the UserID Username Matches the Incoming Username then it is clearly my own Profile.
             }
 
             TempData["IsDarkMode"] = IsDarkModeCookie;

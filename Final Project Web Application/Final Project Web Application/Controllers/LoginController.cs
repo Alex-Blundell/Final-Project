@@ -152,6 +152,11 @@ namespace Final_Project_Web_Application.Controllers
 
             bool SignedUp = true;
 
+            if(Username.IsNullOrEmpty() || Password.IsNullOrEmpty())
+            {
+                return RedirectToAction("SignUp", "Login");
+            }
+
             foreach(Models.User CurrentUser in Context.Users)
             {
                 // An Account already exists with that Username.

@@ -100,8 +100,10 @@ namespace Final_Project_Web_Application.Controllers
         public IActionResult Thread(int ID)
         {
             string IsDarkModeCookie = Request.Cookies["IsDarkMode"];
+            string UserID = Request.Cookies["UserID"];
+            string HasLoggedIn = Request.Cookies["HasLoggedIn"];
 
-            // Probably the First time the Website has been Run, Add Cookie for Dark Mode and Set it to the Default Value.
+            // Probably the First time the Website has been Run, Add Cookie for Dark Mode and Set it to the Defualt Value.
             if (IsDarkModeCookie == null)
             {
                 CookieOptions Options = new CookieOptions();
@@ -109,6 +111,12 @@ namespace Final_Project_Web_Application.Controllers
 
                 IsDarkModeCookie = "No";
                 Response.Cookies.Append("IsDarkMode", IsDarkModeCookie, Options);
+            }
+
+            if (HasLoggedIn == "Yes")
+            {
+                TempData["HasLoggedIn"] = HasLoggedIn;
+                TempData["UserID"] = UserID;
             }
 
             TempData["IsDarkMode"] = IsDarkModeCookie;
@@ -119,8 +127,10 @@ namespace Final_Project_Web_Application.Controllers
         public IActionResult NewThread()
         {
             string IsDarkModeCookie = Request.Cookies["IsDarkMode"];
+            string UserID = Request.Cookies["UserID"];
+            string HasLoggedIn = Request.Cookies["HasLoggedIn"];
 
-            // Probably the First time the Website has been Run, Add Cookie for Dark Mode and Set it to the Default Value.
+            // Probably the First time the Website has been Run, Add Cookie for Dark Mode and Set it to the Defualt Value.
             if (IsDarkModeCookie == null)
             {
                 CookieOptions Options = new CookieOptions();
@@ -130,16 +140,25 @@ namespace Final_Project_Web_Application.Controllers
                 Response.Cookies.Append("IsDarkMode", IsDarkModeCookie, Options);
             }
 
+            if (HasLoggedIn == "Yes")
+            {
+                TempData["HasLoggedIn"] = HasLoggedIn;
+                TempData["UserID"] = UserID;
+            }
+
             TempData["IsDarkMode"] = IsDarkModeCookie;
 
             return View();
         }
 
-        public IActionResult NewPost()
+        [HttpPost]
+        public IActionResult NewThread(string Name, string Message)
         {
             string IsDarkModeCookie = Request.Cookies["IsDarkMode"];
+            string UserID = Request.Cookies["UserID"];
+            string HasLoggedIn = Request.Cookies["HasLoggedIn"];
 
-            // Probably the First time the Website has been Run, Add Cookie for Dark Mode and Set it to the Default Value.
+            // Probably the First time the Website has been Run, Add Cookie for Dark Mode and Set it to the Defualt Value.
             if (IsDarkModeCookie == null)
             {
                 CookieOptions Options = new CookieOptions();
@@ -147,6 +166,67 @@ namespace Final_Project_Web_Application.Controllers
 
                 IsDarkModeCookie = "No";
                 Response.Cookies.Append("IsDarkMode", IsDarkModeCookie, Options);
+            }
+
+            if (HasLoggedIn == "Yes")
+            {
+                TempData["HasLoggedIn"] = HasLoggedIn;
+                TempData["UserID"] = UserID;
+            }
+
+            TempData["IsDarkMode"] = IsDarkModeCookie;
+
+            // New Thread.
+            Models.Thread NewThread = new Models.Thread();
+
+            NewThread.Name = Name;
+            NewThread.ForumID = 0;
+            NewThread.CreationDate = DateTime.Now.ToString();
+
+            Context.Threads.Add(NewThread);
+            Context.SaveChanges();
+
+            // New Post.
+            IEnumerable<Models.Thread> AllThreads = Context.Threads;
+
+            Post NewPost = new Post();
+
+            NewPost.ThreadID = AllThreads.Last().ID;
+
+            NewPost.Title = Name;
+            NewPost.Message = Message;
+            NewPost.PostNum = 1;
+            NewPost.PostDateTime = AllThreads.Last().CreationDate;
+
+            NewPost.UserID = int.Parse(UserID);
+            NewPost.WasEdited = false;
+            
+            Context.Posts.Add(NewPost);
+            Context.SaveChanges();
+            
+            return View();
+        }
+
+        public IActionResult NewPost()
+        {
+            string IsDarkModeCookie = Request.Cookies["IsDarkMode"];
+            string UserID = Request.Cookies["UserID"];
+            string HasLoggedIn = Request.Cookies["HasLoggedIn"];
+
+            // Probably the First time the Website has been Run, Add Cookie for Dark Mode and Set it to the Defualt Value.
+            if (IsDarkModeCookie == null)
+            {
+                CookieOptions Options = new CookieOptions();
+                Options.Expires = DateTime.Now.AddYears(100);
+
+                IsDarkModeCookie = "No";
+                Response.Cookies.Append("IsDarkMode", IsDarkModeCookie, Options);
+            }
+
+            if (HasLoggedIn == "Yes")
+            {
+                TempData["HasLoggedIn"] = HasLoggedIn;
+                TempData["UserID"] = UserID;
             }
 
             TempData["IsDarkMode"] = IsDarkModeCookie;
