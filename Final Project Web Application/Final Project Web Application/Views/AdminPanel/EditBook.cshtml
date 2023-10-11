@@ -1,17 +1,18 @@
 ﻿@model Final_Project_Web_Application.Models.Book
 
 @{
-    ViewData["Title"] = "AddBook";
+    ViewData["Title"] = "EditBook";
 }
 
-<h1>AddBook</h1>
+<h1>EditBook</h1>
 
 <h4>Book</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4 details-middle">
-        <form asp-action="AddBook">
+    <div class="col-md-4">
+        <form asp-action="EditBook">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" class="form-control" />
@@ -34,48 +35,24 @@
             </div>
             <div class="form-group">
                 <label asp-for="Genre" class="control-label"></label>
-                <i b-w58dyykg6s="" class="arrow down genre-arrow"></i>
-                <select asp-for="Genre" class="form-control select-button">
-                    <option value="ActionAdventure">Action & Adventure</option>
-                    <option value="Classic">Classic</option>
-                    <option value="Crime">Crime</option>
-                    <option value="Drama">Drama</option>
-                    <option value="Fantasy">Fantasy</option>
-                    <option value="Horror">Horror</option>
-                    <option value="Mystery">Mystery</option>
-                    <option value="Non_Fiction">Non-Fiction</option>
-                    <option value="Romance">Romance</option>
-                    <option value="Satire">Satire</option>
-                    <option value="Sci_Fi">Sci-Fi</option>
-                    <option value="Thriller">Thriller</option>
-                    <option value="Western">Western</option>
-                    <option value="Young_Adult">Young Adult</option>
-                </select>
+                <select asp-for="Genre" class="form-control"></select>
                 <span asp-validation-for="Genre" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <center><input name ="CreateBTN" type="submit" value="Create" class="btn btn-primary" /></center>
+                <label asp-for="Status" class="control-label"></label>
+                <select asp-for="Status" class="form-control"></select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <form asp-action="Index" asp-controller="AdminPanel">
-        <button class="btn btn-lg btn-primary">Return</button>
-    </form>
+    <a asp-action="Index">Back to List</a>
 </div>
-
-<style>
-    .genre-arrow{
-        top: 30px;
-        left: 380px!important;
-    }
-
-    .details-middle{
-        margin: auto;
-    }
-</style>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

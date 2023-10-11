@@ -23,6 +23,9 @@
     <link rel="stylesheet" href="~/Final_Project_Web_Application.styles.css" asp-append-version="true" />
 
     <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sceditor@3/minified/themes/default.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sceditor@3/minified/sceditor.min.js"></script>
 </head>
 <body onload="LoadDarkMode()">
     <header>
@@ -307,8 +310,13 @@
         }
 
         .dark-mode .table td, .table th {
-            border-top: 1px solid hsla(0, 0%, 100%, 0.1);
+            border: 1px solid hsla(0, 0%, 100%, 0.1);
             border-bottom-width: 0px;
+        }
+
+        .dark-mode .table tbody
+        {
+            background-color: #262626;
         }
 
         body
@@ -336,6 +344,7 @@
         .main-body{
             min-height: 735px;
             max-width: 1450px;
+            display: flow-root;
         }
 
         .footer {

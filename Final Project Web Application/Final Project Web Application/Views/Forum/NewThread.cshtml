@@ -1,5 +1,128 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Final_Project_Web_Application.Models.Thread
+
 @{
+    ViewData["Title"] = "NewThread";
+}
+
+<h1>NewThread</h1>
+
+<h4>Thread</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="NewThread">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group" style="transform: translateX(100%);">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="sceditor-container wysiwygMode ltr" style="width: 1072px; height: 238px; transform: translateX(15%); margin-top: 25px;">
+                <div class="sceditor-toolbar" unselectable="on">
+                    <div class="sceditor-group">
+                        <a class="sceditor-button sceditor-button-bold" data-sceditor-command="bold" unselectable="on" title="Bold (Ctrl+B)">
+                            <div unselectable="on">Bold</div>
+                        </a>
+                        <a class="sceditor-button sceditor-button-italic" data-sceditor-command="italic" unselectable="on" title="Italic (Ctrl+I)">
+                            <div unselectable="on">Italic</div>
+                        </a>
+                        <a class="sceditor-button sceditor-button-underline" data-sceditor-command="underline" unselectable="on" title="Underline (Ctrl+U)">
+                            <div unselectable="on">Underline</div>
+                        </a>
+                        <a class="sceditor-button sceditor-button-strike" data-sceditor-command="strike" unselectable="on" title="Strikethrough">
+                            <div unselectable="on">Strikethrough</div>
+                        </a>
+                    </div>
+                    <div class="sceditor-group">
+                        <a class="sceditor-button sceditor-button-left active" data-sceditor-command="left" unselectable="on" title="Align left">
+                            <div unselectable="on">Align left</div>
+                        </a>
+                        <a class="sceditor-button sceditor-button-center" data-sceditor-command="center" unselectable="on" title="Center">
+                            <div unselectable="on">Center</div>
+                        </a>
+                        <a class="sceditor-button sceditor-button-right" data-sceditor-command="right" unselectable="on" title="Align right">
+                            <div unselectable="on">Align right</div>
+                        </a>
+                        <a class="sceditor-button sceditor-button-justify" data-sceditor-command="justify" unselectable="on" title="Justify">
+                            <div unselectable="on">Justify</div>
+                        </a>
+                    </div>
+                    <div class="sceditor-group">
+                        <a class="sceditor-button sceditor-button-font" data-sceditor-command="font" unselectable="on" title="Font Name">
+                            <div unselectable="on">Font Name</div>
+                        </a>
+                        <a class="sceditor-button sceditor-button-color" data-sceditor-command="color" unselectable="on" title="Font Color">
+                            <div unselectable="on">Font Color</div>
+                        </a>
+                        <a class="sceditor-button sceditor-button-removeformat disabled" data-sceditor-command="removeformat" unselectable="on" title="Remove Formatting">
+                            <div unselectable="on">Remove Formatting</div>
+                        </a>
+                    </div>
+                    <div class="sceditor-group">
+                        <a class="sceditor-button sceditor-button-horizontalrule" data-sceditor-command="horizontalrule" unselectable="on" title="Insert a horizontal rule">
+                            <div unselectable="on">Insert a horizontal rule</div>
+                        </a>
+                        <a class="sceditor-button sceditor-button-image" data-sceditor-command="image" unselectable="on" title="Insert an image">
+                            <div unselectable="on">Insert an image</div>
+                        </a>
+                        <a class="sceditor-button sceditor-button-email" data-sceditor-command="email" unselectable="on" title="Insert an email">
+                            <div unselectable="on">Insert an email</div>
+                        </a>
+                        <a class="sceditor-button sceditor-button-link" data-sceditor-command="link" unselectable="on" title="Insert a link">
+                            <div unselectable="on">Insert a link</div>
+                        </a>
+                        <a class="sceditor-button sceditor-button-unlink disabled" data-sceditor-command="unlink" unselectable="on" title="Unlink">
+                            <div unselectable="on">Unlink</div>
+                        </a>
+                    </div>
+                    <div class="sceditor-group">
+                        <a class="sceditor-button sceditor-button-emoticon" data-sceditor-command="emoticon" unselectable="on" title="Insert an emoticon">
+                            <div unselectable="on">Insert an emoticon</div>
+                        </a>
+                    </div>
+                    <div class="sceditor-group">
+                        <a class="sceditor-button sceditor-button-bulletlist" data-sceditor-command="bulletlist" unselectable="on" title="Bullet list">
+                            <div unselectable="on">Bullet list</div>
+                        </a>
+                        <a class="sceditor-button sceditor-button-orderedlist" data-sceditor-command="orderedlist" unselectable="on" title="Numbered list">
+                            <div unselectable="on">Numbered list</div>
+                        </a>
+                    </div>
+                    <div class="sceditor-group">
+                        <a class="sceditor-button sceditor-button-code" data-sceditor-command="code" unselectable="on" title="Code">
+                            <div unselectable="on">Code</div>
+                        </a>
+                        <a class="sceditor-button sceditor-button-quote" data-sceditor-command="quote" unselectable="on" title="Insert a Quote">
+                            <div unselectable="on">Insert a Quote</div>
+                        </a>
+                    </div>
+                    <div class="sceditor-group">
+                        <a class="sceditor-button sceditor-button-maximize" data-sceditor-command="maximize" unselectable="on" title="Maximize (Ctrl+Shift+M)">
+                            <div unselectable="on">Maximize</div>
+                        </a>
+                        <a class="sceditor-button sceditor-button-source" data-sceditor-command="source" unselectable="on" title="View source (Ctrl+Shift+S)">
+                            <div unselectable="on">View source</div>
+                        </a>
+                    </div>
+                </div>
+                <textarea name="Message" style="" dir="ltr"></textarea>
+                <div class="sceditor-grip"></div>
+                <div class="sceditor-resize-cover" style="display: none;"></div>
+            </div>
+
+            <div class="form-group">
+                <center><input type="submit" value="Create" class="btn btn-primary" /></center>
+            </div>
+
+            <div>
+                <a asp-action="Index">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
