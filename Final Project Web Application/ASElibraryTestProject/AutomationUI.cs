@@ -24,6 +24,15 @@ namespace ASElibraryTestProject
             Options.AddArgument("--start-maximized");
             _driver = new ChromeDriver(Options);
         }
+        [TestMethod] 
+        public void Registerpage()
+        {
+            _driver.Navigate().GoToUrl("https://localhost:44395/Login/SignUp");
+            Assert.AreEqual("Register - Final Project Web Application", _driver.Title);
+              
+            _driver.Close();
+        }
+     
      
         [TestMethod]
         public void Registerwithuserdetail()
@@ -47,6 +56,7 @@ namespace ASElibraryTestProject
             _driver.Close();
 
         }
+
    
         [TestMethod]
         public void Loginwithuserdetail()
