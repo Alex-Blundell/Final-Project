@@ -59,13 +59,13 @@ namespace ASElibraryTestProject
         }
 
         [TestMethod]
-        public void RegisterWithBlankUsername()
+        public void RegisterWithBlankorNullUsername()
         {
             _driver.Navigate().GoToUrl("https://localhost:44395/Login/SignUp");
 
             // Username (leave blank)
             IWebElement username = _driver.FindElement(By.Name("Username"));
-            username.SendKeys("");
+            username.SendKeys(" ");
             DelayForDemo();
 
             // Password
@@ -96,7 +96,7 @@ namespace ASElibraryTestProject
 
             // Password (leave blank)
             IWebElement password = _driver.FindElement(By.Name("Password"));
-            password.SendKeys("");
+            password.SendKeys(" ");
             DelayForDemo();
 
             // Register button click
@@ -142,7 +142,7 @@ namespace ASElibraryTestProject
             _driver.Close();
         }
         [TestMethod]
-        public void LoginWithWrongPassword()
+        public void LoginWithInvaliadPassword()
         {
 
             _driver.Navigate().GoToUrl("https://localhost:44395/Login");

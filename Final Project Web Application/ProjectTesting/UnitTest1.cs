@@ -25,8 +25,6 @@ namespace ProjectTesting
 
         }
 
-
-
     }
 
 
@@ -51,10 +49,6 @@ namespace ProjectTesting
             Assert.AreEqual("ABC123", u.Password);
 
         }
-
-
-              
-
     }
 
     [TestClass]
@@ -68,21 +62,21 @@ namespace ProjectTesting
             Assert.AreEqual("TESTING", b.Author);
         }
         [TestMethod]
-        public void Books_TitleTest3()
+        public void Books_TitleTest()
         {
             Book b = new Book();
             b.Title = "TESTING";
             Assert.AreEqual("TESTING", b.Title);
         }
         [TestMethod]
-        public void Books_DescriptionTest4()
+        public void Books_DescriptionTest()
         {
             Book b = new Book();
             b.Description = "TESTING";
             Assert.AreEqual("TESTING", b.Description);
         }
         [TestMethod]
-        public void Books_CoverUrlTest5()
+        public void Books_CoverUrlTest()
         {
             Book b = new Book();
             b.CoverURL = "http://testing.com";
@@ -288,20 +282,26 @@ namespace ProjectTesting
         [TestMethod]
         public void TestForumNameTest()
         {
+            // Creating an instance of the Forum class
             Forum f = new Forum();
+
+            // Setting the 'Name' property of the forum and asserting its equality
             f.Name = "Test1";
             Assert.AreEqual("Test1", f.Name);
-
         }
+
         [TestMethod]
         public void ForumDescriptionTest()
         {
+            // Creating an instance of the Forum class
             Forum f = new Forum();
+
+            // Setting the 'Description' property of the forum and asserting its equality
             f.Description = "Testing Case";
             Assert.AreEqual("Testing Case", f.Description);
-
         }
     }
+
 
     [TestClass]
     public class PostUnitTest
@@ -310,15 +310,21 @@ namespace ProjectTesting
         [TestMethod]
         public void Post_NameTest()
         {
+            // Creating an instance of the Post class
             Post p = new Post();
+
+            // Setting the 'Title' property of the post and asserting its equality
             p.Title = "Sharing";
             Assert.AreEqual("Sharing", p.Title);
-
         }
+
         [TestMethod]
         public void Post_MessageTest()
         {
+            // Creating an instance of the Post class
             Post p = new Post();
+
+            // Setting the 'Message' property of the post and asserting its equality
             p.Message = "Sharing";
             Assert.AreEqual("Sharing", p.Message);
         }
@@ -326,11 +332,15 @@ namespace ProjectTesting
         [TestMethod]
         public void Post_DateTest()
         {
+            // Creating an instance of the Post class
             Post p = new Post();
+
+            // Setting the 'PostDateTime' property of the post and asserting its equality
             p.PostDateTime = "20/09/2020";
             Assert.AreEqual("20/09/2020", p.PostDateTime);
         }
     }
+
 
 
     [TestClass]
@@ -339,20 +349,25 @@ namespace ProjectTesting
         [TestMethod]
         public void Thread_NameTest()
         {
+            // Creating an instance of the Thread class from the Final_Project_Web_Application.Models namespace
             Final_Project_Web_Application.Models.Thread t = new Final_Project_Web_Application.Models.Thread();
 
+            // Setting the 'Name' property of the thread and asserting its equality
             t.Name = "Thread";
             Assert.AreEqual("Thread", t.Name);
         }
+
         [TestMethod]
         public void Thread_CreationDateTest()
         {
+            // Creating an instance of the Thread class from the Final_Project_Web_Application.Models namespace
             Final_Project_Web_Application.Models.Thread t = new Final_Project_Web_Application.Models.Thread();
+
+            // Setting the 'CreationDate' property of the thread and asserting its equality
             t.CreationDate = "02/10/2023";
             Assert.AreEqual("02/10/2023", t.CreationDate);
-
         }
-        
     }
+
 
 }
