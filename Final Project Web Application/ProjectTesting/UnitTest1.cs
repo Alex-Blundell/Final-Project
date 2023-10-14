@@ -13,8 +13,8 @@ namespace ProjectTesting
             User u = new User();
             u.Username = "ABC";
             Assert.AreEqual("ABC", u.Username);
-
         }
+
         // Test method for testing the Password property
         [TestMethod]
         public void TestLogin_Password()
@@ -22,7 +22,6 @@ namespace ProjectTesting
             User u = new User();
             u.Password = "ABC123";
             Assert.AreEqual("ABC123", u.Password);
-
         }
 
     }
@@ -55,7 +54,7 @@ namespace ProjectTesting
     public class BooksUnitTest
     {
         [TestMethod]
-        public void Books_AuthorTest1()
+        public void Books_AuthorTest()
         {
             Book b = new Book();
             b.Author = "TESTING";
@@ -83,7 +82,7 @@ namespace ProjectTesting
             Assert.AreEqual("http://testing.com", b.CoverURL);
         }
         [TestMethod]
-        public void Books_GenreTest6()
+        public void Books_GenreTest()
         {
             Book b = new Book();
             b.Genre = Book.Category.Classic;

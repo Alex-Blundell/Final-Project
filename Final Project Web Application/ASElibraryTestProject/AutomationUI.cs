@@ -84,91 +84,112 @@ namespace ASElibraryTestProject
 
             _driver.Close();
         }
+        // Test method for registering with a blank or null password.
         [TestMethod]
-        public void RegisterWithBlankorNullPassword()
+        public void RegisterWithBlankOrNullPassword()
         {
+            // Arrange: Navigate to the registration page.
             _driver.Navigate().GoToUrl("https://localhost:44395/Login/SignUp");
 
-            // Username 
+            // Act: Enter a username.
             IWebElement username = _driver.FindElement(By.Name("Username"));
             username.SendKeys("Testing");
             DelayForDemo();
 
-            // Password (leave blank)
+            // Act: Enter a blank password.
             IWebElement password = _driver.FindElement(By.Name("Password"));
-            password.SendKeys(" ");
+            password.SendKeys(" "); // You might want to consider using an empty string for blank.
             DelayForDemo();
 
-            // Register button click
+            // Act: Click the register button.
             _driver.FindElement(By.Name("RegisterBTN")).Submit();
 
-            // Verify that an error message is displayed (you may need to adapt this based on your actual implementation)
+            // Assert: Verify that an error message is displayed.
+            // Note: You may need to adapt this based on your actual implementation.
             IWebElement errorMessage = _driver.FindElement(By.ClassName("alert-danger"));
 
-            IWebElement Message = errorMessage.FindElement(By.TagName("li"));
-            Assert.IsTrue(Message.Text.Contains("The Password field is required."));
+            // Find the specific error message element.
+            IWebElement message = errorMessage.FindElement(By.TagName("li"));
 
+            // Assert that the error message contains the expected text.
+            Assert.IsTrue(message.Text.Contains("The Password field is required."));
+
+            // Clean up: Close the driver.
             _driver.Close();
         }
 
+
+        // Test method for logging in with an invalid username.
         [TestMethod]
-        public void LoginWithInvaliadUsername()
+        public void LoginWithInvalidUsername()
         {
-
+            // Arrange: Navigate to the login page.
             _driver.Navigate().GoToUrl("https://localhost:44395/Login");
-            string URL = _driver.Url;
 
-            // Invaliad Username
+            // Act: Store the current URL for later comparison.
+            string originalURL = _driver.Url;
+
+            // Act: Enter an invalid username.
             IWebElement username = _driver.FindElement(By.Name("Username"));
             username.SendKeys("testing");
             DelayForDemo();
 
-            // Password
+            // Act: Enter a password.
             IWebElement password = _driver.FindElement(By.Name("Password"));
             password.SendKeys("123");
             DelayForDemo();
 
-            // Register button click
+            // Act: Click the login button.
             _driver.FindElement(By.Name("LoginBTN")).Submit();
 
+            // Delay for demonstration purposes.
             DelayForDemo();
             DelayForDemo();
             DelayForDemo();
             DelayForDemo();
             DelayForDemo();
 
-            Assert.AreEqual(_driver.Url, URL);
+            // Assert: Check if the URL is still the same, indicating a failed login.
+            Assert.AreEqual(originalURL, _driver.Url);
 
+            // Clean up: Close the driver.
             _driver.Close();
         }
+
+        // Test method for logging in with an invalid password.
         [TestMethod]
-        public void LoginWithInvaliadPassword()
+        public void LoginWithInvalidPassword()
         {
-
+            // Arrange: Navigate to the login page.
             _driver.Navigate().GoToUrl("https://localhost:44395/Login");
-            string URL = _driver.Url;
 
-            // Username
+            // Act: Store the current URL for later comparison.
+            string originalURL = _driver.Url;
+
+            // Act: Enter a username.
             IWebElement username = _driver.FindElement(By.Name("Username"));
             username.SendKeys("testing");
             DelayForDemo();
 
-            // Password (leave blank)
+            // Act: Enter an invalid password.
             IWebElement password = _driver.FindElement(By.Name("Password"));
-            password.SendKeys("Testing");
+            password.SendKeys("Testing"); // This password might be invalid based on your requirements.
             DelayForDemo();
 
-            // Register button click
+            // Act: Click the login button.
             _driver.FindElement(By.Name("LoginBTN")).Submit();
 
+            // Delay for demonstration purposes.
             DelayForDemo();
             DelayForDemo();
             DelayForDemo();
             DelayForDemo();
             DelayForDemo();
 
-            Assert.AreEqual(_driver.Url, URL);
+            // Assert: Check if the URL is still the same, indicating a failed login.
+            Assert.AreEqual(originalURL, _driver.Url);
 
+            // Clean up: Close the driver.
             _driver.Close();
         }
 
