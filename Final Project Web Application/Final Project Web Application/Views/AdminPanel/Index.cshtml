@@ -35,9 +35,10 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Reverse())
         {
             <tr>
+
                 <td>
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>

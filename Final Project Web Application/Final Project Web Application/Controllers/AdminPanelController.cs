@@ -211,24 +211,18 @@ namespace Final_Project_Web_Application.Controllers
 
             TempData["IsDarkMode"] = IsDarkModeCookie;
 
-            Book SelectedBook = null;
+            Book SelectedBook = Context.Books.FirstOrDefault(b => b.ID == ID);
 
-            foreach(Book CurrentBook in Context.Books)
-            {
-                if(CurrentBook.ID == ID)
+                if (SelectedBook != null)
                 {
-                    SelectedBook = CurrentBook;
+                    Context.Books.Remove(SelectedBook);
+                    Context.SaveChanges();
                 }
+
+                return RedirectToAction("Index");
             }
 
-            if(SelectedBook != null)
-            {
-                Context.Books.Remove(SelectedBook);
-                Context.SaveChanges();
-            }
-
-            return RedirectToAction("Index");
-        }
+        
 
         public IActionResult EditBook(int ID)
         {
