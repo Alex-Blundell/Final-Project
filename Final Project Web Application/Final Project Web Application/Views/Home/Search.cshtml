@@ -4,39 +4,32 @@
     ViewData["Title"] = "Search Results for " + TempData["SearchQuery"];
 }
 
-<h1>Search results for @TempData["SearchQuery"] ...</h1>
+<h1><center>Search results for @TempData["SearchQuery"] ...</center></h1>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                <center>Cover</center>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                <center>@Html.DisplayNameFor(model => model.Title)</center>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Author)
+                <center>@Html.DisplayNameFor(model => model.Description)</center>
             </th>
-            <th></th>
+            <th>
+                <center>@Html.DisplayNameFor(model => model.Author)</center>
+            </th>
         </tr>
     </thead>
     <tbody>
-        @{
-            if(Model.Count() == 0)
-            {
-                <tr>
-                    <td></td>
-                    <td>
-                        <center>No Books found ...</center>
-                    </td>
-                    <td></td>
-                </tr>
-            }
-        }
         @foreach (var item in Model)
         {
             <tr>
+                <td>
+                    <img class="book_cover" src="@item.CoverURL">
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
@@ -50,3 +43,10 @@
         }
     </tbody>
 </table>
+
+<style>
+    .book_cover {
+        height: 300px;
+        width: 200px;
+    }
+</style>

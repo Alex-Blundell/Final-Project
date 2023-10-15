@@ -246,6 +246,16 @@ namespace Final_Project_Web_Application.Controllers
                 Response.Cookies.Append("IsDarkMode", IsDarkModeCookie, Options);
             }
 
+            Book CurrentBook = null;
+
+            foreach(Book ThisBook in Context.Books)
+            {
+                if(ThisBook.ID == ID)
+                {
+                    CurrentBook = ThisBook;
+                }
+            }
+
             if (HasLoggedIn == "Yes")
             {
                 TempData["HasLoggedIn"] = HasLoggedIn;
@@ -268,7 +278,7 @@ namespace Final_Project_Web_Application.Controllers
                     if (SelectedUser.SecLevel >= Models.User.SecurityLevel.Admin)
                     {
                         TempData["IsDarkMode"] = IsDarkModeCookie;
-                        return View();
+                        return View(CurrentBook);
                     }
                     else
                         return RedirectToAction("Index", "Home"); // Saved UserID does not have a security level high enough to view the Administration Panel.
