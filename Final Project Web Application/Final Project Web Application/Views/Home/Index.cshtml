@@ -100,7 +100,7 @@
                     }
 
                     <td>
-                        #@TopBook.Ranking
+                        <p class="book_ranking">#@TopBook.Ranking</p>
                         <img src="@SelectedBook.CoverURL" class="book-cover">
                         <a class="book-details">
                             @SelectedBook.Title
@@ -159,6 +159,13 @@
 </table>
 
 <style>
+    .book_ranking
+    {
+       float: left;
+       padding: inherit;
+       padding-top: 12.5%;
+    }
+    
     .book-table
     {
         width: 40%;
@@ -203,7 +210,7 @@
 
     .carousel-caption
     {
-        background-color: #8197b1AA;
+        background-color: #8197b1db;
         color: #ffd575;
         border: 1px solid hsla(0, 0%, 100%, 0.1);
     }
@@ -217,11 +224,19 @@
     {
         width: 100px;
         height: 150px;
+        float: left;
     }
 
     .book-details{
         padding-left: 25px;
-        display: inline-grid;
+        position: relative;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        flex-direction: column;
+        float: left;
+        align-items: flex-start;
+        padding-top: 5%;
     }
 
     .dark-mode .table{
